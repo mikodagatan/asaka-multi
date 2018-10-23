@@ -1,0 +1,7 @@
+FROM php:7-fpm
+
+RUN apt-get update && apt-get install -y libsodium-dev mysql-client \
+    && docker-php-ext-install sodium pdo_mysql \
+    && pecl install libsodium
+
+WORKDIR /var/www
