@@ -7,20 +7,23 @@
 
   <body>
 
-    <div class="container">
-
-      <header class="row">
+    <div class="grid-container">
+      <div class="header">
         @include('includes.header')
-      </header>
-
-      <div id="main" class="row">
-          @yield('content')
       </div>
 
-      <footer class="row">
-      </footer>
+      <div class="container main">
+
+        <div id="main" class="row">
+            @yield('content')
+        </div>
+
+      </div>
+
+      <div class="footer">
+        @include('includes.footer')
+      </div>
 
     </div>
-
   </body>
 </html>

@@ -1,0 +1,42 @@
+html {
+  height: 100%;
+}
+
+body {
+  height: 100%;
+  background-color: #22282C ;
+}
+
+#main {
+  color: #FFF;
+}
+
+// Grid Layout
+
+.grid-container {
+  display: grid;
+  height: 100%;
+  grid-template-rows: minmax(50px, max-content) 1fr 50px;
+  align-items: center;
+
+  .header {
+    grid-row: 1 / span 1;
+  }
+
+  .container .main {
+    grid-row: 2 / span 1;
+    height: inherit;
+  }
+
+  .footer {
+    grid-row: 3 / span 1;
+    align-self: end;
+    width: 100%;
+    font-size: 10px;
+    color: white;
+    margin: 0;
+    text-align: center;
+
+  }
+
+}
