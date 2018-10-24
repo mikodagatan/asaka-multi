@@ -7,4 +7,4 @@
 
   <script src="{{ mix('/js/app.js') }}"></script>
 
-  <title>myMulti - @yield('title')</title>
+  <title>AsakaMulti - @yield('title')</title>

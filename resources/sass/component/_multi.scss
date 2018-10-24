@@ -1,0 +1,20 @@
+.player {
+  flex: initial;
+  margin: 0 0 15px 15px;
+  height: 300px;
+  width: 450px;
+}
+
+#chatbox {
+  position: fixed;
+  margin: 20px 20px 0 0;
+  background-color: #fcfcfc;
+  border-radius: 5px;
+  border: 3px solid #353839;
+  height: calc(100vh - 100px);
+  width: 470px;
+  padding: 20px;
+  color: $body-bg;
+  z-index: 1;
+// calc(100vh - calc($navbar-height - 40px))
+}

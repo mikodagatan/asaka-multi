@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 class PagesController extends Controller
 {
-  public function front(){
+  public function front() {
     $title = 'Welcome';
     return view('pages.front')
           ->with('title', $title);
