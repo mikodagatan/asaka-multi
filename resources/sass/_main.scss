@@ -13,7 +13,24 @@ body {
 
 nav {
   box-shadow: 2px 2px rgba(0,0,0,.15);
+  letter-spacing: 1px;
+  text-transform: uppercase;
 
+  .navbar-brand {
+    font-family: $font-2;
+  }
+
+  .navbar-nav {
+    margin: 0 0 0 10px;
+  }
+
+  .nav-item {
+    margin: 0 0 0 10px;
+  }
+
+  .nav-link {
+    font-size: 12px;
+  }
 
 }
 
