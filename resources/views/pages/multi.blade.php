@@ -12,7 +12,7 @@
           muted: false,
         };
         var player = new Twitch.Player("{{$channel}}", options);
-        player.setVolume(0.05);
+        player.setVolume(0.01);
         if (player.getMuted() == true) {
           player.setMuted() = false;
         }
@@ -21,7 +21,8 @@
   </div>
   <div id="chat-container">
     <div id="chatbox">
-      HELLO
+      <p>Chat Box</p>
+      @include('includes.chatbox', $data)
     </div>
   </div>
 @endsection
