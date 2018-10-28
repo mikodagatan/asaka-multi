@@ -10,6 +10,7 @@
           height: 300,
           channel: "{{$channel}}",
           muted: false,
+          class: "video-player"
         };
         var player = new Twitch.Player("{{$channel}}", options);
         player.setVolume(0.01);

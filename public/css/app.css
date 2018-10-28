@@ -10627,25 +10627,16 @@ a.asaka-link:hover {
 
 @media (max-width: 599px) {
   .player {
-    width: 80vw;
-    height: 55vw;
-  }
-
-  .player .player-video iframe {
-    width: 80vw;
-    height: 55vw;
+    margin: 0 0 0 5vw;
+    width: 360px;
+    height: 240px;
   }
 }
 
 @media (min-width: 1800px) {
   .player {
-    width: 33vw;
-    height: 22vw;
-  }
-
-  .player .player-video iframe {
-    width: 32vw;
-    height: 24vw;
+    width: 450px;
+    height: 300px;
   }
 }
 

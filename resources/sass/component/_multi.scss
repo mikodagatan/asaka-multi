@@ -44,29 +44,17 @@
   margin: 0 0 15px 15px;
 
   @include for-phone-only {
-    width: 80vw;
-    height: 55vw;
-    .player-video {
-      iframe {
-        width: 80vw;
-        height: 55vw;
-      }
-    }
+    margin: 0 0 0 5vw;
+    width: 360px;
+    height: 240px;
   }
   @include for-tablet-portrait-down {
   }
   @include for-tablet-landscape-down {
   }
   @include for-big-desktop-down {
-    width: 33vw;
-    height: 22vw;
-    .player-video {
-      iframe {
-        width: 32vw;
-        height: 24vw;
-      }
-    }
-
+    width: 450px;
+    height: 300px;
   }
 }
 

@@ -13894,14 +13894,14 @@ module.exports = __webpack_require__(43);
  */
 
 __webpack_require__(13);
-
-window.Vue = __webpack_require__(36);
+__webpack_require__(48);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
+window.Vue = __webpack_require__(36);
 
 Vue.component('example-component', __webpack_require__(39));
 
@@ -47413,6 +47413,44 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 44 */,
+/* 45 */,
+/* 46 */,
+/* 47 */,
+/* 48 */
+/***/ (function(module, exports) {
+
+$(window).on("load", function () {
+  player = $('.player iframe');
+  if ($(window).width() < 600) {
+    player.each(function () {
+      this.setAttribute('height', '240');
+      this.setAttribute('width', '360');
+    });
+  } else {
+    player.each(function () {
+      this.setAttribute('height', '300');
+      this.setAttribute('width', '450');
+    });
+  };
+});
+
+$(window).on("resize", function () {
+  player = $('.player iframe');
+  if ($(window).width() < 600) {
+    player.each(function () {
+      this.setAttribute('height', '240');
+      this.setAttribute('width', '360');
+    });
+  } else {
+    player.each(function () {
+      this.setAttribute('height', '300');
+      this.setAttribute('width', '450');
+    });
+  };
+});
 
 /***/ })
 /******/ ]);
