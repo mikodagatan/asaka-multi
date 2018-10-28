@@ -10511,6 +10511,23 @@ nav .nav-link {
   font-size: 12px;
 }
 
+@media (max-width: 599px) {
+  nav #navbarSupportedContent {
+    width: 40vw;
+    height: 5vh;
+    display: block;
+  }
+
+  nav #navbarSupportedContent ul {
+    display: block;
+  }
+
+  nav #navbarSupportedContent ul li {
+    float: left;
+    width: 60px;
+  }
+}
+
 .header {
   height: 60px;
   width: 100%;
@@ -10602,6 +10619,13 @@ a.asaka-link:hover {
   width: 100vw;
 }
 
+@media (max-width: 599px) {
+  #main #channel-container {
+    -ms-flex-line-pack: start;
+        align-content: start;
+  }
+}
+
 #main #chat-container {
   grid-column: 2 / span 1;
   grid-row: 1 / span 1;
@@ -10627,7 +10651,7 @@ a.asaka-link:hover {
 
 @media (max-width: 599px) {
   .player {
-    margin: 0 0 0 5vw;
+    margin: 0 0 2.5vw 5vw;
     width: 360px;
     height: 240px;
   }

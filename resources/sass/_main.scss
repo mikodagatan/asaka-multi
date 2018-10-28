@@ -35,6 +35,23 @@ nav {
     }
   }
 
+  @include for-phone-only {
+    #navbarSupportedContent {
+      width: 40vw;
+      height: 5vh;
+      // @extend %full-hw;
+      display: block;
+      ul {
+        display: block;
+        li {
+          float: left;
+          width: 60px;
+        }
+      }
+
+    }
+  }
+
 }
 
 .header {
