@@ -1,5 +1,4 @@
 @import url(https://fonts.googleapis.com/css?family=Nunito|Raleway);#main,
-#main #chat-container,
 #chatbox-inner {
   height: 100%;
   width: 100%;
@@ -10510,25 +10509,19 @@ nav .nav-link {
   font-size: 12px;
 }
 
-@media (max-width: 599px) {
-  nav #navbarSupportedContent {
-    width: 40vw;
-    height: 5vh;
-    display: block;
+@media (max-width: 1200px) {
+  nav ul.navbar-nav {
+    display: inline-block;
   }
 
-  nav #navbarSupportedContent ul {
-    display: block;
-  }
-
-  nav #navbarSupportedContent ul li {
+  nav ul.navbar-nav li.nav-item {
     float: left;
     width: 60px;
   }
 }
 
 .header {
-  height: 60px;
+  height: 4rem;
   width: 100%;
   position: fixed;
   top: 0;
@@ -10540,16 +10533,21 @@ nav .nav-link {
 }
 
 .footer {
-  height: 20px;
+  height: 1.5rem;
   width: 100%;
   position: fixed;
   bottom: 0;
   background-color: #696969;
+  display: grid;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 a.asaka-link {
   color: #FFF;
   text-decoration: none;
+  font-size: 0.5rem;
   -webkit-transition: font-size 0.5s;
   transition: font-size 0.5s;
 }
@@ -10577,7 +10575,7 @@ a.asaka-link:link {
 
 a.asaka-link:hover {
   color: #FFF;
-  font-size: 20px;
+  font-size: 1rem;
   text-decoration: none;
 }
 
@@ -10585,7 +10583,7 @@ a.asaka-link:hover {
   display: grid;
   height: 100%;
   width: 100%;
-  grid-template-rows: 60px 1fr 50px;
+  grid-template-rows: 4rem 1fr 50px;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -10606,7 +10604,7 @@ a.asaka-link:hover {
   grid-row: 2 / span 1;
   height: inherit;
   display: grid;
-  grid-template-columns: 66% auto;
+  grid-template-columns: 90% auto;
 }
 
 @media (max-width: 599px) {
@@ -10619,16 +10617,10 @@ a.asaka-link:hover {
   }
 }
 
-@media (min-width: 1800px) {
-  #main {
-    grid-template-columns: 66vw auto;
-  }
-}
-
 #main #channel-container {
   grid-column: 1 / span 1;
   grid-row: 1 / span 1;
-  padding: 20px 20px 0 0;
+  padding: 2.5vh 0 0 0;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -10637,30 +10629,19 @@ a.asaka-link:hover {
   -webkit-box-pack: start;
       -ms-flex-pack: start;
           justify-content: start;
-  width: 66vw;
+  width: 90%;
 }
 
 @media (max-width: 599px) {
   #main #channel-container {
     -ms-flex-line-pack: start;
         align-content: start;
+    text-align: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
     width: 100vw;
-  }
-}
-
-#main #chat-container {
-  grid-column: 2 / span 1;
-  grid-row: 1 / span 1;
-}
-
-@media (max-width: 599px) {
-  #main #chat-container {
-    height: auto;
-    width: auto;
-    position: fixed;
-    display: block;
-    top: 10vh;
-    z-index: 10;
+    padding: 2.5vh 0 0 0;
   }
 }
 
@@ -10668,12 +10649,12 @@ a.asaka-link:hover {
   -webkit-box-flex: initial;
       -ms-flex: initial;
           flex: initial;
-  margin: 0 0 15px 15px;
+  margin: 0 0 2.5vh 1rem;
 }
 
 @media (max-width: 599px) {
   .player {
-    margin: 0 0 2.5vw 5vw;
+    margin: 0 0 2.5vh 0;
     width: 360px;
     height: 240px;
   }
@@ -10686,15 +10667,32 @@ a.asaka-link:hover {
   }
 }
 
-#chatbox,
-#chatbox.copy {
+#chat-container {
+  height: 70%;
+  width: 100%;
+  grid-column: 2 / span 1;
+  grid-row: 1 / span 1;
+}
+
+@media (max-width: 599px) {
+  #chat-container {
+    height: auto;
+    width: auto;
+    position: fixed;
+    display: block;
+    top: 10vh;
+    z-index: 10;
+  }
+}
+
+#chatbox {
   position: fixed;
   right: 0;
-  margin: 20px 20px 0 0;
+  margin: 2.5vh 1vw 0 0;
   background-color: #fcfcfc;
   border-radius: 5px;
   border: 3px solid #353839;
-  height: calc(100vh - 100px);
+  height: calc(100vh - 7.5rem);
   width: 470px;
   padding: 1.25em;
   color: #22282C;
@@ -10704,31 +10702,28 @@ a.asaka-link:hover {
 }
 
 @media screen and (prefers-reduced-motion: reduce) {
-  #chatbox,
-  #chatbox.copy {
+  #chatbox {
     -webkit-transition: none;
     transition: none;
   }
 }
 
 @media (max-width: 599px) {
-  #chatbox,
-  #chatbox.copy {
+  #chatbox {
     display: block;
     position: fixed;
-    right: 0;
+    top: 2rem;
     z-index: 10;
   }
 }
 
 @media (max-width: 900px) {
-  #chatbox,
-  #chatbox.copy {
+  #chatbox {
     width: 60px;
     height: 60px;
     border-radius: 50%;
     border: 3px solid white;
-    background-color: #22282C;
+    background-color: #5DADE2;
     padding: 0;
     -webkit-box-pack: center;
         -ms-flex-pack: center;
@@ -10738,18 +10733,17 @@ a.asaka-link:hover {
 }
 
 @media (min-width: 1800px) {
-  #chatbox,
-  #chatbox.copy {
+  #chatbox {
     display: block;
     width: 470px;
   }
 }
 
 #chatbox-inner {
-  background: url("/../img/sam-wermut-waves-unsplash.jpg");
+  background-color: #5DADE2;
   background-size: 100% 100%;
-  -webkit-transition: background-size 0.5s, border-radius 0.5s;
-  transition: background-size 0.5s, border-radius 0.5s;
+  -webkit-transition: background-size 0.5s, border-radius 0.5s, background-color 0.25s;
+  transition: background-size 0.5s, border-radius 0.5s, background-color 0.25s;
 }
 
 @media screen and (prefers-reduced-motion: reduce) {
@@ -10771,6 +10765,10 @@ a.asaka-link:hover {
   #chatbox-inner {
     width: 470px;
   }
+}
+
+#chatbox-inner.active {
+  background-color: #C70039;
 }
 
 #chatbox-header {
@@ -10817,5 +10815,29 @@ a.asaka-link:hover {
   #chatbox-icon {
     display: none;
   }
+}
+
+.chatbox-modal {
+  display: none;
+  height: 80vh;
+  width: calc(100vw - 2rem);
+  position: fixed;
+  top: 6.1rem;
+  background-color: rgba(0, 0, 0, 0.8);
+  border-radius: 0.6rem;
+  -webkit-transition: display 0.5s;
+  transition: display 0.5s;
+  margin: 1rem;
+}
+
+@media screen and (prefers-reduced-motion: reduce) {
+  .chatbox-modal {
+    -webkit-transition: none;
+    transition: none;
+  }
+}
+
+.chatbox-modal.show {
+  display: block;
 }
 

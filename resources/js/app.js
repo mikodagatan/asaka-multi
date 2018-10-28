@@ -7,6 +7,7 @@
 
 require('./bootstrap');
 require('./player.js');
+require('./chat-modal.js');
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

@@ -1,0 +1,15 @@
+.chatbox-modal {
+  display: none;
+  height: 80vh;
+  width: calc(100vw - 2rem);
+  position: fixed;
+  top: 6.1rem;
+  background-color: rgba(0, 0, 0, 0.8);
+  border-radius: 0.6rem;
+  @include transition(display 0.5s);
+  // z-index: 100;
+  margin: 1rem;
+  &.show{
+    display: block;
+  }
+}

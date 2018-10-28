@@ -35,23 +35,16 @@ nav {
     }
   }
 
-  @include for-phone-only {
-    #navbarSupportedContent {
-      width: 40vw;
-      height: 5vh;
-      // @extend %full-hw;
-      display: block;
-      ul {
-        display: block;
-        li {
-          float: left;
-          width: 60px;
-        }
+  @include for-desktop-down {
+    // @extend %full-hw;
+    ul.navbar-nav {
+      display: inline-block;
+      li.nav-item {
+        float: left;
+        width: 60px;
       }
-
     }
   }
-
 }
 
 .header {
@@ -66,16 +59,19 @@ nav {
 }
 
 .footer {
-  height: 20px;
+  height: 1.5rem;
   width: 100%;
   position: fixed;
   bottom: 0;
   background-color: #696969;
+  display: grid;
+  align-items: center;
 }
 
 a.asaka-link {
   color: #FFF;
   text-decoration: none;
+  font-size: 0.5rem;
   @include transition(font-size 0.5s);
   &:link {
     color: #FFF;
@@ -84,7 +80,7 @@ a.asaka-link {
   }
   &:hover {
     color: #FFF;
-    font-size: 20px;
+    font-size: 1rem;
     text-decoration: none;
   }
 }

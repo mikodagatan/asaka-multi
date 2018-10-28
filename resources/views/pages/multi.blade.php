@@ -25,4 +25,5 @@
       @include('includes.chatbox', $data)
     </div>
   </div>
+  @include('includes.chatbox_modal')
 @endsection

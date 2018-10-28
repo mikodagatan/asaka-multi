@@ -13895,6 +13895,7 @@ module.exports = __webpack_require__(43);
 
 __webpack_require__(13);
 __webpack_require__(48);
+__webpack_require__(50);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -47451,6 +47452,25 @@ $(window).on("resize", function () {
       this.setAttribute('width', '450');
     });
   };
+});
+
+/***/ }),
+/* 49 */,
+/* 50 */
+/***/ (function(module, exports) {
+
+$(window).on('load', function () {
+  chatbox_inner = $('#chatbox-inner');
+  modal = $('.chatbox-modal');
+  $('#chatbox-icon').on('click', function () {
+    if (chatbox_inner.hasClass('active')) {
+      chatbox_inner.removeClass('active');
+      modal.fadeToggle();
+    } else {
+      chatbox_inner.addClass('active');
+      modal.fadeToggle();
+    }
+  });
 });
 
 /***/ })

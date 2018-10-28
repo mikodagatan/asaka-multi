@@ -5,50 +5,34 @@
   grid-row: 2 / span 1;
   height: inherit;
   display: grid;
-  grid-template-columns: 66% auto;
+  grid-template-columns: 90% auto;
   @include for-phone-only {
     display: flex;
     flex-wrap: wrap;
   }
-  @include for-big-desktop-down {
-    grid-template-columns: 66vw auto;
-  }
   #channel-container {
     grid-column: 1 / span 1;
     grid-row: 1 / span 1;
-    padding: 20px 20px 0 0;
+    padding: 2.5vh 0 0 0;
     display: flex;
     flex-wrap: wrap;
     justify-content: start;
-    width: 66vw;
+    width: 90%;
     @include for-phone-only {
       align-content: start;
+      text-align: center;
+      justify-content: center;
       width: 100vw;
-    }
-
-  }
-
-  #chat-container {
-    @extend %full-hw;
-    grid-column: 2 / span 1;
-    grid-row: 1 / span 1;
-    @include for-phone-only {
-      height: auto;
-      width: auto;
-      position: fixed;
-      display: block;
-      top: 10vh;
-      z-index: 10;
+      padding: 2.5vh 0 0 0;
     }
   }
 }
 
 .player {
   flex: initial;
-  margin: 0 0 15px 15px;
-
+  margin: 0 0 2.5vh 1rem;
   @include for-phone-only {
-    margin: 0 0 2.5vw 5vw;
+    margin: 0 0 2.5vh 0;
     width: 360px;
     height: 240px;
   }
@@ -60,100 +44,4 @@
     width: 450px;
     height: 300px;
   }
-}
-
-#chatbox {
-  position: fixed;
-  right: 0;
-  margin: 20px 20px 0 0;
-  background-color: #fcfcfc;
-  border-radius: 5px;
-  border: 3px solid #353839;
-  height: calc(100vh - 100px);
-  width: 470px;
-  padding: $g-padding;
-  color: $body-bg;
-  z-index: 1;
-  @include transition(width $t, height 0.33s, background-color $t,
-    border-radius $t, border $t, display $t);
-  @include for-phone-only {
-    display: block;
-    position: fixed;
-    right: 0;
-    z-index: 10;
-  }
-  @include for-tablet-portrait-down {
-  }
-  @include for-tablet-landscape-down {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    border: 3px solid white;
-    background-color: $body-bg;
-    padding: 0;
-    justify-content: center;
-    text-align: center;
-
-  }
-  @include for-big-desktop-down {
-    display: block;
-    width: 470px;
-  }
-}
-
-#chatbox-inner {
-  @extend %full-hw;
-  background: $bg-image-1;
-  background-size: 100% 100%;
-  @include transition(
-              background-size $t,
-              border-radius $t
-  );
-  @include for-phone-only {
-  }
-  @include for-tablet-portrait-down {
-  }
-  @include for-tablet-landscape-down {
-    background: none;
-    border-radius: 50%;
-    background-size: 0 0;
-  }
-  @include for-big-desktop-down {
-    width: 470px;
-  }
-}
-
-#chatbox-header {
-  color: white;
-  @include for-phone-only {
-  }
-  @include for-tablet-portrait-down {
-  }
-  @include for-tablet-landscape-down {
-    display: none;
-  }
-  @include for-big-desktop-down {
-    display: block;
-  }
-}
-
-#chatbox-icon {
-  height: 0;
-  width: 0;
-  color: white;
-  font-size: 30px;
-  @include transition(height $t, width $t, display block);
-  @include for-tablet-landscape-down {
-    display: block;
-    height: 50px;
-    width: 50px;
-  }
-  @include for-big-desktop-down {
-    display: none;
-  }
-
-}
-
-#chatbox.copy {
-  @extend #chatbox;
 }
