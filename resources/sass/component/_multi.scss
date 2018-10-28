@@ -1,8 +1,73 @@
+  $t: $g-ttime; //for faster typing!
+
+#main {
+  @extend %full-hw;
+  grid-row: 2 / span 1;
+  height: inherit;
+  display: grid;
+  grid-template-columns: 66% auto;
+  @include for-phone-only {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  @include for-big-desktop-down {
+    grid-template-columns: 66vw auto;
+  }
+  #channel-container {
+    @extend %full-hw;
+    grid-column: 1 / span 1;
+    grid-row: 1 / span 1;
+    padding: 20px 20px 0 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: start;
+    width: 100vw;
+  }
+
+  #chat-container {
+    @extend %full-hw;
+    grid-column: 2 / span 1;
+    grid-row: 1 / span 1;
+    @include for-phone-only {
+      width: 100vw;
+      height: 100vh;
+      z-index: 10;
+      position: fixed;
+      display: block;
+      top: 10vh;
+    }
+  }
+}
+
 .player {
   flex: initial;
   margin: 0 0 15px 15px;
-  height: 300px;
-  width: 450px;
+
+  @include for-phone-only {
+    width: 80vw;
+    height: 55vw;
+    .player-video {
+      iframe {
+        width: 80vw;
+        height: 55vw;
+      }
+    }
+  }
+  @include for-tablet-portrait-down {
+  }
+  @include for-tablet-landscape-down {
+  }
+  @include for-big-desktop-down {
+    width: 33vw;
+    height: 22vw;
+    .player-video {
+      iframe {
+        width: 32vw;
+        height: 24vw;
+      }
+    }
+
+  }
 }
 
 #chatbox {
@@ -14,20 +79,84 @@
   border: 3px solid #353839;
   height: calc(100vh - 100px);
   width: 470px;
-  padding: 20px;
+  padding: $g-padding;
   color: $body-bg;
   z-index: 1;
-  @include transition(width 0.7s);
+  @include transition(width $t, height 0.33s, background-color $t,
+    border-radius $t, border $t, display $t);
   @include for-phone-only {
-    display: none;
+    position: fixed;
+    right: 0;
+
   }
-  @include for-tablet-portrait-up {
-    width: 50%;
+  @include for-tablet-portrait-down {
   }
-  @include for-tablet-landscape-up {
-    width: 40%;
+  @include for-tablet-landscape-down {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 3px solid white;
+    background-color: $body-bg;
+    padding: 0;
+    justify-content: center;
+    text-align: center;
+
   }
-  @include for-desktop-up {
+  @include for-big-desktop-down {
+    display: block;
     width: 470px;
   }
+}
+
+#chatbox-inner {
+  @extend %full-hw;
+  background: $bg-image-1;
+  background-size: 100% 100%;
+  @include transition(
+              background-size $t,
+              border-radius $t
+  );
+  @include for-phone-only {
+  }
+  @include for-tablet-portrait-down {
+  }
+  @include for-tablet-landscape-down {
+    background: none;
+    border-radius: 50%;
+    background-size: 0 0;
+  }
+  @include for-big-desktop-down {
+    width: 470px;
+  }
+}
+
+#chatbox-header {
+  color: white;
+  @include for-phone-only {
+  }
+  @include for-tablet-portrait-down {
+  }
+  @include for-tablet-landscape-down {
+    display: none;
+  }
+  @include for-big-desktop-down {
+    display: block;
+  }
+}
+
+#chatbox-icon {
+  height: 0;
+  width: 0;
+  color: white;
+  font-size: 30px;
+  @include transition(height $t, width $t, display block);
+  @include for-tablet-landscape-down {
+    display: block;
+    height: 50px;
+    width: 50px;
+  }
+  @include for-big-desktop-down {
+    display: none;
+  }
+
 }

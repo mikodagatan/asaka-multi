@@ -1,8 +1,8 @@
 @extends('layouts.default')
 @section('content')
   <div id="channel-container">
+    <script src= "https://player.twitch.tv/js/embed/v1.js"></script>
     @foreach ($data as $channel)
-      <script src= "https://player.twitch.tv/js/embed/v1.js"></script>
       <div id="{{$channel}}" class="player"></div>
       <script type="text/javascript">
         var options = {
@@ -21,7 +21,6 @@
   </div>
   <div id="chat-container">
     <div id="chatbox">
-      <p>Chat Box</p>
       @include('includes.chatbox', $data)
     </div>
   </div>

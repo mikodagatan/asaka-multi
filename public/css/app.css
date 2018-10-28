@@ -1,6 +1,7 @@
-@import url(https://fonts.googleapis.com/css?family=Nunito|Raleway);.grid-container #main,
-.grid-container #main #channel-container,
-.grid-container #main #chat-container {
+@import url(https://fonts.googleapis.com/css?family=Nunito|Raleway);#main,
+#main #channel-container,
+#main #chat-container,
+#chatbox-inner {
   height: 100%;
   width: 100%;
 }
@@ -10563,14 +10564,30 @@ a.asaka-link:hover {
   text-align: center;
 }
 
-.grid-container #main {
+#main {
   grid-row: 2 / span 1;
   height: inherit;
   display: grid;
-  grid-template-columns: 950px auto;
+  grid-template-columns: 66% auto;
 }
 
-.grid-container #main #channel-container {
+@media (max-width: 599px) {
+  #main {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+  }
+}
+
+@media (min-width: 1800px) {
+  #main {
+    grid-template-columns: 66vw auto;
+  }
+}
+
+#main #channel-container {
   grid-column: 1 / span 1;
   grid-row: 1 / span 1;
   padding: 20px 20px 0 0;
@@ -10582,11 +10599,23 @@ a.asaka-link:hover {
   -webkit-box-pack: start;
       -ms-flex-pack: start;
           justify-content: start;
+  width: 100vw;
 }
 
-.grid-container #main #chat-container {
+#main #chat-container {
   grid-column: 2 / span 1;
   grid-row: 1 / span 1;
+}
+
+@media (max-width: 599px) {
+  #main #chat-container {
+    width: 100vw;
+    height: 100vh;
+    z-index: 10;
+    position: fixed;
+    display: block;
+    top: 10vh;
+  }
 }
 
 .player {
@@ -10594,8 +10623,30 @@ a.asaka-link:hover {
       -ms-flex: initial;
           flex: initial;
   margin: 0 0 15px 15px;
-  height: 300px;
-  width: 450px;
+}
+
+@media (max-width: 599px) {
+  .player {
+    width: 80vw;
+    height: 55vw;
+  }
+
+  .player .player-video iframe {
+    width: 80vw;
+    height: 55vw;
+  }
+}
+
+@media (min-width: 1800px) {
+  .player {
+    width: 33vw;
+    height: 22vw;
+  }
+
+  .player .player-video iframe {
+    width: 32vw;
+    height: 24vw;
+  }
 }
 
 #chatbox {
@@ -10607,11 +10658,11 @@ a.asaka-link:hover {
   border: 3px solid #353839;
   height: calc(100vh - 100px);
   width: 470px;
-  padding: 20px;
+  padding: 1.25em;
   color: #22282C;
   z-index: 1;
-  -webkit-transition: width 0.7s;
-  transition: width 0.7s;
+  -webkit-transition: width 0.5s, height 0.33s, background-color 0.5s, border-radius 0.5s, border 0.5s, display 0.5s;
+  transition: width 0.5s, height 0.33s, background-color 0.5s, border-radius 0.5s, border 0.5s, display 0.5s;
 }
 
 @media screen and (prefers-reduced-motion: reduce) {
@@ -10623,25 +10674,104 @@ a.asaka-link:hover {
 
 @media (max-width: 599px) {
   #chatbox {
+    position: fixed;
+    right: 0;
+  }
+}
+
+@media (max-width: 900px) {
+  #chatbox {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 3px solid white;
+    background-color: #22282C;
+    padding: 0;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    text-align: center;
+  }
+}
+
+@media (min-width: 1800px) {
+  #chatbox {
+    display: block;
+    width: 470px;
+  }
+}
+
+#chatbox-inner {
+  background: url("/../img/sam-wermut-waves-unsplash.jpg");
+  background-size: 100% 100%;
+  -webkit-transition: background-size 0.5s, border-radius 0.5s;
+  transition: background-size 0.5s, border-radius 0.5s;
+}
+
+@media screen and (prefers-reduced-motion: reduce) {
+  #chatbox-inner {
+    -webkit-transition: none;
+    transition: none;
+  }
+}
+
+@media (max-width: 900px) {
+  #chatbox-inner {
+    background: none;
+    border-radius: 50%;
+    background-size: 0 0;
+  }
+}
+
+@media (min-width: 1800px) {
+  #chatbox-inner {
+    width: 470px;
+  }
+}
+
+#chatbox-header {
+  color: white;
+}
+
+@media (max-width: 900px) {
+  #chatbox-header {
     display: none;
   }
 }
 
-@media (min-width: 600px) {
-  #chatbox {
-    width: 50%;
+@media (min-width: 1800px) {
+  #chatbox-header {
+    display: block;
   }
 }
 
-@media (min-width: 900px) {
-  #chatbox {
-    width: 40%;
+#chatbox-icon {
+  height: 0;
+  width: 0;
+  color: white;
+  font-size: 30px;
+  -webkit-transition: height 0.5s, width 0.5s, display block;
+  transition: height 0.5s, width 0.5s, display block;
+}
+
+@media screen and (prefers-reduced-motion: reduce) {
+  #chatbox-icon {
+    -webkit-transition: none;
+    transition: none;
   }
 }
 
-@media (min-width: 1200px) {
-  #chatbox {
-    width: 470px;
+@media (max-width: 900px) {
+  #chatbox-icon {
+    display: block;
+    height: 50px;
+    width: 50px;
+  }
+}
+
+@media (min-width: 1800px) {
+  #chatbox-icon {
+    display: none;
   }
 }
 
