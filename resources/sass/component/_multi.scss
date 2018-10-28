@@ -14,16 +14,16 @@
     grid-template-columns: 66vw auto;
   }
   #channel-container {
-    @extend %full-hw;
     grid-column: 1 / span 1;
     grid-row: 1 / span 1;
     padding: 20px 20px 0 0;
     display: flex;
     flex-wrap: wrap;
     justify-content: start;
-    width: 100vw;
+    width: 66vw;
     @include for-phone-only {
       align-content: start;
+      width: 100vw;
     }
 
   }

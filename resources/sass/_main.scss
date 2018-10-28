@@ -65,7 +65,18 @@ nav {
   }
 }
 
+.footer {
+  height: 20px;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  background-color: #696969;
+}
+
 a.asaka-link {
+  color: #FFF;
+  text-decoration: none;
+  @include transition(font-size 0.5s);
   &:link {
     color: #FFF;
     text-decoration: none;

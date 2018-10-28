@@ -1,5 +1,4 @@
 @import url(https://fonts.googleapis.com/css?family=Nunito|Raleway);#main,
-#main #channel-container,
 #main #chat-container,
 #chatbox-inner {
   height: 100%;
@@ -10540,6 +10539,28 @@ nav .nav-link {
   height: inherit;
 }
 
+.footer {
+  height: 20px;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  background-color: #696969;
+}
+
+a.asaka-link {
+  color: #FFF;
+  text-decoration: none;
+  -webkit-transition: font-size 0.5s;
+  transition: font-size 0.5s;
+}
+
+@media screen and (prefers-reduced-motion: reduce) {
+  a.asaka-link {
+    -webkit-transition: none;
+    transition: none;
+  }
+}
+
 a.asaka-link:link {
   color: #FFF;
   text-decoration: none;
@@ -10616,13 +10637,14 @@ a.asaka-link:hover {
   -webkit-box-pack: start;
       -ms-flex-pack: start;
           justify-content: start;
-  width: 100vw;
+  width: 66vw;
 }
 
 @media (max-width: 599px) {
   #main #channel-container {
     -ms-flex-line-pack: start;
         align-content: start;
+    width: 100vw;
   }
 }
 
