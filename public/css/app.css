@@ -10609,12 +10609,12 @@ a.asaka-link:hover {
 
 @media (max-width: 599px) {
   #main #chat-container {
-    width: 100vw;
-    height: 100vh;
-    z-index: 10;
+    height: auto;
+    width: auto;
     position: fixed;
     display: block;
     top: 10vh;
+    z-index: 10;
   }
 }
 
@@ -10640,7 +10640,8 @@ a.asaka-link:hover {
   }
 }
 
-#chatbox {
+#chatbox,
+#chatbox.copy {
   position: fixed;
   right: 0;
   margin: 20px 20px 0 0;
@@ -10657,21 +10658,26 @@ a.asaka-link:hover {
 }
 
 @media screen and (prefers-reduced-motion: reduce) {
-  #chatbox {
+  #chatbox,
+  #chatbox.copy {
     -webkit-transition: none;
     transition: none;
   }
 }
 
 @media (max-width: 599px) {
-  #chatbox {
+  #chatbox,
+  #chatbox.copy {
+    display: block;
     position: fixed;
     right: 0;
+    z-index: 10;
   }
 }
 
 @media (max-width: 900px) {
-  #chatbox {
+  #chatbox,
+  #chatbox.copy {
     width: 60px;
     height: 60px;
     border-radius: 50%;
@@ -10686,7 +10692,8 @@ a.asaka-link:hover {
 }
 
 @media (min-width: 1800px) {
-  #chatbox {
+  #chatbox,
+  #chatbox.copy {
     display: block;
     width: 470px;
   }

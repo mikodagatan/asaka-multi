@@ -22,6 +22,7 @@
     flex-wrap: wrap;
     justify-content: start;
     width: 100vw;
+
   }
 
   #chat-container {
@@ -29,12 +30,12 @@
     grid-column: 2 / span 1;
     grid-row: 1 / span 1;
     @include for-phone-only {
-      width: 100vw;
-      height: 100vh;
-      z-index: 10;
+      height: auto;
+      width: auto;
       position: fixed;
       display: block;
       top: 10vh;
+      z-index: 10;
     }
   }
 }
@@ -73,9 +74,10 @@
   @include transition(width $t, height 0.33s, background-color $t,
     border-radius $t, border $t, display $t);
   @include for-phone-only {
+    display: block;
     position: fixed;
     right: 0;
-
+    z-index: 10;
   }
   @include for-tablet-portrait-down {
   }
@@ -147,4 +149,8 @@
     display: none;
   }
 
+}
+
+#chatbox.copy {
+  @extend #chatbox;
 }

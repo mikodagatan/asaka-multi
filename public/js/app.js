@@ -47444,6 +47444,7 @@ $(window).on("resize", function () {
       this.setAttribute('height', '240');
       this.setAttribute('width', '360');
     });
+    // $(document.body).append( $('#chatbox').detach() );
   } else {
     player.each(function () {
       this.setAttribute('height', '300');
