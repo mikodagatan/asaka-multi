@@ -4,9 +4,15 @@
   <div id="chat-core">
     <div id="chat-channel-heads">
       @foreach ($data as $channel)
-        <div class="channel-button" id="chat-button-{{$channel}}">
+        @if ($data[0] == $channel)
+        <div class="channel-button main" id="chat-button-{{$channel}}">
           {{$channel}}
         </div>
+        @else
+          <div class="channel-button" id="chat-button-{{$channel}}">
+            {{$channel}}
+          </div>
+        @endif
       @endforeach
     </div>
     <div id="chat-channels">

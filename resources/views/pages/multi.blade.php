@@ -1,7 +1,7 @@
 @extends('layouts.default')
 @section('content')
   <div id="channel-container">
-    <script src= "https://player.twitch.tv/js/embed/v1.js"></script>
+
     @foreach ($data as $channel)
       <div id="{{$channel}}" class="player"></div>
       <script type="text/javascript">

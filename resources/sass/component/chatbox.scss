@@ -25,6 +25,9 @@
   }
   &.active {
     display: inline-block;
+    &.main {
+      background-color: $myGreen;
+    }
   }
 }
 #chat-channels {
@@ -33,6 +36,9 @@
   text-align: center;
   justify-content: center;
   align-content: center;
+  .chat-channel-heads {
+    .channel-button.main {}
+  }
   .chat-channel {
     @extend %full-hw;
     iframe {

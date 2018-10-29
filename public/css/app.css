@@ -10817,6 +10817,10 @@ a.asaka-link:hover {
   display: inline-block;
 }
 
+.channel-button.active.main {
+  background-color: #82E0AA;
+}
+
 #chat-channels {
   margin: 1rem 0 0 0;
   display: grid;
