@@ -1,5 +1,6 @@
 @import url(https://fonts.googleapis.com/css?family=Nunito|Raleway);#main,
-#chatbox-inner {
+#chatbox-inner,
+#chat-channels .chat-channel {
   height: 100%;
   width: 100%;
 }
@@ -10674,7 +10675,7 @@ a.asaka-link:hover {
   grid-row: 1 / span 1;
 }
 
-@media (max-width: 599px) {
+@media (max-width: 900px) {
   #chat-container {
     height: auto;
     width: auto;
@@ -10697,30 +10698,15 @@ a.asaka-link:hover {
   padding: 1.25em;
   color: #22282C;
   z-index: 1;
-  -webkit-transition: width 0.5s, height 0.33s, background-color 0.5s, border-radius 0.5s, border 0.5s, display 0.5s;
-  transition: width 0.5s, height 0.33s, background-color 0.5s, border-radius 0.5s, border 0.5s, display 0.5s;
-}
-
-@media screen and (prefers-reduced-motion: reduce) {
-  #chatbox {
-    -webkit-transition: none;
-    transition: none;
-  }
-}
-
-@media (max-width: 599px) {
-  #chatbox {
-    display: block;
-    position: fixed;
-    top: 2rem;
-    z-index: 10;
-  }
 }
 
 @media (max-width: 900px) {
   #chatbox {
+    display: block;
     width: 60px;
     height: 60px;
+    top: 2rem;
+    position: fixed;
     border-radius: 50%;
     border: 3px solid white;
     background-color: #5DADE2;
@@ -10729,6 +10715,7 @@ a.asaka-link:hover {
         -ms-flex-pack: center;
             justify-content: center;
     text-align: center;
+    z-index: 10;
   }
 }
 
@@ -10736,21 +10723,13 @@ a.asaka-link:hover {
   #chatbox {
     display: block;
     width: 470px;
+    background-color: #22282C;
   }
 }
 
 #chatbox-inner {
-  background-color: #5DADE2;
+  background-color: white;
   background-size: 100% 100%;
-  -webkit-transition: background-size 0.5s, border-radius 0.5s, background-color 0.25s;
-  transition: background-size 0.5s, border-radius 0.5s, background-color 0.25s;
-}
-
-@media screen and (prefers-reduced-motion: reduce) {
-  #chatbox-inner {
-    -webkit-transition: none;
-    transition: none;
-  }
 }
 
 @media (max-width: 900px) {
@@ -10758,6 +10737,7 @@ a.asaka-link:hover {
     background: none;
     border-radius: 50%;
     background-size: 0 0;
+    background-color: #5DADE2;
   }
 }
 
@@ -10792,15 +10772,6 @@ a.asaka-link:hover {
   width: 0;
   color: white;
   font-size: 30px;
-  -webkit-transition: height 0.5s, width 0.5s, display block;
-  transition: height 0.5s, width 0.5s, display block;
-}
-
-@media screen and (prefers-reduced-motion: reduce) {
-  #chatbox-icon {
-    -webkit-transition: none;
-    transition: none;
-  }
 }
 
 @media (max-width: 900px) {
@@ -10825,19 +10796,43 @@ a.asaka-link:hover {
   top: 6.1rem;
   background-color: rgba(0, 0, 0, 0.8);
   border-radius: 0.6rem;
-  -webkit-transition: display 0.5s;
-  transition: display 0.5s;
   margin: 1rem;
 }
 
-@media screen and (prefers-reduced-motion: reduce) {
-  .chatbox-modal {
-    -webkit-transition: none;
-    transition: none;
-  }
+.channel-button {
+  display: none;
+  padding: 0.1rem 0.25rem 0.1rem 0.25rem;
+  border-radius: 0.25rem;
+  border: 0.05rem solid white;
+  background-color: #5DADE2;
+  font-size: 0.8rem;
 }
 
-.chatbox-modal.show {
-  display: block;
+.channel-button:hover {
+  background-color: #82E0AA;
+  cursor: pointer;
+}
+
+.channel-button.active {
+  display: inline-block;
+}
+
+#chat-channels {
+  margin: 1rem 0 0 0;
+  display: grid;
+  text-align: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -ms-flex-line-pack: center;
+      align-content: center;
+}
+
+#chat-channels .chat-channel iframe {
+  display: none;
+}
+
+#chat-channels .chat-channel iframe.active {
+  display: inline-block;
 }
 

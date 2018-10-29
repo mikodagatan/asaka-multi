@@ -13896,6 +13896,8 @@ module.exports = __webpack_require__(43);
 __webpack_require__(13);
 __webpack_require__(48);
 __webpack_require__(50);
+__webpack_require__(51);
+__webpack_require__(52);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -47471,7 +47473,79 @@ $(window).on('load', function () {
       modal.fadeToggle();
     }
   });
+  core = $('#chat-core');
+  if ($(window).width() < 900) {
+    $('.chatbox-modal').append(core.detach());
+  } else {
+    $('#chatbox-inner').append(core.detach());
+  };
+  $('.channel-button').addClass('active');
+
+  $(window).on("resize", function () {
+    core = $('#chat-core');
+    if ($(window).width() < 900) {
+      $('.chatbox-modal').append(core.detach());
+    } else {
+      $('#chatbox-inner').append(core.detach());
+      $('#chatbox-inner').removeClass('active');
+      $('.chatbox-modal').removeClass('active').fadeOut();
+    };
+    $('.channel-button').addClass('active');
+  });
 });
+
+/***/ }),
+/* 51 */
+/***/ (function(module, exports) {
+
+$(window).on('load', function () {
+  // Variables
+  chat_channel = $('.chat-channels').children();
+  channel_button = $('.channel-button');
+  all_chat_channels = $('.chat-channel iframe');
+
+  if ($(window).width() < 900) {
+    height = 500;
+    width = 300;
+  } else {
+    height = 500;
+    width = 400;
+  }
+  $(window).on("resize", function () {
+    if ($(window).width() < 900) {
+      height = 500;
+      width = 300;
+    } else {
+      height = 500;
+      width = 400;
+    }
+  });
+
+  // Functions
+  channel_button.on('click', function () {
+    all_chat_channels.each(function () {
+      this.setAttribute('height', 0);
+      this.setAttribute('width', 0);
+      this.setAttribute('class', '');
+    });
+    channel = this.getAttribute('id').substr(12);
+    // console.log(channel);
+    frame = $("iframe#chat-" + channel);
+    console.log(frame);
+    frame.each(function () {
+      // console.log(this);
+      this.setAttribute('height', height);
+      this.setAttribute('width', width);
+      this.setAttribute('class', 'active');
+    });
+  });
+});
+
+/***/ }),
+/* 52 */
+/***/ (function(module, exports) {
+
+
 
 /***/ })
 /******/ ]);

@@ -6,10 +6,41 @@
   top: 6.1rem;
   background-color: rgba(0, 0, 0, 0.8);
   border-radius: 0.6rem;
-  @include transition(display 0.5s);
   // z-index: 100;
   margin: 1rem;
   &.show{
-    display: block;
+    // display: block;
   }
+}
+.channel-button {
+  display: none;
+  padding: 0.1rem 0.25rem 0.1rem 0.25rem;
+  border-radius: 0.25rem;
+  border: 0.05rem solid white;
+  background-color: $myBlue;
+  font-size: 0.8rem;
+  &:hover {
+    background-color: $myGreen;
+    cursor: pointer;
+  }
+  &.active {
+    display: inline-block;
+  }
+}
+#chat-channels {
+  margin: 1rem 0 0 0;
+  display: grid;
+  text-align: center;
+  justify-content: center;
+  align-content: center;
+  .chat-channel {
+    @extend %full-hw;
+    iframe {
+      display: none;
+      &.active {
+        display: inline-block;
+      }
+    }
+  }
+
 }
