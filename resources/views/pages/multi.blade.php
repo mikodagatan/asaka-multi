@@ -6,8 +6,8 @@
       <div id="{{$channel}}" class="player"></div>
       <script type="text/javascript">
         var options = {
-          width: 450,
-          height: 300,
+          width: 0,
+          height: 0,
           channel: "{{$channel}}",
           muted: false,
           class: "video-player"

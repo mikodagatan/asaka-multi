@@ -47461,7 +47461,7 @@ $(window).on("resize", function () {
 /* 50 */
 /***/ (function(module, exports) {
 
-$(window).on('load', function () {
+$(window).on('load resize', function () {
   chatbox_inner = $('#chatbox-inner');
   modal = $('.chatbox-modal');
   $('#chatbox-icon').on('click', function () {
@@ -47498,47 +47498,25 @@ $(window).on('load', function () {
 /* 51 */
 /***/ (function(module, exports) {
 
-
-
 $(window).on('load', function () {
   // Variables
   chat_channel = $('.chat-channels').children();
   channel_button = $('.channel-button');
   all_chat_channels = $('.chat-channel iframe');
+  height = 500;
+  width = 300;
 
-  first = all_chat_channels.first()[0];
+  all_chat_channels[0].setAttribute('class', 'active');
 
-  if ($(window).width() < 900) {
-    height = 500;
-    width = 300;
-  } else {
-    height = 500;
-    width = 400;
-  }
-
-  first.setAttribute('height', height);
-  first.setAttribute('width', width);
-  first.setAttribute('class', 'active');
-
-  $(window).on("resize", function () {
-
-    if ($(window).width() < 900) {
-      main = $('.chat-channel iframe.main')[0];
-      height = 500;
-      width = 300;
-      main.setAttribute('height', height);
-      main.setAttribute('width', width);
-    } else {
-      main = $('.chat-channel iframe.main')[0];
-      height = 500;
-      width = 400;
-      main.setAttribute('height', height);
-      main.setAttribute('width', width);
-    }
-  });
+  // all_chat_channels.each(function() {
+  //   ( this ).setAttribute('height', height);
+  //   ( this ).setAttribute('width', width);
+  //   if ( all_chat_channels[0] == this ) {
+  //     this.setAttribute('class','active');
+  //   }
+  // });
 
   // Functions
-
 
   channel_button.on('click', function () {
     channel = this.getAttribute('id').substr(12);
@@ -47560,6 +47538,48 @@ $(window).on('load', function () {
     frame.setAttribute('class', 'active');
   });
 });
+
+// if ($(window).width() <= 900) {
+//   big_screen = true;
+// } else {
+//   big_screen = false;
+// }
+
+// $(window).on("resize", function() {
+//   height = 500;
+//   width = 400;
+//   main = $('.chat-channel iframe.main')[0];
+//
+//   if ($(window).width() <= 900) {
+//     if (big_screen == true) {
+//       to_resize = true;
+//       big_screen = false;
+//     };
+//   } else {
+//     if (big_screen == false) {
+//       to_resize = true;
+//       big_screen = false;
+//     }
+//   }
+//
+//   if (to_resize == true) {
+//     height = 500;
+//     if (big_screen == true) {
+//       width = 400;
+//     } else {
+//       width = 300;
+//     }
+//   }
+//
+//   if (to_resize == true ) {
+//     all_chat_channels.each( function() {
+//       ( this ).setAttribute('height', height);
+//       ( this ).setAttribute('width', width);
+//     });
+//     to_resize = false;
+//   }
+//
+// });
 
 /***/ }),
 /* 52 */

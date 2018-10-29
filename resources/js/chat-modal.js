@@ -1,4 +1,4 @@
-$(window).on('load', function() {
+$(window).on('load resize', function() {
   chatbox_inner = $('#chatbox-inner');
   modal = $('.chatbox-modal');
   $('#chatbox-icon').on('click', function () {
