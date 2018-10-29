@@ -26,7 +26,6 @@ $(window).on('load', function() {
       $('#chatbox-inner').append(core.detach());
       $('#chatbox-inner').removeClass('active');
       $('.chatbox-modal').removeClass('active').fadeOut();
-
     };
     $('.channel-button').addClass('active');
   });

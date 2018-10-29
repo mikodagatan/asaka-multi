@@ -1,8 +1,15 @@
+
+
+
 $(window).on('load', function() {
   // Variables
   chat_channel = $('.chat-channels').children();
   channel_button = $('.channel-button');
   all_chat_channels = $('.chat-channel iframe');
+
+  first = all_chat_channels.first()[0];
+
+
 
   if ($(window).width() < 900) {
     height = 500;
@@ -11,6 +18,11 @@ $(window).on('load', function() {
     height = 500;
     width = 400;
   }
+
+  first.setAttribute('height',height);
+  first.setAttribute('width',width);
+  first.setAttribute('class','active');
+
   $(window).on("resize", function() {
     if ($(window).width() < 900) {
       height = 500;
@@ -20,9 +32,11 @@ $(window).on('load', function() {
       width = 400;
     }
   });
-  
+
 
   // Functions
+
+
   channel_button.on('click', function () {
     all_chat_channels.each(function() {
       (this).setAttribute('height', 0);
