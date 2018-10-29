@@ -10598,14 +10598,15 @@ a.asaka-link:hover {
   font-size: 10px;
   color: white;
   margin: 0;
-  text-align: center;
+  text-align: right;
+  padding: 0 1rem 0 0;
 }
 
 #main {
   grid-row: 2 / span 1;
   height: inherit;
   display: grid;
-  grid-template-columns: 400px auto;
+  grid-template-columns: 300px auto;
 }
 
 @media (max-width: 599px) {
@@ -10621,8 +10622,8 @@ a.asaka-link:hover {
 #main #channel-container {
   grid-column: 2 / span 1;
   grid-row: 1 / span 1;
-  padding: 1rem 0 0 0;
-  width: 90%;
+  padding: 0.4rem 0 0 0;
+  width: 100%;
 }
 
 @media (max-width: 599px) {
@@ -10634,20 +10635,20 @@ a.asaka-link:hover {
         -ms-flex-pack: center;
             justify-content: center;
     width: 100vw;
-    padding: 1rem 0 0 0;
+    padding: 0.4rem 0 0 0;
   }
 }
 
 .player {
   display: inline-block;
-  margin: 0 0 1rem 1rem;
+  margin: 0 0 0.4rem 0.4rem;
   width: 360px;
-  height: 240px;
+  height: 202.5px;
 }
 
 @media (max-width: 599px) {
   .player {
-    margin: 0 0 1rem 0;
+    margin: 0 0 0.4rem 0;
     width: 360px;
     height: 240px;
   }
@@ -10670,12 +10671,11 @@ a.asaka-link:hover {
 #chatbox {
   position: fixed;
   left: 0;
-  margin: 2.5vh 1vw 0 0;
+  margin: 0 1vw 0 0;
   background-color: #fcfcfc;
-  border-radius: 5px;
-  height: calc(100vh - 7.5rem);
-  width: 400px;
-  padding: 1.25em;
+  height: calc(100vh - 4rem);
+  width: 300px;
+  padding: 0.5rem 0.25rem 0 0.25rem;
   color: #22282C;
   z-index: 1;
 }
@@ -10705,6 +10705,10 @@ a.asaka-link:hover {
   background-color: rgba(0, 0, 0, 0.8);
   border-radius: 0.6rem;
   margin: 1rem;
+}
+
+.chatbox-modal.show {
+  display: block;
 }
 
 .channel-button {

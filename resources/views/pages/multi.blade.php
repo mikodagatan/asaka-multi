@@ -12,7 +12,7 @@
       <script type="text/javascript">
         var options = {
           width: 360,
-          height: 240,
+          height: 202.5,
           channel: "{{$channel}}",
           muted: false,
           class: "video-player"
