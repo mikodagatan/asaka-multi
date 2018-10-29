@@ -1,13 +1,18 @@
 @extends('layouts.default')
 @section('content')
+  <div id="chat-container">
+    <div id="chatbox">
+      @include('includes.chatbox', $data)
+    </div>
+  </div>
   <div id="channel-container">
 
     @foreach ($data as $channel)
       <div id="{{$channel}}" class="player"></div>
       <script type="text/javascript">
         var options = {
-          width: 0,
-          height: 0,
+          width: 360,
+          height: 240,
           channel: "{{$channel}}",
           muted: false,
           class: "video-player"
@@ -20,10 +25,6 @@
       </script>
     @endforeach
   </div>
-  <div id="chat-container">
-    <div id="chatbox">
-      @include('includes.chatbox', $data)
-    </div>
-  </div>
+
   @include('includes.chatbox_modal', $data)
 @endsection

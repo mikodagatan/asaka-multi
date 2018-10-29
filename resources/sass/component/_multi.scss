@@ -5,34 +5,38 @@
   grid-row: 2 / span 1;
   height: inherit;
   display: grid;
-  grid-template-columns: 90% auto;
+  grid-template-columns: 400px auto;
   @include for-phone-only {
     display: flex;
     flex-wrap: wrap;
   }
   #channel-container {
-    grid-column: 1 / span 1;
+    grid-column: 2 / span 1;
     grid-row: 1 / span 1;
-    padding: 2.5vh 0 0 0;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: start;
+    padding: 1rem 0 0 0;
+    // display: flex;
+    // flex-wrap: wrap;
+    // justify-content: start;
+    // align-items: start;
     width: 90%;
     @include for-phone-only {
       align-content: start;
       text-align: center;
       justify-content: center;
       width: 100vw;
-      padding: 2.5vh 0 0 0;
+      padding: 1rem 0 0 0;
     }
   }
 }
 
 .player {
-  flex: initial;
-  margin: 0 0 2.5vh 1rem;
+  // flex: initial;
+  display: inline-block;
+  margin: 0 0 1rem 1rem;
+  width: 360px;
+  height: 240px;
   @include for-phone-only {
-    margin: 0 0 2.5vh 0;
+    margin: 0 0 1rem 0;
     width: 360px;
     height: 240px;
   }
