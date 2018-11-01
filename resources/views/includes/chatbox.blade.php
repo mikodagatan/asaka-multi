@@ -22,8 +22,7 @@
                   scrolling="yes"
                   id="chat-{{$channel}}"
                   src="https://www.twitch.tv/embed/{{$channel}}/chat"
-                  height="500"
-                  width="300">
+                  >
           </iframe>
         </div>
       @endforeach

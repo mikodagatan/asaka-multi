@@ -1,6 +1,5 @@
 @import url(https://fonts.googleapis.com/css?family=Nunito|Raleway);#main,
-#chatbox-inner,
-#chat-channels .chat-channel {
+#chatbox-inner {
   height: 100%;
   width: 100%;
 }
@@ -10735,20 +10734,43 @@ a.asaka-link:hover {
 
 #chat-channels {
   margin: 1rem 0 0 0;
-  display: grid;
-  text-align: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -ms-flex-line-pack: center;
-      align-content: center;
+}
+
+#chat-channels .chat-channel {
+  overflow: hidden;
+  padding-top: 80vh;
+  position: relative;
+  display: none;
+}
+
+#chat-channels .chat-channel.active {
+  display: block;
 }
 
 #chat-channels .chat-channel iframe {
   display: none;
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
 }
 
 #chat-channels .chat-channel iframe.active {
   display: inline-block;
+}
+
+.iframe-container {
+  overflow: hidden;
+  padding-top: 80vh;
+  position: relative;
+}
+
+.iframe-container iframe {
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
 }
 

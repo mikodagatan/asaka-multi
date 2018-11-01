@@ -32,17 +32,25 @@
 }
 #chat-channels {
   margin: 1rem 0 0 0;
-  display: grid;
-  text-align: center;
-  justify-content: center;
-  align-content: center;
   .chat-channel-heads {
     .channel-button.main {}
   }
   .chat-channel {
-    @extend %full-hw;
+    // @extend %full-hw;
+    overflow: hidden;
+    padding-top: 80vh;
+    position: relative;
+    display: none;
+    &.active {
+      display: block;
+    }
     iframe {
       display: none;
+      height: 100%;
+      left: 0;
+      position: absolute;
+      top: 0;
+      width: 100%;
       &.active {
         display: inline-block;
       }

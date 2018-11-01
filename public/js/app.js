@@ -13879,7 +13879,7 @@ module.exports = Cancel;
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(12);
-module.exports = __webpack_require__(43);
+module.exports = __webpack_require__(47);
 
 
 /***/ }),
@@ -13894,19 +13894,19 @@ module.exports = __webpack_require__(43);
  */
 
 __webpack_require__(13);
-__webpack_require__(48);
-__webpack_require__(50);
-__webpack_require__(51);
-__webpack_require__(52);
+__webpack_require__(36);
+__webpack_require__(37);
+__webpack_require__(38);
+__webpack_require__(39);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
-window.Vue = __webpack_require__(36);
+window.Vue = __webpack_require__(40);
 
-Vue.component('example-component', __webpack_require__(39));
+Vue.component('example-component', __webpack_require__(43));
 
 var app = new Vue({
   el: '#app'
@@ -35956,6 +35956,179 @@ module.exports = function spread(callback) {
 
 /***/ }),
 /* 36 */
+/***/ (function(module, exports) {
+
+// $( window ).on("load",function() {
+//   players = $('.player iframe');
+//   players.each( function() {
+//     ( this ).setAttribute('height', 240);
+//     ( this ).setAttribute('width', 360);
+//   });
+// });
+//
+
+
+// $( window ).on( "load", function() {
+//   player = $('.player iframe');
+//   if ($(window).width() < 600) {
+//     player.each(function() {
+//       ( this ).setAttribute('height', '240');
+//       ( this ).setAttribute('width', '360');
+//     });
+//   } else {
+//     player.each(function() {
+//       ( this ).setAttribute('height', '300');
+//       ( this ).setAttribute('width', '450');
+//     });
+//   };
+// });
+//
+// $( window ).on( "resize", function() {
+//   player = $('.player iframe');
+//   if ($(window).width() < 600) {
+//     player.each(function() {
+//       ( this ).setAttribute('height', '220');
+//       ( this ).setAttribute('width', '330');
+//     });
+//     // $(document.body).append( $('#chatbox').detach() );
+//   } else if ($(window).width() < 1200) {
+//     player.each(function() {
+//       ( this ).setAttribute('height', '240');
+//       ( this ).setAttribute('width', '360');
+//     });
+//   } else {
+//     ( this ).setAttribute('height', '300');
+//     ( this ).setAttribute('width', '400');
+//   };
+// });
+
+/***/ }),
+/* 37 */
+/***/ (function(module, exports) {
+
+$(window).on('load resize', function () {
+  chatbox_inner = $('#chatbox-inner');
+  modal = $('.chatbox-modal');
+
+  $('.channel-button').addClass('active');
+
+  $('#chatbox-icon').on('click', function () {
+    if (chatbox_inner.hasClass('active')) {
+      chatbox_inner.removeClass('active');
+      modal.fadeToggle();
+    } else {
+      chatbox_inner.addClass('active');
+      modal.fadeToggle();
+    }
+  });
+  // core = $('#chat-core');
+  // if ($(window).width() < 900) {
+  //   $('.chatbox-modal').append(core.detach());
+  // } else {
+  //   $('#chatbox-inner').append(core.detach());
+  // };
+  // $('.channel-button').addClass('active');
+  //
+  // $( window ).on( "resize", function() {
+  //   core = $('#chat-core');
+  //   if ($(window).width() < 900) {
+  //     $('.chatbox-modal').append(core.detach());
+  //   } else {
+  //     $('#chatbox-inner').append(core.detach());
+  //     $('#chatbox-inner').removeClass('active');
+  //     $('.chatbox-modal').removeClass('active').fadeOut();
+  //   };
+  //   $('.channel-button').addClass('active');
+  // });
+});
+
+/***/ }),
+/* 38 */
+/***/ (function(module, exports) {
+
+$(window).on('load', function () {
+  // Variables
+  chat_channel = $('.chat-channels').children();
+  channel_button = $('.channel-button');
+  all_chat_channels = $('.chat-channel iframe');
+
+  all_chat_channels[0].setAttribute('class', 'active');
+  $(all_chat_channels[0]).parent().addClass('active');
+  // Functions
+
+  channel_button.on('click', function () {
+    channel = this.getAttribute('id').substr(12);
+
+    // remove the active attributes
+    all_chat_channels.each(function () {
+      this.setAttribute('class', '');
+      this_channel = this.getAttribute('id').substr(5);
+      $('#chat-button-' + this_channel).removeClass('main');
+      console.log($(this).parent());
+      $(this).parent().removeClass('active');
+    });
+
+    // console.log(channel);
+    frame = $("iframe#chat-" + channel)[0];
+    $('#chat-button-' + channel).addClass('main');
+
+    // frame.setAttribute('height',height);
+    // frame.setAttribute('width',width);
+    frame.setAttribute('class', 'active');
+    $(frame).parent().addClass('active');
+  });
+});
+
+// if ($(window).width() <= 900) {
+//   big_screen = true;
+// } else {
+//   big_screen = false;
+// }
+
+// $(window).on("resize", function() {
+//   height = 500;
+//   width = 400;
+//   main = $('.chat-channel iframe.main')[0];
+//
+//   if ($(window).width() <= 900) {
+//     if (big_screen == true) {
+//       to_resize = true;
+//       big_screen = false;
+//     };
+//   } else {
+//     if (big_screen == false) {
+//       to_resize = true;
+//       big_screen = false;
+//     }
+//   }
+//
+//   if (to_resize == true) {
+//     height = 500;
+//     if (big_screen == true) {
+//       width = 400;
+//     } else {
+//       width = 300;
+//     }
+//   }
+//
+//   if (to_resize == true ) {
+//     all_chat_channels.each( function() {
+//       ( this ).setAttribute('height', height);
+//       ( this ).setAttribute('width', width);
+//     });
+//     to_resize = false;
+//   }
+//
+// });
+
+/***/ }),
+/* 39 */
+/***/ (function(module, exports) {
+
+
+
+/***/ }),
+/* 40 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -46918,10 +47091,10 @@ Vue.compile = compileToFunctions;
 
 module.exports = Vue;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1), __webpack_require__(37).setImmediate))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1), __webpack_require__(41).setImmediate))
 
 /***/ }),
-/* 37 */
+/* 41 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global) {var scope = (typeof global !== "undefined" && global) ||
@@ -46977,7 +47150,7 @@ exports._unrefActive = exports.active = function(item) {
 };
 
 // setimmediate attaches itself to the global object
-__webpack_require__(38);
+__webpack_require__(42);
 // On some exotic environments, it's not clear which object `setimmediate` was
 // able to install onto.  Search each possibility in the same order as the
 // `setimmediate` library.
@@ -46991,7 +47164,7 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 38 */
+/* 42 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, process) {(function (global, undefined) {
@@ -47184,15 +47357,15 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1), __webpack_require__(6)))
 
 /***/ }),
-/* 39 */
+/* 43 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(40)
+var normalizeComponent = __webpack_require__(44)
 /* script */
-var __vue_script__ = __webpack_require__(41)
+var __vue_script__ = __webpack_require__(45)
 /* template */
-var __vue_template__ = __webpack_require__(42)
+var __vue_template__ = __webpack_require__(46)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -47231,7 +47404,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 40 */
+/* 44 */
 /***/ (function(module, exports) {
 
 /* globals __VUE_SSR_CONTEXT__ */
@@ -47340,7 +47513,7 @@ module.exports = function normalizeComponent (
 
 
 /***/ }),
-/* 41 */
+/* 45 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -47369,7 +47542,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 42 */
+/* 46 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -47412,196 +47585,10 @@ if (false) {
 }
 
 /***/ }),
-/* 43 */
+/* 47 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 44 */,
-/* 45 */,
-/* 46 */,
-/* 47 */,
-/* 48 */
-/***/ (function(module, exports) {
-
-// $( window ).on("load",function() {
-//   players = $('.player iframe');
-//   players.each( function() {
-//     ( this ).setAttribute('height', 240);
-//     ( this ).setAttribute('width', 360);
-//   });
-// });
-//
-
-
-// $( window ).on( "load", function() {
-//   player = $('.player iframe');
-//   if ($(window).width() < 600) {
-//     player.each(function() {
-//       ( this ).setAttribute('height', '240');
-//       ( this ).setAttribute('width', '360');
-//     });
-//   } else {
-//     player.each(function() {
-//       ( this ).setAttribute('height', '300');
-//       ( this ).setAttribute('width', '450');
-//     });
-//   };
-// });
-//
-// $( window ).on( "resize", function() {
-//   player = $('.player iframe');
-//   if ($(window).width() < 600) {
-//     player.each(function() {
-//       ( this ).setAttribute('height', '220');
-//       ( this ).setAttribute('width', '330');
-//     });
-//     // $(document.body).append( $('#chatbox').detach() );
-//   } else if ($(window).width() < 1200) {
-//     player.each(function() {
-//       ( this ).setAttribute('height', '240');
-//       ( this ).setAttribute('width', '360');
-//     });
-//   } else {
-//     ( this ).setAttribute('height', '300');
-//     ( this ).setAttribute('width', '400');
-//   };
-// });
-
-/***/ }),
-/* 49 */,
-/* 50 */
-/***/ (function(module, exports) {
-
-$(window).on('load resize', function () {
-  chatbox_inner = $('#chatbox-inner');
-  modal = $('.chatbox-modal');
-
-  $('.channel-button').addClass('active');
-
-  $('#chatbox-icon').on('click', function () {
-    if (chatbox_inner.hasClass('active')) {
-      chatbox_inner.removeClass('active');
-      modal.fadeToggle();
-    } else {
-      chatbox_inner.addClass('active');
-      modal.fadeToggle();
-    }
-  });
-  // core = $('#chat-core');
-  // if ($(window).width() < 900) {
-  //   $('.chatbox-modal').append(core.detach());
-  // } else {
-  //   $('#chatbox-inner').append(core.detach());
-  // };
-  // $('.channel-button').addClass('active');
-  //
-  // $( window ).on( "resize", function() {
-  //   core = $('#chat-core');
-  //   if ($(window).width() < 900) {
-  //     $('.chatbox-modal').append(core.detach());
-  //   } else {
-  //     $('#chatbox-inner').append(core.detach());
-  //     $('#chatbox-inner').removeClass('active');
-  //     $('.chatbox-modal').removeClass('active').fadeOut();
-  //   };
-  //   $('.channel-button').addClass('active');
-  // });
-});
-
-/***/ }),
-/* 51 */
-/***/ (function(module, exports) {
-
-$(window).on('load', function () {
-  // Variables
-  chat_channel = $('.chat-channels').children();
-  channel_button = $('.channel-button');
-  all_chat_channels = $('.chat-channel iframe');
-  height = 500;
-  width = 300;
-
-  all_chat_channels[0].setAttribute('class', 'active');
-
-  // all_chat_channels.each(function() {
-  //   ( this ).setAttribute('height', height);
-  //   ( this ).setAttribute('width', width);
-  //   if ( all_chat_channels[0] == this ) {
-  //     this.setAttribute('class','active');
-  //   }
-  // });
-
-  // Functions
-
-  channel_button.on('click', function () {
-    channel = this.getAttribute('id').substr(12);
-
-    all_chat_channels.each(function () {
-      this.setAttribute('height', 0);
-      this.setAttribute('width', 0);
-      this.setAttribute('class', '');
-      this_channel = this.getAttribute('id').substr(5);
-      $('#chat-button-' + this_channel).removeClass('main');
-    });
-
-    // console.log(channel);
-    frame = $("iframe#chat-" + channel)[0];
-    $('#chat-button-' + channel).addClass('main');
-
-    frame.setAttribute('height', height);
-    frame.setAttribute('width', width);
-    frame.setAttribute('class', 'active');
-  });
-});
-
-// if ($(window).width() <= 900) {
-//   big_screen = true;
-// } else {
-//   big_screen = false;
-// }
-
-// $(window).on("resize", function() {
-//   height = 500;
-//   width = 400;
-//   main = $('.chat-channel iframe.main')[0];
-//
-//   if ($(window).width() <= 900) {
-//     if (big_screen == true) {
-//       to_resize = true;
-//       big_screen = false;
-//     };
-//   } else {
-//     if (big_screen == false) {
-//       to_resize = true;
-//       big_screen = false;
-//     }
-//   }
-//
-//   if (to_resize == true) {
-//     height = 500;
-//     if (big_screen == true) {
-//       width = 400;
-//     } else {
-//       width = 300;
-//     }
-//   }
-//
-//   if (to_resize == true ) {
-//     all_chat_channels.each( function() {
-//       ( this ).setAttribute('height', height);
-//       ( this ).setAttribute('width', width);
-//     });
-//     to_resize = false;
-//   }
-//
-// });
-
-/***/ }),
-/* 52 */
-/***/ (function(module, exports) {
-
-
 
 /***/ })
 /******/ ]);

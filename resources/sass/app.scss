@@ -15,3 +15,16 @@
 @import 'component/multi';
 @import 'component/chat-container';
 @import 'component/chatbox';
+
+.iframe-container {
+  overflow: hidden;
+  padding-top: 80vh;
+  position: relative;
+  iframe {
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+  }
+}
