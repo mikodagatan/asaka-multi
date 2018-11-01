@@ -10748,13 +10748,13 @@ a.asaka-link:hover {
   display: block;
 }
 
-@media (max-height: 599px) {
+@media (max-height: 699px) {
   #chat-channels .chat-channel {
     padding-top: 91vh;
   }
 }
 
-@media (min-height: 600px) {
+@media (min-height: 700px) {
   #chat-channels .chat-channel {
     padding-top: 80vh;
   }
@@ -10773,13 +10773,13 @@ a.asaka-link:hover {
   display: inline-block;
 }
 
-@media (max-height: 599px) {
+@media (max-height: 699px) {
   #chat-channels .chat-channel iframe {
     top: -100px;
   }
 }
 
-@media (min-height: 600px) {
+@media (min-height: 700px) {
   #chat-channels .chat-channel iframe {
     top: 0;
   }

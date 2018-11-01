@@ -23,10 +23,10 @@
   @media (min-width: 1800px) { @content; }
 }
 @mixin for-lower-height {
-  @media (max-height: 599px) { @content; }
+  @media (max-height: 699px) { @content; }
 }
 @mixin for-full-height {
-  @media (min-height: 600px) { @content; }
+  @media (min-height: 700px) { @content; }
 }
 
 // @mixin md-down($size) {
