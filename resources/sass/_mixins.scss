@@ -22,6 +22,12 @@
 @mixin for-big-desktop-down {
   @media (min-width: 1800px) { @content; }
 }
+@mixin for-lower-height {
+  @media (max-height: 599px) { @content; }
+}
+@mixin for-full-height {
+  @media (min-height: 600px) { @content; }
+}
 
 // @mixin md-down($size) {
 //   @media all and (max-width: $size){

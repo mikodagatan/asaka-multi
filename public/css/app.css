@@ -10599,6 +10599,7 @@ a.asaka-link:hover {
   margin: 0;
   text-align: right;
   padding: 0 1rem 0 0;
+  z-index: 200;
 }
 
 #main {
@@ -10747,6 +10748,18 @@ a.asaka-link:hover {
   display: block;
 }
 
+@media (max-height: 599px) {
+  #chat-channels .chat-channel {
+    padding-top: 91vh;
+  }
+}
+
+@media (min-height: 600px) {
+  #chat-channels .chat-channel {
+    padding-top: 80vh;
+  }
+}
+
 #chat-channels .chat-channel iframe {
   display: none;
   height: 100%;
@@ -10758,6 +10771,18 @@ a.asaka-link:hover {
 
 #chat-channels .chat-channel iframe.active {
   display: inline-block;
+}
+
+@media (max-height: 599px) {
+  #chat-channels .chat-channel iframe {
+    top: -100px;
+  }
+}
+
+@media (min-height: 600px) {
+  #chat-channels .chat-channel iframe {
+    top: 0;
+  }
 }
 
 .iframe-container {

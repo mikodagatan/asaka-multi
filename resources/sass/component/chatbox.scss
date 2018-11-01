@@ -41,9 +41,17 @@
     padding-top: 80vh;
     position: relative;
     display: none;
+
     &.active {
       display: block;
     }
+    @include for-lower-height {
+      padding-top: 91vh;
+    }
+    @include for-full-height {
+      padding-top: 80vh;
+    }
+
     iframe {
       display: none;
       height: 100%;
@@ -53,6 +61,12 @@
       width: 100%;
       &.active {
         display: inline-block;
+      }
+      @include for-lower-height {
+        top: -100px;
+      }
+      @include for-full-height {
+        top: 0;
       }
     }
   }
