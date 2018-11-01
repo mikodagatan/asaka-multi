@@ -10668,6 +10668,18 @@ a.asaka-link:hover {
   grid-row: 1 / span 1;
 }
 
+@media (max-width: 599px) {
+  #chat-container {
+    position: fixed;
+    left: -400px;
+    display: none;
+  }
+
+  #chat-container.active {
+    display: block;
+  }
+}
+
 #chatbox {
   position: fixed;
   left: 0;
@@ -10685,35 +10697,9 @@ a.asaka-link:hover {
   background-size: 100% 100%;
 }
 
-#chatbox-header {
-  color: white;
-}
-
-#chatbox-icon {
-  height: 0;
-  width: 0;
-  color: white;
-  font-size: 30px;
-}
-
 #chat-core {
   display: grid;
   grid-template-rows: minmax(50px, auto) auto;
-}
-
-.chatbox-modal {
-  display: none;
-  height: 80vh;
-  width: calc(100vw - 2rem);
-  position: fixed;
-  top: 6.1rem;
-  background-color: rgba(0, 0, 0, 0.8);
-  border-radius: 0.6rem;
-  margin: 1rem;
-}
-
-.chatbox-modal.show {
-  display: block;
 }
 
 .channel-button {
@@ -10797,6 +10783,28 @@ a.asaka-link:hover {
 @media (min-height: 700px) {
   #chat-channels .chat-channel iframe {
     top: 0;
+  }
+}
+
+#chatbox-button {
+  display: none;
+}
+
+@media (max-width: 599px) {
+  #chatbox-button {
+    display: block;
+    position: fixed;
+    top: 2rem;
+    right: 10px;
+    height: 4rem;
+    width: 4rem;
+    border-radius: 50%;
+    background-color: #82E0AA;
+    z-index: 200;
+  }
+
+  #chatbox-button.active {
+    background-color: #C70039;
   }
 }
 

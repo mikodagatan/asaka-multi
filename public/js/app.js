@@ -36012,34 +36012,10 @@ $(window).on('load resize', function () {
 
   $('.channel-button').addClass('active');
 
-  $('#chatbox-icon').on('click', function () {
-    if (chatbox_inner.hasClass('active')) {
-      chatbox_inner.removeClass('active');
-      modal.fadeToggle();
-    } else {
-      chatbox_inner.addClass('active');
-      modal.fadeToggle();
-    }
+  $('#chatbox-button').on('click', function () {
+    $(this).toggleClass('active');
+    $('#chat-container').toggleClass('active');
   });
-  // core = $('#chat-core');
-  // if ($(window).width() < 900) {
-  //   $('.chatbox-modal').append(core.detach());
-  // } else {
-  //   $('#chatbox-inner').append(core.detach());
-  // };
-  // $('.channel-button').addClass('active');
-  //
-  // $( window ).on( "resize", function() {
-  //   core = $('#chat-core');
-  //   if ($(window).width() < 900) {
-  //     $('.chatbox-modal').append(core.detach());
-  //   } else {
-  //     $('#chatbox-inner').append(core.detach());
-  //     $('#chatbox-inner').removeClass('active');
-  //     $('.chatbox-modal').removeClass('active').fadeOut();
-  //   };
-  //   $('.channel-button').addClass('active');
-  // });
 });
 
 /***/ }),

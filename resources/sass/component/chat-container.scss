@@ -3,14 +3,14 @@
   width: 100%;
   grid-column: 1 / span 1;
   grid-row: 1 / span 1;
-  // @include for-tablet-landscape-down {
-  //   height: auto;
-  //   width: auto;
-  //   position: fixed;
-  //   display: block;
-  //   top: 10vh;
-  //   z-index: 10;
-  // }
+  @include for-phone-only {
+    position: fixed;
+    left: -400px;
+    display: none;
+    &.active {
+      display: block;
+    }
+  }
 }
 
 #chatbox {
@@ -25,89 +25,10 @@
   padding: 0.5rem 0.25rem 0 0.25rem;
   color: $body-bg;
   z-index: 1;
-  // @include transition(width $t, height 0.33s, background-color $t,
-  //   border-radius $t, border $t, display $t);
-  // @include for-phone-only {
-  //
-  // }
-  // @include for-tablet-portrait-down {
-  // }
-  // @include for-tablet-landscape-down {
-  //   display: block;
-  //   width: 60px;
-  //   height: 60px;
-  //   top: 2rem;
-  //   position: fixed;
-  //   border-radius: 50%;
-  //   border: 3px solid white;
-  //   background-color: #5DADE2;
-  //   padding: 0;
-  //   justify-content: center;
-  //   text-align: center;
-  //   z-index: 10;
-  // }
-  // @include for-big-desktop-down {
-  //   display: block;
-  //   width: 470px;
-  //   background-color: $body-bg;
-  // }
 }
 
 #chatbox-inner {
   @extend %full-hw;
   background-color: white;
   background-size: 100% 100%;
-
-  // @include transition(
-  //             background-size $t,
-  //             border-radius $t,
-  //             background-color 0.25s
-  // );
-  // @include for-phone-only {
-  // }
-  // @include for-tablet-portrait-down {
-  // }
-  // @include for-tablet-landscape-down {
-  //   background: none;
-  //   border-radius: 50%;
-  //   background-size: 0 0;
-  //   background-color: $myBlue;
-  // }
-  // @include for-big-desktop-down {
-  //   width: 470px;
-  // }
-  // &.active {
-  //   background-color: $myRed;
-  // }
-}
-
-#chatbox-header {
-  color: white;
-  // @include for-phone-only {
-  // }
-  // @include for-tablet-portrait-down {
-  // }
-  // @include for-tablet-landscape-down {
-  //   display: none;
-  // }
-  // @include for-big-desktop-down {
-  //   display: block;
-  // }
-}
-
-#chatbox-icon {
-  height: 0;
-  width: 0;
-  color: white;
-  font-size: 30px;
-  // @include transition(height $t, width $t, display block);
-  // @include for-tablet-landscape-down {
-  //   display: block;
-  //   height: 50px;
-  //   width: 50px;
-  // }
-  // @include for-big-desktop-down {
-  //   display: none;
-  // }
-
 }

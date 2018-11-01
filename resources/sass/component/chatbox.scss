@@ -3,20 +3,22 @@
   grid-template-rows: minmax(50px, auto) auto;
 }
 
-.chatbox-modal {
-  display: none;
-  height: 80vh;
-  width: calc(100vw - 2rem);
-  position: fixed;
-  top: 6.1rem;
-  background-color: rgba(0, 0, 0, 0.8);
-  border-radius: 0.6rem;
-  // z-index: 100;
-  margin: 1rem;
-  &.show{
-    display: block;
-  }
-}
+// .chatbox-modal {
+//   display: none;
+//   height: 80vh;
+//   width: calc(100vw - 2rem);
+//   position: fixed;
+//   top: 0;
+//   left: 0;
+//   top: 6.1rem;
+//   background-color: rgba(0, 0, 0, 0.8);
+//   border-radius: 0.6rem;
+//   // z-index: 100;
+//   margin: 1rem;
+//   &.show{
+//     display: block;
+//   }
+// }
 .channel-button {
   display: none;
   padding: 0.1rem 0.25rem 0.1rem 0.25rem;

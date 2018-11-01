@@ -1,0 +1,17 @@
+#chatbox-button {
+  display: none;
+  @include for-phone-only {
+    display: block;
+    position: fixed;
+    top: 2rem;
+    right: 10px;
+    height: 4rem;
+    width: 4rem;
+    border-radius: 50%;
+    background-color: $myGreen;
+    z-index: 200;
+    &.active {
+      background-color: $myRed;
+    }
+  }
+}

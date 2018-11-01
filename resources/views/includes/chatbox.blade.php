@@ -1,6 +1,4 @@
 <div id="chatbox-inner">
-  <div id="chatbox-icon">
-  </div>
   <div id="chat-core">
     <div id="chat-channel-heads">
       @foreach ($data as $channel)
