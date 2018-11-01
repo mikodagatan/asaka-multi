@@ -1,5 +1,6 @@
 @import url(https://fonts.googleapis.com/css?family=Nunito|Raleway);#main,
-#chatbox-inner {
+#chatbox-inner,
+#chat-channels .chat-channel {
   height: 100%;
   width: 100%;
 }
@@ -10583,7 +10584,7 @@ a.asaka-link:hover {
   display: grid;
   height: 100%;
   width: 100%;
-  grid-template-rows: 4rem 1fr 50px;
+  grid-template-rows: 4rem 1fr 1.5rem;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -10599,12 +10600,11 @@ a.asaka-link:hover {
   margin: 0;
   text-align: right;
   padding: 0 1rem 0 0;
-  z-index: 200;
 }
 
 #main {
   grid-row: 2 / span 1;
-  height: inherit;
+  height: 100%;
   display: grid;
   grid-template-columns: 300px auto;
 }
@@ -10672,9 +10672,9 @@ a.asaka-link:hover {
   position: fixed;
   left: 0;
   margin: 0 1vw 0 0;
-  background-color: #fcfcfc;
-  height: calc(100vh - 4rem);
   width: 300px;
+  background-color: #fcfcfc;
+  height: calc(100% - 1.5rem);
   padding: 0.5rem 0.25rem 0 0.25rem;
   color: #22282C;
   z-index: 1;
@@ -10694,6 +10694,11 @@ a.asaka-link:hover {
   width: 0;
   color: white;
   font-size: 30px;
+}
+
+#chat-core {
+  display: grid;
+  grid-template-rows: minmax(50px, auto) auto;
 }
 
 .chatbox-modal {
@@ -10733,13 +10738,24 @@ a.asaka-link:hover {
   background-color: #82E0AA;
 }
 
+#chat-channel-heads {
+  grid-row: 1 / span 1;
+}
+
 #chat-channels {
-  margin: 1rem 0 0 0;
+  margin: 0.4rem 0 0 0;
+  grid-row: 2 / span 1;
+}
+
+#chat-channels .chat-channel-heads {
+  height: 100%;
+  -webkit-box-flex: initial;
+      -ms-flex: initial;
+          flex: initial;
 }
 
 #chat-channels .chat-channel {
   overflow: hidden;
-  padding-top: 80vh;
   position: relative;
   display: none;
 }
@@ -10750,7 +10766,7 @@ a.asaka-link:hover {
 
 @media (max-height: 699px) {
   #chat-channels .chat-channel {
-    padding-top: 91vh;
+    padding-top: 90vh;
   }
 }
 
@@ -10762,10 +10778,9 @@ a.asaka-link:hover {
 
 #chat-channels .chat-channel iframe {
   display: none;
-  height: 100%;
+  height: 98%;
   left: 0;
   position: absolute;
-  top: 0;
   width: 100%;
 }
 

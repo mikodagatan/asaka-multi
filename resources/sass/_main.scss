@@ -91,7 +91,7 @@ a.asaka-link {
   display: grid;
   height: 100%;
   width: 100%;
-  grid-template-rows: $navbar-height 1fr 50px;
+  grid-template-rows: $navbar-height 1fr 1.5rem;
   align-items: center;
 
   .footer {
@@ -103,7 +103,6 @@ a.asaka-link {
     margin: 0;
     text-align: right;
     padding: 0 1rem 0 0;
-    z-index: 200;
     &:hover {
 
     }

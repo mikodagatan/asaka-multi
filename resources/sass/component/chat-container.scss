@@ -17,10 +17,11 @@
   position: fixed;
   left: 0;
   margin: 0 1vw 0 0;
+  width: 300px;
   background-color: #fcfcfc;
   // border: 3px solid #353839;
-  height: calc(100vh - 4rem);
-  width: 300px;
+  height: calc(100% - 1.5rem);
+
   padding: 0.5rem 0.25rem 0 0.25rem;
   color: $body-bg;
   z-index: 1;
@@ -56,6 +57,7 @@
   @extend %full-hw;
   background-color: white;
   background-size: 100% 100%;
+
   // @include transition(
   //             background-size $t,
   //             border-radius $t,
