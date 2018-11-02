@@ -2,15 +2,16 @@
   grid-column: 1 / span 2;
   width: 100%;
   height: 100%;
-  // display: flex;
-  // flex-wrap: wrap;
-  // flex-direction: right;
   display: grid;
   grid-template-columns: 50% 50%;
   justify-content: center;
   align-items: center;
   align-content: center;
   padding: 1.5rem 2rem 1.5rem 2rem;
+  @include for-phone-only {
+    grid-template-columns: 100%;
+    grid-template-rows: auto auto;
+  }
 }
 
 .introductions {
@@ -18,11 +19,19 @@
   grid-column: 1 / span 1;
   width: 100%;
   padding: 0 2rem 0 1rem;
+  @include for-phone-only {
+    grid-row: 1 / span 1;
+  }
+  @include for-big-desktop-down {
+    grid-column: 1 / span 1;
+  }
 }
 
 .ph-channel {
   width: 100%;
-  grid-column: 2 / span 1;
+
+
+
   // padding: 0 0 0 2rem;
   .player-main {
     position: relative;
@@ -34,5 +43,12 @@
       left: 0;
       @extend %full-hw;
     }
+  }
+  @include for-phone-only {
+    grid-row: 2 / span 1;
+    padding: 2rem 0 2rem 0;
+  }
+  @include for-big-desktop-down {
+    grid-column: 2 / span 1;
   }
 }

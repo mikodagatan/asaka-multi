@@ -8,7 +8,7 @@
       <p>I made this website because I felt that the current available tools are insufficient to satisfy my needs when supporting other channels.</p>
       <p>Other people may feel the same, so I'm sharing this to all of you to use this to support the streamers you love!</p>
       <p>To start using this website, just type the channel names separated by a forward-slash (/).</p>
-      <p>For example: www.asakamulti.tv/phantasmaasaka/crescentine/raeyei/rox_games</p>
+      <p>For example: asakamulti.tv/phantasmaasaka/rox_games</p>
       <p>I configured this website to give you these benefits:
       </p>
       <ul>
