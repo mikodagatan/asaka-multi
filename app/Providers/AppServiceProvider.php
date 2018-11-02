@@ -16,10 +16,10 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
       Schema::defaultStringLength(191);
+      // navigation array
       $navItems =
         [
-          'Home' => ['Home', ''],
-          'About' => ['About', 'About']
+          'Home' => ['Home', '']
         ];
       View::share('navItems', $navItems);
     }

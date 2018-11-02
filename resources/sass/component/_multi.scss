@@ -1,9 +1,8 @@
   $t: $g-ttime; //for faster typing!
 
-#main {
+.multi {
   @extend %full-hw;
   grid-row: 2 / span 1;
-  height: 100%;
   display: grid;
   grid-template-columns: 300px auto;
   @include for-phone-only {

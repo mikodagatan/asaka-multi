@@ -36007,7 +36007,6 @@ module.exports = function spread(callback) {
 /***/ (function(module, exports) {
 
 $(window).on('load resize', function () {
-  chatbox_inner = $('#chatbox-inner');
   modal = $('.chatbox-modal');
 
   $('.channel-button').addClass('active');
@@ -36021,6 +36020,7 @@ $(window).on('load resize', function () {
 /***/ }),
 /* 38 */
 /***/ (function(module, exports) {
+
 
 $(window).on('load', function () {
   // Variables

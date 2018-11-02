@@ -1,3 +1,4 @@
+
 $(window).on('load', function() {
   // Variables
   chat_channel = $('.chat-channels').children();

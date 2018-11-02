@@ -1,6 +1,5 @@
 @import url(https://fonts.googleapis.com/css?family=Nunito|Raleway);.ph-channel .player-main iframe,
-#main,
-#chatbox-inner,
+.multi,
 #chat-channels .chat-channel {
   height: 100%;
   width: 100%;
@@ -10601,20 +10600,21 @@ a.asaka-link:hover {
   margin: 0;
   text-align: right;
   padding: 0 1rem 0 0;
+  z-index: 101;
+}
+
+.grid-container #main {
+  grid-row: 2 / span 1;
+  height: 100%;
+  width: 100%;
 }
 
 .front {
+  grid-column: 1 / span 2;
   width: 100%;
   height: 100%;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: right;
-          flex-direction: right;
+  display: grid;
+  grid-template-columns: 50% 50%;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
@@ -10623,20 +10623,18 @@ a.asaka-link:hover {
           align-items: center;
   -ms-flex-line-pack: center;
       align-content: center;
-  grid-column: 1 / span 2;
-  margin: 1.5rem 2rem 1.5rem 2rem;
+  padding: 1.5rem 2rem 1.5rem 2rem;
 }
 
 .introductions {
-  -webkit-box-flex: initial;
-      -ms-flex: initial;
-          flex: initial;
-  width: 40rem;
+  grid-column: 1 / span 1;
+  width: 100%;
+  padding: 0 2rem 0 1rem;
 }
 
 .ph-channel {
-  width: 40rem;
-  margin: 0 0 0 2rem;
+  width: 100%;
+  grid-column: 2 / span 1;
 }
 
 .ph-channel .player-main {
@@ -10651,15 +10649,14 @@ a.asaka-link:hover {
   left: 0;
 }
 
-#main {
+.multi {
   grid-row: 2 / span 1;
-  height: 100%;
   display: grid;
   grid-template-columns: 300px auto;
 }
 
 @media (max-width: 599px) {
-  #main {
+  .multi {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -10668,7 +10665,7 @@ a.asaka-link:hover {
   }
 }
 
-#main #channel-container {
+.multi #channel-container {
   grid-column: 2 / span 1;
   grid-row: 1 / span 1;
   padding: 0.4rem 0 0 0;
@@ -10676,7 +10673,7 @@ a.asaka-link:hover {
 }
 
 @media (max-width: 599px) {
-  #main #channel-container {
+  .multi #channel-container {
     -ms-flex-line-pack: start;
         align-content: start;
     text-align: center;
@@ -10733,15 +10730,10 @@ a.asaka-link:hover {
   margin: 0 1vw 0 0;
   width: 300px;
   background-color: #fcfcfc;
-  height: calc(100% - 1.5rem);
+  height: calc(100% - 4.5rem);
   padding: 0.5rem 0.25rem 0 0.25rem;
   color: #22282C;
   z-index: 1;
-}
-
-#chatbox-inner {
-  background-color: white;
-  background-size: 100% 100%;
 }
 
 #chat-core {
