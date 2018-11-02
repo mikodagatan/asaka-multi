@@ -1,0 +1,34 @@
+.front {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: right;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  grid-column: 1 / span 2;
+  margin: 1.5rem 2rem 1.5rem 2rem;
+}
+
+.introductions {
+  flex: initial;
+  width: 40rem;
+
+}
+
+.ph-channel {
+  width: 40rem;
+  margin: 0 0 0 2rem;
+  .player-main {
+    position: relative;
+    overflow: hidden;
+    padding-top: 56.25%;
+    iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      @extend %full-hw;
+    }
+  }
+}
