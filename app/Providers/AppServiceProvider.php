@@ -19,7 +19,8 @@ class AppServiceProvider extends ServiceProvider
       // navigation array
       $navItems =
         [
-          'Home' => ['Home', '']
+          'Home' => ['Home', ''],
+          'Manage' => ['Manage', '#']
         ];
       View::share('navItems', $navItems);
     }

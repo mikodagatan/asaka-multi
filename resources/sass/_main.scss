@@ -115,3 +115,9 @@ a.asaka-link {
     width: 100%;
   }
 }
+
+#manage {
+  &:hover {
+    cursor: pointer;
+  }
+}

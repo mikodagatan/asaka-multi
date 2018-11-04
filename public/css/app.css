@@ -10609,6 +10609,10 @@ a.asaka-link:hover {
   width: 100%;
 }
 
+#manage:hover {
+  cursor: pointer;
+}
+
 .front {
   grid-column: 1 / span 2;
   width: 100%;
