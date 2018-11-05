@@ -22,7 +22,7 @@ add('writable_dirs', []);
 
 // Hosts
 
-host('asakamulti.com')
+host('206.189.95.223')
     ->user('deployer')
     ->identityFile('~/.ssh/deployerkey')
     ->set('deploy_path', '~/var/www/html/myMulti');
