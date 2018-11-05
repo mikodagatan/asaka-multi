@@ -1,0 +1,372 @@
+[localhost] > git rev-parse --abbrev-ref HEAD
+[localhost] < master
+[206.189.95.223] > echo $0
+[206.189.95.223] < bash
+[206.189.95.223] > if [ ! -d ~/var/www/html/myMulti ]; then mkdir -p ~/var/www/html/myMulti; fi
+[206.189.95.223] > if [ ! -L ~/var/www/html/myMulti/current ] && [ -d ~/var/www/html/myMulti/current ]; then echo 'true'; fi
+[206.189.95.223] > cd ~/var/www/html/myMulti && if [ ! -d .dep ]; then mkdir .dep; fi
+[206.189.95.223] > cd ~/var/www/html/myMulti && if [ ! -d releases ]; then mkdir releases; fi
+[206.189.95.223] > cd ~/var/www/html/myMulti && if [ ! -d shared ]; then mkdir shared; fi
+[206.189.95.223] > if [ -f ~/var/www/html/myMulti/.dep/deploy.lock ]; then echo 'true'; fi
+[206.189.95.223] > touch ~/var/www/html/myMulti/.dep/deploy.lock
+[206.189.95.223] > cd ~/var/www/html/myMulti && (if [ -h release ]; then echo 'true'; fi)
+[206.189.95.223] < true
+[206.189.95.223] > cd ~/var/www/html/myMulti && (rm -rf "$(readlink release)")
+[206.189.95.223] > cd ~/var/www/html/myMulti && (rm release)
+[206.189.95.223] > cd ~/var/www/html/myMulti && (if [ -d releases ] && [ "$(ls -A releases)" ]; then echo 'true'; fi)
+[206.189.95.223] > cd ~/var/www/html/myMulti && (if [ -d ~/var/www/html/myMulti/releases/1 ]; then echo 'true'; fi)
+[206.189.95.223] > cd ~/var/www/html/myMulti && (date +"%Y%m%d%H%M%S")
+[206.189.95.223] < 20181105083100
+[206.189.95.223] > cd ~/var/www/html/myMulti && (echo '20181105083100,1' >> .dep/releases)
+[206.189.95.223] > cd ~/var/www/html/myMulti && (mkdir ~/var/www/html/myMulti/releases/1)
+[206.189.95.223] > cd ~/var/www/html/myMulti && (if [[ $(man ln 2>&1 || ln -h 2>&1 || ln --help 2>&1) =~ '--relative' ]]; then echo 'true'; fi)
+[206.189.95.223] < true
+[206.189.95.223] > cd ~/var/www/html/myMulti && (ln -nfs --relative ~/var/www/html/myMulti/releases/1 ~/var/www/html/myMulti/release)
+[206.189.95.223] > command -v 'git' || which 'git' || type -p 'git'
+[206.189.95.223] < /usr/bin/git
+[206.189.95.223] > /usr/bin/git version
+[206.189.95.223] < git version 2.7.4
+[206.189.95.223] > cd ~/var/www/html/myMulti && (if [ -h ~/var/www/html/myMulti/release ]; then echo 'true'; fi)
+[206.189.95.223] < true
+[206.189.95.223] > cd ~/var/www/html/myMulti && (readlink ~/var/www/html/myMulti/release)
+[206.189.95.223] < releases/1
+[206.189.95.223] > cd ~/var/www/html/myMulti && (/usr/bin/git clone -b master  --recursive -q git@bitbucket.org:kimonoso/mymulti.git ~/var/www/html/myMulti/releases/1 2>&1)
+[Symfony\Component\Process\Exception\ProcessFailedException] The command "ssh -A -tt -i ~/.ssh/deployerkey deployer@206.189.95.223 'cd ~/var/www/html/myMulti && (/usr/bin/git clone -b master  --recursive -q git@bitbucket.org:kimonoso/mymulti.git ~/var/www/html/myMulti/releases/1 2>&1)'" failed.
+
+Exit Code: 128(Invalid exit argument)
+
+Working directory: /Users/kimonoso/Documents/Programming/myMulti
+
+Output:
+================
+
+
+Error Output:
+================
+
+#0 phar:///usr/local/bin/dep/src/Ssh/Client.php(75): Symfony\Component\Process\Process->mustRun()
+#1 phar:///usr/local/bin/dep/src/functions.php(304): Deployer\Ssh\Client->run(Object(Deployer\Host\Host), ''cd ~/var/www/h...', Array)
+#2 phar:///usr/local/bin/dep/recipe/deploy/update_code.php(90): Deployer\run('cd ~/var/www/ht...', Array)
+#3 [internal function]: Deployer\Deployer::Deployer\{closure}()
+#4 phar:///usr/local/bin/dep/src/Task/Task.php(105): call_user_func(Object(Closure))
+#5 phar:///usr/local/bin/dep/src/Executor/SeriesExecutor.php(63): Deployer\Task\Task->run(Object(Deployer\Task\Context))
+#6 phar:///usr/local/bin/dep/src/Console/TaskCommand.php(142): Deployer\Executor\SeriesExecutor->run(Array, Array)
+#7 phar:///usr/local/bin/dep/vendor/symfony/console/Command/Command.php(252): Deployer\Console\TaskCommand->execute(Object(Symfony\Component\Console\Input\ArgvInput), Object(Deployer\Console\Output\OutputWatcher))
+#8 phar:///usr/local/bin/dep/vendor/symfony/console/Application.php(946): Symfony\Component\Console\Command\Command->run(Object(Symfony\Component\Console\Input\ArgvInput), Object(Deployer\Console\Output\OutputWatcher))
+#9 phar:///usr/local/bin/dep/src/Console/Application.php(133): Symfony\Component\Console\Application->doRunCommand(Object(Deployer\Console\TaskCommand), Object(Symfony\Component\Console\Input\ArgvInput), Object(Deployer\Console\Output\OutputWatcher))
+#10 phar:///usr/local/bin/dep/vendor/symfony/console/Application.php(248): Deployer\Console\Application->doRunCommand(Object(Deployer\Console\TaskCommand), Object(Symfony\Component\Console\Input\ArgvInput), Object(Deployer\Console\Output\OutputWatcher))
+#11 phar:///usr/local/bin/dep/vendor/symfony/console/Application.php(148): Symfony\Component\Console\Application->doRun(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#12 phar:///usr/local/bin/dep/src/Deployer.php(331): Symfony\Component\Console\Application->run(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#13 phar:///usr/local/bin/dep/bin/dep(119): Deployer\Deployer::run('6.3.0', '/Users/kimonoso...')
+#14 /usr/local/bin/dep(4): require('phar:///usr/loc...')
+#15 {main}
+[206.189.95.223] > rm -f ~/var/www/html/myMulti/.dep/deploy.lock
+[localhost] > git rev-parse --abbrev-ref HEAD
+[localhost] < master
+[206.189.95.223] > echo $0
+[206.189.95.223] < bash
+[206.189.95.223] > if [ ! -d ~/var/www/html/myMulti ]; then mkdir -p ~/var/www/html/myMulti; fi
+[206.189.95.223] > if [ ! -L ~/var/www/html/myMulti/current ] && [ -d ~/var/www/html/myMulti/current ]; then echo 'true'; fi
+[206.189.95.223] > cd ~/var/www/html/myMulti && if [ ! -d .dep ]; then mkdir .dep; fi
+[206.189.95.223] > cd ~/var/www/html/myMulti && if [ ! -d releases ]; then mkdir releases; fi
+[206.189.95.223] > cd ~/var/www/html/myMulti && if [ ! -d shared ]; then mkdir shared; fi
+[206.189.95.223] > if [ -f ~/var/www/html/myMulti/.dep/deploy.lock ]; then echo 'true'; fi
+[206.189.95.223] > touch ~/var/www/html/myMulti/.dep/deploy.lock
+[206.189.95.223] > cd ~/var/www/html/myMulti && (if [ -h release ]; then echo 'true'; fi)
+[206.189.95.223] > cd ~/var/www/html/myMulti && (if [ -d releases ] && [ "$(ls -A releases)" ]; then echo 'true'; fi)
+[206.189.95.223] > cd ~/var/www/html/myMulti && (if [ -d ~/var/www/html/myMulti/releases/1 ]; then echo 'true'; fi)
+[206.189.95.223] > cd ~/var/www/html/myMulti && (date +"%Y%m%d%H%M%S")
+[206.189.95.223] < 20181105084037
+[206.189.95.223] > cd ~/var/www/html/myMulti && (echo '20181105084037,1' >> .dep/releases)
+[206.189.95.223] > cd ~/var/www/html/myMulti && (mkdir ~/var/www/html/myMulti/releases/1)
+[206.189.95.223] > cd ~/var/www/html/myMulti && (if [[ $(man ln 2>&1 || ln -h 2>&1 || ln --help 2>&1) =~ '--relative' ]]; then echo 'true'; fi)
+[206.189.95.223] < true
+[206.189.95.223] > cd ~/var/www/html/myMulti && (ln -nfs --relative ~/var/www/html/myMulti/releases/1 ~/var/www/html/myMulti/release)
+[206.189.95.223] > command -v 'git' || which 'git' || type -p 'git'
+[206.189.95.223] < /usr/bin/git
+[206.189.95.223] > /usr/bin/git version
+[206.189.95.223] < git version 2.7.4
+[206.189.95.223] > cd ~/var/www/html/myMulti && (if [ -h ~/var/www/html/myMulti/release ]; then echo 'true'; fi)
+[206.189.95.223] < true
+[206.189.95.223] > cd ~/var/www/html/myMulti && (readlink ~/var/www/html/myMulti/release)
+[206.189.95.223] < releases/1
+[206.189.95.223] > cd ~/var/www/html/myMulti && (/usr/bin/git clone -b master  --recursive -q git@bitbucket.org:kimonoso/mymulti.git ~/var/www/html/myMulti/releases/1 2>&1)
+[Symfony\Component\Process\Exception\ProcessFailedException] The command "ssh -A -tt -i ~/.ssh/deployerkey deployer@206.189.95.223 'cd ~/var/www/html/myMulti && (/usr/bin/git clone -b master  --recursive -q git@bitbucket.org:kimonoso/mymulti.git ~/var/www/html/myMulti/releases/1 2>&1)'" failed.
+
+Exit Code: 128(Invalid exit argument)
+
+Working directory: /Users/kimonoso/Documents/Programming/myMulti
+
+Output:
+================
+
+
+Error Output:
+================
+
+#0 phar:///usr/local/bin/dep/src/Ssh/Client.php(75): Symfony\Component\Process\Process->mustRun()
+#1 phar:///usr/local/bin/dep/src/functions.php(304): Deployer\Ssh\Client->run(Object(Deployer\Host\Host), ''cd ~/var/www/h...', Array)
+#2 phar:///usr/local/bin/dep/recipe/deploy/update_code.php(90): Deployer\run('cd ~/var/www/ht...', Array)
+#3 [internal function]: Deployer\Deployer::Deployer\{closure}()
+#4 phar:///usr/local/bin/dep/src/Task/Task.php(105): call_user_func(Object(Closure))
+#5 phar:///usr/local/bin/dep/src/Executor/SeriesExecutor.php(63): Deployer\Task\Task->run(Object(Deployer\Task\Context))
+#6 phar:///usr/local/bin/dep/src/Console/TaskCommand.php(142): Deployer\Executor\SeriesExecutor->run(Array, Array)
+#7 phar:///usr/local/bin/dep/vendor/symfony/console/Command/Command.php(252): Deployer\Console\TaskCommand->execute(Object(Symfony\Component\Console\Input\ArgvInput), Object(Deployer\Console\Output\OutputWatcher))
+#8 phar:///usr/local/bin/dep/vendor/symfony/console/Application.php(946): Symfony\Component\Console\Command\Command->run(Object(Symfony\Component\Console\Input\ArgvInput), Object(Deployer\Console\Output\OutputWatcher))
+#9 phar:///usr/local/bin/dep/src/Console/Application.php(133): Symfony\Component\Console\Application->doRunCommand(Object(Deployer\Console\TaskCommand), Object(Symfony\Component\Console\Input\ArgvInput), Object(Deployer\Console\Output\OutputWatcher))
+#10 phar:///usr/local/bin/dep/vendor/symfony/console/Application.php(248): Deployer\Console\Application->doRunCommand(Object(Deployer\Console\TaskCommand), Object(Symfony\Component\Console\Input\ArgvInput), Object(Deployer\Console\Output\OutputWatcher))
+#11 phar:///usr/local/bin/dep/vendor/symfony/console/Application.php(148): Symfony\Component\Console\Application->doRun(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#12 phar:///usr/local/bin/dep/src/Deployer.php(331): Symfony\Component\Console\Application->run(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#13 phar:///usr/local/bin/dep/bin/dep(119): Deployer\Deployer::run('6.3.0', '/Users/kimonoso...')
+#14 /usr/local/bin/dep(4): require('phar:///usr/loc...')
+#15 {main}
+[206.189.95.223] > rm -f ~/var/www/html/myMulti/.dep/deploy.lock
+[localhost] > git rev-parse --abbrev-ref HEAD
+[localhost] < master
+[206.189.95.223] > echo $0
+[206.189.95.223] < bash
+[206.189.95.223] > if [ ! -d ~/var/www/html/myMulti ]; then mkdir -p ~/var/www/html/myMulti; fi
+[206.189.95.223] > if [ ! -L ~/var/www/html/myMulti/current ] && [ -d ~/var/www/html/myMulti/current ]; then echo 'true'; fi
+[206.189.95.223] > cd ~/var/www/html/myMulti && if [ ! -d .dep ]; then mkdir .dep; fi
+[206.189.95.223] > cd ~/var/www/html/myMulti && if [ ! -d releases ]; then mkdir releases; fi
+[206.189.95.223] > cd ~/var/www/html/myMulti && if [ ! -d shared ]; then mkdir shared; fi
+[206.189.95.223] > if [ -f ~/var/www/html/myMulti/.dep/deploy.lock ]; then echo 'true'; fi
+[206.189.95.223] > touch ~/var/www/html/myMulti/.dep/deploy.lock
+[206.189.95.223] > cd ~/var/www/html/myMulti && (if [ -h release ]; then echo 'true'; fi)
+[206.189.95.223] < true
+[206.189.95.223] > cd ~/var/www/html/myMulti && (rm -rf "$(readlink release)")
+[206.189.95.223] > cd ~/var/www/html/myMulti && (rm release)
+[206.189.95.223] > cd ~/var/www/html/myMulti && (if [ -d releases ] && [ "$(ls -A releases)" ]; then echo 'true'; fi)
+[206.189.95.223] > cd ~/var/www/html/myMulti && (if [ -d ~/var/www/html/myMulti/releases/1 ]; then echo 'true'; fi)
+[206.189.95.223] > cd ~/var/www/html/myMulti && (date +"%Y%m%d%H%M%S")
+[206.189.95.223] < 20181105084649
+[206.189.95.223] > cd ~/var/www/html/myMulti && (echo '20181105084649,1' >> .dep/releases)
+[206.189.95.223] > cd ~/var/www/html/myMulti && (mkdir ~/var/www/html/myMulti/releases/1)
+[206.189.95.223] > cd ~/var/www/html/myMulti && (if [[ $(man ln 2>&1 || ln -h 2>&1 || ln --help 2>&1) =~ '--relative' ]]; then echo 'true'; fi)
+[206.189.95.223] < true
+[206.189.95.223] > cd ~/var/www/html/myMulti && (ln -nfs --relative ~/var/www/html/myMulti/releases/1 ~/var/www/html/myMulti/release)
+[206.189.95.223] > command -v 'git' || which 'git' || type -p 'git'
+[206.189.95.223] < /usr/bin/git
+[206.189.95.223] > /usr/bin/git version
+[206.189.95.223] < git version 2.7.4
+[206.189.95.223] > cd ~/var/www/html/myMulti && (if [ -h ~/var/www/html/myMulti/release ]; then echo 'true'; fi)
+[206.189.95.223] < true
+[206.189.95.223] > cd ~/var/www/html/myMulti && (readlink ~/var/www/html/myMulti/release)
+[206.189.95.223] < releases/1
+[206.189.95.223] > cd ~/var/www/html/myMulti && (/usr/bin/git clone -b master  --recursive -q git@bitbucket.org:kimonoso/mymulti.git ~/var/www/html/myMulti/releases/1 2>&1)
+[Symfony\Component\Process\Exception\ProcessFailedException] The command "ssh -A -tt -i ~/.ssh/deployerkey.pub deployer@206.189.95.223 'cd ~/var/www/html/myMulti && (/usr/bin/git clone -b master  --recursive -q git@bitbucket.org:kimonoso/mymulti.git ~/var/www/html/myMulti/releases/1 2>&1)'" failed.
+
+Exit Code: 128(Invalid exit argument)
+
+Working directory: /Users/kimonoso/Documents/Programming/myMulti
+
+Output:
+================
+
+
+Error Output:
+================
+
+#0 phar:///usr/local/bin/dep/src/Ssh/Client.php(75): Symfony\Component\Process\Process->mustRun()
+#1 phar:///usr/local/bin/dep/src/functions.php(304): Deployer\Ssh\Client->run(Object(Deployer\Host\Host), ''cd ~/var/www/h...', Array)
+#2 phar:///usr/local/bin/dep/recipe/deploy/update_code.php(90): Deployer\run('cd ~/var/www/ht...', Array)
+#3 [internal function]: Deployer\Deployer::Deployer\{closure}()
+#4 phar:///usr/local/bin/dep/src/Task/Task.php(105): call_user_func(Object(Closure))
+#5 phar:///usr/local/bin/dep/src/Executor/SeriesExecutor.php(63): Deployer\Task\Task->run(Object(Deployer\Task\Context))
+#6 phar:///usr/local/bin/dep/src/Console/TaskCommand.php(142): Deployer\Executor\SeriesExecutor->run(Array, Array)
+#7 phar:///usr/local/bin/dep/vendor/symfony/console/Command/Command.php(252): Deployer\Console\TaskCommand->execute(Object(Symfony\Component\Console\Input\ArgvInput), Object(Deployer\Console\Output\OutputWatcher))
+#8 phar:///usr/local/bin/dep/vendor/symfony/console/Application.php(946): Symfony\Component\Console\Command\Command->run(Object(Symfony\Component\Console\Input\ArgvInput), Object(Deployer\Console\Output\OutputWatcher))
+#9 phar:///usr/local/bin/dep/src/Console/Application.php(133): Symfony\Component\Console\Application->doRunCommand(Object(Deployer\Console\TaskCommand), Object(Symfony\Component\Console\Input\ArgvInput), Object(Deployer\Console\Output\OutputWatcher))
+#10 phar:///usr/local/bin/dep/vendor/symfony/console/Application.php(248): Deployer\Console\Application->doRunCommand(Object(Deployer\Console\TaskCommand), Object(Symfony\Component\Console\Input\ArgvInput), Object(Deployer\Console\Output\OutputWatcher))
+#11 phar:///usr/local/bin/dep/vendor/symfony/console/Application.php(148): Symfony\Component\Console\Application->doRun(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#12 phar:///usr/local/bin/dep/src/Deployer.php(331): Symfony\Component\Console\Application->run(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#13 phar:///usr/local/bin/dep/bin/dep(119): Deployer\Deployer::run('6.3.0', '/Users/kimonoso...')
+#14 /usr/local/bin/dep(4): require('phar:///usr/loc...')
+#15 {main}
+[206.189.95.223] > rm -f ~/var/www/html/myMulti/.dep/deploy.lock
+[localhost] > git rev-parse --abbrev-ref HEAD
+[localhost] < master
+[206.189.95.223] > echo $0
+[206.189.95.223] < bash
+[206.189.95.223] > if [ ! -d ~/var/www/html/myMulti ]; then mkdir -p ~/var/www/html/myMulti; fi
+[206.189.95.223] > if [ ! -L ~/var/www/html/myMulti/current ] && [ -d ~/var/www/html/myMulti/current ]; then echo 'true'; fi
+[206.189.95.223] > cd ~/var/www/html/myMulti && if [ ! -d .dep ]; then mkdir .dep; fi
+[206.189.95.223] > cd ~/var/www/html/myMulti && if [ ! -d releases ]; then mkdir releases; fi
+[206.189.95.223] > cd ~/var/www/html/myMulti && if [ ! -d shared ]; then mkdir shared; fi
+[206.189.95.223] > if [ -f ~/var/www/html/myMulti/.dep/deploy.lock ]; then echo 'true'; fi
+[206.189.95.223] > touch ~/var/www/html/myMulti/.dep/deploy.lock
+[206.189.95.223] > cd ~/var/www/html/myMulti && (if [ -h release ]; then echo 'true'; fi)
+[206.189.95.223] < true
+[206.189.95.223] > cd ~/var/www/html/myMulti && (rm -rf "$(readlink release)")
+[206.189.95.223] > cd ~/var/www/html/myMulti && (rm release)
+[206.189.95.223] > cd ~/var/www/html/myMulti && (if [ -d releases ] && [ "$(ls -A releases)" ]; then echo 'true'; fi)
+[206.189.95.223] > cd ~/var/www/html/myMulti && (if [ -d ~/var/www/html/myMulti/releases/1 ]; then echo 'true'; fi)
+[206.189.95.223] > cd ~/var/www/html/myMulti && (date +"%Y%m%d%H%M%S")
+[206.189.95.223] < 20181105084734
+[206.189.95.223] > cd ~/var/www/html/myMulti && (echo '20181105084734,1' >> .dep/releases)
+[206.189.95.223] > cd ~/var/www/html/myMulti && (mkdir ~/var/www/html/myMulti/releases/1)
+[206.189.95.223] > cd ~/var/www/html/myMulti && (if [[ $(man ln 2>&1 || ln -h 2>&1 || ln --help 2>&1) =~ '--relative' ]]; then echo 'true'; fi)
+[206.189.95.223] < true
+[206.189.95.223] > cd ~/var/www/html/myMulti && (ln -nfs --relative ~/var/www/html/myMulti/releases/1 ~/var/www/html/myMulti/release)
+[206.189.95.223] > command -v 'git' || which 'git' || type -p 'git'
+[206.189.95.223] < /usr/bin/git
+[206.189.95.223] > /usr/bin/git version
+[206.189.95.223] < git version 2.7.4
+[206.189.95.223] > cd ~/var/www/html/myMulti && (if [ -h ~/var/www/html/myMulti/release ]; then echo 'true'; fi)
+[206.189.95.223] < true
+[206.189.95.223] > cd ~/var/www/html/myMulti && (readlink ~/var/www/html/myMulti/release)
+[206.189.95.223] < releases/1
+[206.189.95.223] > cd ~/var/www/html/myMulti && (/usr/bin/git clone -b master  --recursive -q git@bitbucket.org:kimonoso/mymulti.git ~/var/www/html/myMulti/releases/1 2>&1)
+[Symfony\Component\Process\Exception\ProcessFailedException] The command "ssh -A -tt -i ~/.ssh/deployerkey deployer@206.189.95.223 'cd ~/var/www/html/myMulti && (/usr/bin/git clone -b master  --recursive -q git@bitbucket.org:kimonoso/mymulti.git ~/var/www/html/myMulti/releases/1 2>&1)'" failed.
+
+Exit Code: 128(Invalid exit argument)
+
+Working directory: /Users/kimonoso/Documents/Programming/myMulti
+
+Output:
+================
+
+
+Error Output:
+================
+
+#0 phar:///usr/local/bin/dep/src/Ssh/Client.php(75): Symfony\Component\Process\Process->mustRun()
+#1 phar:///usr/local/bin/dep/src/functions.php(304): Deployer\Ssh\Client->run(Object(Deployer\Host\Host), ''cd ~/var/www/h...', Array)
+#2 phar:///usr/local/bin/dep/recipe/deploy/update_code.php(90): Deployer\run('cd ~/var/www/ht...', Array)
+#3 [internal function]: Deployer\Deployer::Deployer\{closure}()
+#4 phar:///usr/local/bin/dep/src/Task/Task.php(105): call_user_func(Object(Closure))
+#5 phar:///usr/local/bin/dep/src/Executor/SeriesExecutor.php(63): Deployer\Task\Task->run(Object(Deployer\Task\Context))
+#6 phar:///usr/local/bin/dep/src/Console/TaskCommand.php(142): Deployer\Executor\SeriesExecutor->run(Array, Array)
+#7 phar:///usr/local/bin/dep/vendor/symfony/console/Command/Command.php(252): Deployer\Console\TaskCommand->execute(Object(Symfony\Component\Console\Input\ArgvInput), Object(Deployer\Console\Output\OutputWatcher))
+#8 phar:///usr/local/bin/dep/vendor/symfony/console/Application.php(946): Symfony\Component\Console\Command\Command->run(Object(Symfony\Component\Console\Input\ArgvInput), Object(Deployer\Console\Output\OutputWatcher))
+#9 phar:///usr/local/bin/dep/src/Console/Application.php(133): Symfony\Component\Console\Application->doRunCommand(Object(Deployer\Console\TaskCommand), Object(Symfony\Component\Console\Input\ArgvInput), Object(Deployer\Console\Output\OutputWatcher))
+#10 phar:///usr/local/bin/dep/vendor/symfony/console/Application.php(248): Deployer\Console\Application->doRunCommand(Object(Deployer\Console\TaskCommand), Object(Symfony\Component\Console\Input\ArgvInput), Object(Deployer\Console\Output\OutputWatcher))
+#11 phar:///usr/local/bin/dep/vendor/symfony/console/Application.php(148): Symfony\Component\Console\Application->doRun(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#12 phar:///usr/local/bin/dep/src/Deployer.php(331): Symfony\Component\Console\Application->run(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#13 phar:///usr/local/bin/dep/bin/dep(119): Deployer\Deployer::run('6.3.0', '/Users/kimonoso...')
+#14 /usr/local/bin/dep(4): require('phar:///usr/loc...')
+#15 {main}
+[206.189.95.223] > rm -f ~/var/www/html/myMulti/.dep/deploy.lock
+[localhost] > git rev-parse --abbrev-ref HEAD
+[localhost] < master
+[206.189.95.223] > echo $0
+[206.189.95.223] < bash
+[206.189.95.223] > if [ ! -d ~/var/www/html/myMulti ]; then mkdir -p ~/var/www/html/myMulti; fi
+[206.189.95.223] > if [ ! -L ~/var/www/html/myMulti/current ] && [ -d ~/var/www/html/myMulti/current ]; then echo 'true'; fi
+[206.189.95.223] > cd ~/var/www/html/myMulti && if [ ! -d .dep ]; then mkdir .dep; fi
+[206.189.95.223] > cd ~/var/www/html/myMulti && if [ ! -d releases ]; then mkdir releases; fi
+[206.189.95.223] > cd ~/var/www/html/myMulti && if [ ! -d shared ]; then mkdir shared; fi
+[206.189.95.223] > if [ -f ~/var/www/html/myMulti/.dep/deploy.lock ]; then echo 'true'; fi
+[206.189.95.223] > touch ~/var/www/html/myMulti/.dep/deploy.lock
+[206.189.95.223] > cd ~/var/www/html/myMulti && (if [ -h release ]; then echo 'true'; fi)
+[206.189.95.223] > cd ~/var/www/html/myMulti && (if [ -d releases ] && [ "$(ls -A releases)" ]; then echo 'true'; fi)
+[206.189.95.223] > cd ~/var/www/html/myMulti && (if [ -d ~/var/www/html/myMulti/releases/1 ]; then echo 'true'; fi)
+[206.189.95.223] > cd ~/var/www/html/myMulti && (date +"%Y%m%d%H%M%S")
+[206.189.95.223] < 20181105084931
+[206.189.95.223] > cd ~/var/www/html/myMulti && (echo '20181105084931,1' >> .dep/releases)
+[206.189.95.223] > cd ~/var/www/html/myMulti && (mkdir ~/var/www/html/myMulti/releases/1)
+[206.189.95.223] > cd ~/var/www/html/myMulti && (if [[ $(man ln 2>&1 || ln -h 2>&1 || ln --help 2>&1) =~ '--relative' ]]; then echo 'true'; fi)
+[206.189.95.223] < true
+[206.189.95.223] > cd ~/var/www/html/myMulti && (ln -nfs --relative ~/var/www/html/myMulti/releases/1 ~/var/www/html/myMulti/release)
+[206.189.95.223] > command -v 'git' || which 'git' || type -p 'git'
+[206.189.95.223] < /usr/bin/git
+[206.189.95.223] > /usr/bin/git version
+[206.189.95.223] < git version 2.7.4
+[206.189.95.223] > cd ~/var/www/html/myMulti && (if [ -h ~/var/www/html/myMulti/release ]; then echo 'true'; fi)
+[206.189.95.223] < true
+[206.189.95.223] > cd ~/var/www/html/myMulti && (readlink ~/var/www/html/myMulti/release)
+[206.189.95.223] < releases/1
+[206.189.95.223] > cd ~/var/www/html/myMulti && (/usr/bin/git clone -b master  --recursive -q git@bitbucket.org:kimonoso/mymulti.git ~/var/www/html/myMulti/releases/1 2>&1)
+[Symfony\Component\Process\Exception\ProcessFailedException] The command "ssh -A -tt -i ~/.ssh/deployerkey deployer@206.189.95.223 'cd ~/var/www/html/myMulti && (/usr/bin/git clone -b master  --recursive -q git@bitbucket.org:kimonoso/mymulti.git ~/var/www/html/myMulti/releases/1 2>&1)'" failed.
+
+Exit Code: 128(Invalid exit argument)
+
+Working directory: /Users/kimonoso/Documents/Programming/myMulti
+
+Output:
+================
+
+
+Error Output:
+================
+
+#0 phar:///usr/local/bin/dep/src/Ssh/Client.php(75): Symfony\Component\Process\Process->mustRun()
+#1 phar:///usr/local/bin/dep/src/functions.php(304): Deployer\Ssh\Client->run(Object(Deployer\Host\Host), ''cd ~/var/www/h...', Array)
+#2 phar:///usr/local/bin/dep/recipe/deploy/update_code.php(90): Deployer\run('cd ~/var/www/ht...', Array)
+#3 [internal function]: Deployer\Deployer::Deployer\{closure}()
+#4 phar:///usr/local/bin/dep/src/Task/Task.php(105): call_user_func(Object(Closure))
+#5 phar:///usr/local/bin/dep/src/Executor/SeriesExecutor.php(63): Deployer\Task\Task->run(Object(Deployer\Task\Context))
+#6 phar:///usr/local/bin/dep/src/Console/TaskCommand.php(142): Deployer\Executor\SeriesExecutor->run(Array, Array)
+#7 phar:///usr/local/bin/dep/vendor/symfony/console/Command/Command.php(252): Deployer\Console\TaskCommand->execute(Object(Symfony\Component\Console\Input\ArgvInput), Object(Deployer\Console\Output\OutputWatcher))
+#8 phar:///usr/local/bin/dep/vendor/symfony/console/Application.php(946): Symfony\Component\Console\Command\Command->run(Object(Symfony\Component\Console\Input\ArgvInput), Object(Deployer\Console\Output\OutputWatcher))
+#9 phar:///usr/local/bin/dep/src/Console/Application.php(133): Symfony\Component\Console\Application->doRunCommand(Object(Deployer\Console\TaskCommand), Object(Symfony\Component\Console\Input\ArgvInput), Object(Deployer\Console\Output\OutputWatcher))
+#10 phar:///usr/local/bin/dep/vendor/symfony/console/Application.php(248): Deployer\Console\Application->doRunCommand(Object(Deployer\Console\TaskCommand), Object(Symfony\Component\Console\Input\ArgvInput), Object(Deployer\Console\Output\OutputWatcher))
+#11 phar:///usr/local/bin/dep/vendor/symfony/console/Application.php(148): Symfony\Component\Console\Application->doRun(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#12 phar:///usr/local/bin/dep/src/Deployer.php(331): Symfony\Component\Console\Application->run(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#13 phar:///usr/local/bin/dep/bin/dep(119): Deployer\Deployer::run('6.3.0', '/Users/kimonoso...')
+#14 /usr/local/bin/dep(4): require('phar:///usr/loc...')
+#15 {main}
+[206.189.95.223] > rm -f ~/var/www/html/myMulti/.dep/deploy.lock
+[localhost] > git rev-parse --abbrev-ref HEAD
+[localhost] < master
+[206.189.95.223] > echo $0
+[206.189.95.223] < bash
+[206.189.95.223] > if [ ! -d ~/var/www/html/myMulti ]; then mkdir -p ~/var/www/html/myMulti; fi
+[206.189.95.223] > if [ ! -L ~/var/www/html/myMulti/current ] && [ -d ~/var/www/html/myMulti/current ]; then echo 'true'; fi
+[206.189.95.223] > cd ~/var/www/html/myMulti && if [ ! -d .dep ]; then mkdir .dep; fi
+[206.189.95.223] > cd ~/var/www/html/myMulti && if [ ! -d releases ]; then mkdir releases; fi
+[206.189.95.223] > cd ~/var/www/html/myMulti && if [ ! -d shared ]; then mkdir shared; fi
+[206.189.95.223] > if [ -f ~/var/www/html/myMulti/.dep/deploy.lock ]; then echo 'true'; fi
+[206.189.95.223] > touch ~/var/www/html/myMulti/.dep/deploy.lock
+[206.189.95.223] > cd ~/var/www/html/myMulti && (if [ -h release ]; then echo 'true'; fi)
+[206.189.95.223] < true
+[206.189.95.223] > cd ~/var/www/html/myMulti && (rm -rf "$(readlink release)")
+[206.189.95.223] > cd ~/var/www/html/myMulti && (rm release)
+[206.189.95.223] > cd ~/var/www/html/myMulti && (if [ -d releases ] && [ "$(ls -A releases)" ]; then echo 'true'; fi)
+[206.189.95.223] > cd ~/var/www/html/myMulti && (if [ -d ~/var/www/html/myMulti/releases/1 ]; then echo 'true'; fi)
+[206.189.95.223] > cd ~/var/www/html/myMulti && (date +"%Y%m%d%H%M%S")
+[206.189.95.223] < 20181105091015
+[206.189.95.223] > cd ~/var/www/html/myMulti && (echo '20181105091015,1' >> .dep/releases)
+[206.189.95.223] > cd ~/var/www/html/myMulti && (mkdir ~/var/www/html/myMulti/releases/1)
+[206.189.95.223] > cd ~/var/www/html/myMulti && (if [[ $(man ln 2>&1 || ln -h 2>&1 || ln --help 2>&1) =~ '--relative' ]]; then echo 'true'; fi)
+[206.189.95.223] < true
+[206.189.95.223] > cd ~/var/www/html/myMulti && (ln -nfs --relative ~/var/www/html/myMulti/releases/1 ~/var/www/html/myMulti/release)
+[206.189.95.223] > command -v 'git' || which 'git' || type -p 'git'
+[206.189.95.223] < /usr/bin/git
+[206.189.95.223] > /usr/bin/git version
+[206.189.95.223] < git version 2.7.4
+[206.189.95.223] > cd ~/var/www/html/myMulti && (if [ -h ~/var/www/html/myMulti/release ]; then echo 'true'; fi)
+[206.189.95.223] < true
+[206.189.95.223] > cd ~/var/www/html/myMulti && (readlink ~/var/www/html/myMulti/release)
+[206.189.95.223] < releases/1
+[206.189.95.223] > cd ~/var/www/html/myMulti && (/usr/bin/git clone -b master  --recursive -q git@bitbucket.org:kimonoso/mymulti.git ~/var/www/html/myMulti/releases/1 2>&1)
+[Symfony\Component\Process\Exception\ProcessFailedException] The command "ssh -A -tt -i ~/.ssh/deployerkey deployer@206.189.95.223 'cd ~/var/www/html/myMulti && (/usr/bin/git clone -b master  --recursive -q git@bitbucket.org:kimonoso/mymulti.git ~/var/www/html/myMulti/releases/1 2>&1)'" failed.
+
+Exit Code: 128(Invalid exit argument)
+
+Working directory: /Users/kimonoso/Documents/Programming/myMulti
+
+Output:
+================
+
+
+Error Output:
+================
+
+#0 phar:///usr/local/bin/dep/src/Ssh/Client.php(75): Symfony\Component\Process\Process->mustRun()
+#1 phar:///usr/local/bin/dep/src/functions.php(304): Deployer\Ssh\Client->run(Object(Deployer\Host\Host), ''cd ~/var/www/h...', Array)
+#2 phar:///usr/local/bin/dep/recipe/deploy/update_code.php(90): Deployer\run('cd ~/var/www/ht...', Array)
+#3 [internal function]: Deployer\Deployer::Deployer\{closure}()
+#4 phar:///usr/local/bin/dep/src/Task/Task.php(105): call_user_func(Object(Closure))
+#5 phar:///usr/local/bin/dep/src/Executor/SeriesExecutor.php(63): Deployer\Task\Task->run(Object(Deployer\Task\Context))
+#6 phar:///usr/local/bin/dep/src/Console/TaskCommand.php(142): Deployer\Executor\SeriesExecutor->run(Array, Array)
+#7 phar:///usr/local/bin/dep/vendor/symfony/console/Command/Command.php(252): Deployer\Console\TaskCommand->execute(Object(Symfony\Component\Console\Input\ArgvInput), Object(Deployer\Console\Output\OutputWatcher))
+#8 phar:///usr/local/bin/dep/vendor/symfony/console/Application.php(946): Symfony\Component\Console\Command\Command->run(Object(Symfony\Component\Console\Input\ArgvInput), Object(Deployer\Console\Output\OutputWatcher))
+#9 phar:///usr/local/bin/dep/src/Console/Application.php(133): Symfony\Component\Console\Application->doRunCommand(Object(Deployer\Console\TaskCommand), Object(Symfony\Component\Console\Input\ArgvInput), Object(Deployer\Console\Output\OutputWatcher))
+#10 phar:///usr/local/bin/dep/vendor/symfony/console/Application.php(248): Deployer\Console\Application->doRunCommand(Object(Deployer\Console\TaskCommand), Object(Symfony\Component\Console\Input\ArgvInput), Object(Deployer\Console\Output\OutputWatcher))
+#11 phar:///usr/local/bin/dep/vendor/symfony/console/Application.php(148): Symfony\Component\Console\Application->doRun(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#12 phar:///usr/local/bin/dep/src/Deployer.php(331): Symfony\Component\Console\Application->run(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#13 phar:///usr/local/bin/dep/bin/dep(119): Deployer\Deployer::run('6.3.0', '/Users/kimonoso...')
+#14 /usr/local/bin/dep(4): require('phar:///usr/loc...')
+#15 {main}
+[206.189.95.223] > rm -f ~/var/www/html/myMulti/.dep/deploy.lock
