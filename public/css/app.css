@@ -10600,7 +10600,7 @@ a.asaka-link:hover {
   margin: 0;
   text-align: right;
   padding: 0 1rem 0 0;
-  z-index: 101;
+  z-index: 1;
 }
 
 .grid-container #main {
@@ -10741,7 +10741,7 @@ a.asaka-link:hover {
 }
 
 #chat-container {
-  height: calc(100% - 1.5rem);
+  height: 100%;
   width: 330px;
   grid-column: 1 / span 1;
   grid-row: 1 / span 1;
@@ -10756,7 +10756,7 @@ a.asaka-link:hover {
 
   #chat-container.active {
     display: block;
-    z-index: 300;
+    z-index: 10;
   }
 }
 
