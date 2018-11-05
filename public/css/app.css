@@ -10772,6 +10772,12 @@ a.asaka-link:hover {
   z-index: 1;
 }
 
+@media (max-width: 599px) {
+  #chatbox {
+    height: 100%;
+  }
+}
+
 #chat-core {
   display: grid;
   grid-template-rows: minmax(50px, auto) auto;
