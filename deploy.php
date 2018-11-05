@@ -25,7 +25,7 @@ add('writable_dirs', []);
 host('206.189.95.223')
     ->user('deployer')
     ->identityFile('~/.ssh/deployerkey')
-    ->set('deploy_path', '~/var/www/html/myMulti');
+    ->set('deploy_path', '/var/www/html/myMulti');
 
 // Tasks
 
