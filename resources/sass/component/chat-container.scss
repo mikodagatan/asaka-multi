@@ -9,6 +9,7 @@
     display: none;
     &.active {
       display: block;
+      z-index: 300;
     }
   }
 }
