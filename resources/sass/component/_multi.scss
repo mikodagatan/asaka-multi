@@ -4,7 +4,7 @@
   @extend %full-hw;
   grid-row: 2 / span 1;
   display: grid;
-  grid-template-columns: 300px auto;
+  grid-template-columns: 330px auto;
   @include for-phone-only {
     display: flex;
     flex-wrap: wrap;
@@ -29,8 +29,8 @@
   // flex: initial;
   display: inline-block;
   margin: 0 0 0.4rem 0.4rem;
-  width: 360px;
-  height: 202.5px;
+  width: 355px;
+  height: 199.6875px;
   @include for-phone-only {
     margin: 0 0 0.4rem 0;
   }

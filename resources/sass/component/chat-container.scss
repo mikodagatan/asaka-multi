@@ -1,6 +1,6 @@
 #chat-container {
   height: 100%;
-  width: 100%;
+  width: 330px;
   grid-column: 1 / span 1;
   grid-row: 1 / span 1;
   @include for-phone-only {
@@ -17,7 +17,7 @@
   position: fixed;
   left: 0;
   margin: 0 1vw 0 0;
-  width: 300px;
+  width: 330px;
   background-color: #fcfcfc;
   // border: 3px solid #353839;
   height: calc(100% - 4.5rem);

@@ -10687,7 +10687,7 @@ a.asaka-link:hover {
 .multi {
   grid-row: 2 / span 1;
   display: grid;
-  grid-template-columns: 300px auto;
+  grid-template-columns: 330px auto;
 }
 
 @media (max-width: 599px) {
@@ -10723,8 +10723,8 @@ a.asaka-link:hover {
 .player {
   display: inline-block;
   margin: 0 0 0.4rem 0.4rem;
-  width: 360px;
-  height: 202.5px;
+  width: 355px;
+  height: 199.6875px;
 }
 
 @media (max-width: 599px) {
@@ -10742,7 +10742,7 @@ a.asaka-link:hover {
 
 #chat-container {
   height: 100%;
-  width: 100%;
+  width: 330px;
   grid-column: 1 / span 1;
   grid-row: 1 / span 1;
 }
@@ -10763,7 +10763,7 @@ a.asaka-link:hover {
   position: fixed;
   left: 0;
   margin: 0 1vw 0 0;
-  width: 300px;
+  width: 330px;
   background-color: #fcfcfc;
   height: calc(100% - 4.5rem);
   padding: 0.5rem 0.25rem 0 0.25rem;
