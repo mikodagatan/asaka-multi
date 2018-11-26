@@ -5,7 +5,6 @@
 
   <link href="{{ mix('/css/app.css') }}" rel="stylesheet" type="text/css" >
 
-  <script src="{{ mix('/js/app.js') }}"></script>
   <script src= "https://player.twitch.tv/js/embed/v1.js"></script>
 
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-129676471-1"></script>
