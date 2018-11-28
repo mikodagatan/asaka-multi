@@ -6,7 +6,7 @@
   </head>
 
   <body>
-    <div class="main"></div>
+    <div id="app"></div>
   </body>
 
   {{--  Needed to place here for React to work --}}

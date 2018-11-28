@@ -19,4 +19,8 @@
 
 import { Router, Route, Switch } from 'react-router';
 
-require('./components/layout/Main');
+require('./components/App');
+
+$('a').on('click', (e) => {
+  preventDefault();
+});
