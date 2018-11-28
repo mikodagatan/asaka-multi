@@ -21,6 +21,6 @@ import { Router, Route, Switch } from 'react-router';
 
 require('./components/App');
 
-$('a').on('click', (e) => {
+$('a').not('.asaka-link').on('click', (e) => {
   preventDefault();
 });
