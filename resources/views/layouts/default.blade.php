@@ -2,27 +2,13 @@
 <html>
 
   <head>
-    @include('includes.head')
+    @include('./layouts/head')
   </head>
 
   <body>
-
-    <div class="grid-container">
-      <div class="header">
-        @include('includes.header')
-      </div>
-
-      <div id="main">
-          @yield('content')
-      </div>
-
-      <div class="footer">
-        @include('includes.footer')
-      </div>
-
-    </div>
+    <div class="main"></div>
   </body>
-  
+
   {{--  Needed to place here for React to work --}}
   <script src="{{ mix('/js/app.js') }}"></script>
 </html>
