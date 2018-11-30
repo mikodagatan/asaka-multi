@@ -28,7 +28,7 @@ export default class NavLink extends Component {
       this.animate.reverse();
     }
   }
-  handleClick(e, multi = null) {
+  handleClick(e, multi) {
     if (multi) {
       this.props.onMultiClick(multi);
     }
@@ -52,7 +52,7 @@ export default class NavLink extends Component {
         style={link}
         ref={a => this.target = a}
         data-hover='false'
-        onClick={e => this.handleClick(e, true)}
+        onClick={e => this.handleClick(e, this.props.multi)}
         onMouseEnter={e => this.handleHover(e)}
         onMouseLeave={e => this.handleHover(e)}
         href={this.props.href}

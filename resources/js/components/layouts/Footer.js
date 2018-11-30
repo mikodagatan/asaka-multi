@@ -11,7 +11,8 @@ export default class Footer extends Component {
         display: 'flex',
         justifyContent: 'flex-end',
         alignItems: 'center',
-        backgroundColor: '#696969'
+        backgroundColor: '#696969',
+        zIndex: 10
       },
       link: {
         color: 'white',
@@ -19,7 +20,7 @@ export default class Footer extends Component {
         fontSize: 10,
         padding: '0 0.5rem 0 0'
       }
-    }
+    };
     return (
       <div style={style.footer}id="footer">
         <a style={style.link}href="http://www.twitch.tv/phantasmaasaka" className="asaka-link">t.tv/PhantasmaAsaka</a>

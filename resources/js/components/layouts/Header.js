@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import {
-  TweenMax,
   TimelineMax
 } from 'gsap';
+import { colors } from './variables';
 import NavLink from './elements/NavLink';
 // import MultiButton from './MultiButton';
 
@@ -15,21 +15,19 @@ export default class Header extends Component {
     this.animation = new TimelineMax({ paused: true });
     this.multiAnimation = null;
   }
+
   componentDidMount() {
-    const colors = {
-      nav: '#f8f8ff',
-      body: '#22282C',
-      orange: '#FF7F50'
-    };
-    this.animation = this.animation.from(this.target[0], 0.7, {
+    this.animation = this.animation.from(this.target[0], 1, {
       x: 200,
-      opacity: 0 },
-      0.1)
-      .play();
+      ease: Bounce.easeOut
+    }).play();
     this.multiAnimation = new TimelineMax({ paused: true })
       .to(this.target[0], 0.3, {
-      backgroundColor: colors.orange
-    });
+        backgroundColor: colors.orange,
+        height: 30,
+      }).to(this.target[0], 0.3, {
+
+      });
   }
 
   handleMultiClick() {
@@ -49,28 +47,7 @@ export default class Header extends Component {
     this.props.onMultiChange(multi);
   }
 
-  manageClasses() {
-    let classes;
-    if (this.props.multi) {
-      classes = 'nav-link hidden';
-    } else {
-      classes = 'nav-link';
-    }
-    return classes;
-  }
-
-  useMultiStyle() {
-    return `navbar navbar-expand-lg navbar-light bg-light
-    ${(this.props.multi) ? 'multi-style' : ''}`;
-  }
-
   render() {
-    const colors = {
-      nav: '#f8f8ff',
-      body: '#22282C',
-      orange: 'FF7F50'
-    };
-
     const navbar = {
       backgroundColor: colors.nav,
       display: 'flex',
@@ -79,6 +56,7 @@ export default class Header extends Component {
       margin: 'auto',
       alignItems: 'center',
       overflowY: 'hidden',
+      zIndex: 10,
     };
 
     const brand = {
@@ -110,6 +88,7 @@ export default class Header extends Component {
           <NavLink href='/'>Home</NavLink>
           <NavLink
             href='/'
+            multi='true'
             onMultiClick={this.handleMultiClick}
           >Multi</NavLink>
           <NavLink href='/'>Manage</NavLink>
