@@ -8,6 +8,7 @@ export default class NavLink extends Component {
     this.handleClick = this.handleClick.bind(this);
     this.target = null;
     this.animate = null;
+    this.hide = null;
   }
   componentDidMount() {
     this.animate = new TimelineMax({ paused: true })
@@ -16,6 +17,20 @@ export default class NavLink extends Component {
         backgroundColor: '#22282Cl',
         textDecoration: 'none'
       });
+    this.hide = new TimelineMax({ paused: true })
+      .to(this.target, 0.3, {
+        opacity: 0,
+      })
+      .to(this.target, 0.3, {
+        display: 'none',
+      });
+  }
+  componentDidUpdate() {
+    if (this.props.multi) {
+      this.hide.play();
+    } else {
+      this.hide.reverse();
+    }
   }
   handleHover(e) {
     const { target } = e;
@@ -44,7 +59,8 @@ export default class NavLink extends Component {
       letterSpacing: '1px',
       textTransform: 'uppercase',
       padding: '30px 15px 30px 15px',
-      textDecoration: 'none'
+      textDecoration: 'none',
+      cursor: 'pointer',
     };
 
     return (
@@ -52,7 +68,7 @@ export default class NavLink extends Component {
         style={link}
         ref={a => this.target = a}
         data-hover='false'
-        onClick={e => this.handleClick(e, this.props.multi)}
+        onClick={e => this.handleClick(e, this.props.multiButton)}
         onMouseEnter={e => this.handleHover(e)}
         onMouseLeave={e => this.handleHover(e)}
         href={this.props.href}

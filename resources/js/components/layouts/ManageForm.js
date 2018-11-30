@@ -15,6 +15,7 @@ export default class ManageForm extends Component {
     this.handleRemoveStream = this.handleRemoveStream.bind(this);
     this.storeInput = this.storeInput.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.handleClose = this.handleClose.bind(this);
 
     this.target = null;
     this.animation = new TimelineMax({ paused: true });
@@ -26,7 +27,7 @@ export default class ManageForm extends Component {
         x: -500,
         ease: Power3.easeOut,
         display: 'block',
-        delay: 0.3
+        delay: 0.2
       });
   }
 
@@ -34,7 +35,7 @@ export default class ManageForm extends Component {
     if (this.props.multi) {
       this.animation.play();
     } else {
-      this.animation.delay(0.3).reverse();
+      this.animation.reverse();
     }
   }
 
@@ -51,6 +52,10 @@ export default class ManageForm extends Component {
             (index === sIndex) ? { name: e.target.value } : stream
       ))
     });
+  }
+
+  handleClose() {
+    this.animation.reverse();
   }
 
   handleChange(index, e) {
@@ -115,7 +120,7 @@ export default class ManageForm extends Component {
         borderRight: 'none',
         borderRadius: '20px 0 0 20px',
         outline: 'none',
-        width: 200,
+        width: 250,
       },
       close: {
         width: 30,
@@ -123,8 +128,9 @@ export default class ManageForm extends Component {
         border: 'none',
         padding: 6.5,
         fontSize: 10,
-        backgroundColor: '#e3342f',
+        backgroundColor: colors.red,
         color: 'white',
+        cursor: 'pointer',
       }
     };
     return (
@@ -160,19 +166,41 @@ export default class ManageForm extends Component {
         backgroundColor: colors.nav,
         position: 'absolute',
         top: 30,
-        padding: '2rem',
         marginBottom: 10,
         left: '-500',
+        overflowY: 'scroll',
+        textAlign: 'center',
       },
       manageHeader: {
-        fontSize: 20
+        backgroundColor: colors.orange,
+        fontSize: 20,
+        letterSpacing: 1,
+        color: 'white',
+        width: '100%',
+        height: 70,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+      },
+      closeManage: {
+        width: '100%',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        color: 'white',
+        padding: 2.5,
+        backgroundColor: colors.red,
+        cursor: 'pointer',
+      },
+      manageForm: {
+        padding: '1rem',
       },
       submit: {
         marginTop: 10,
+        padding: '5px 20px 5px 20px',
         borderRadius: 5,
-        '&:hover': {
-          cursor: 'pointer',
-        }
+        outline: 'none',
+        cursor: 'pointer'
       }
     };
     return (
@@ -181,8 +209,23 @@ export default class ManageForm extends Component {
         ref={manage => this.target = manage}
         style={styles.manageStyle}
       >
-        <p style={styles.manageHeader}>Manage Streams</p>
-        <form id="manage-form">
+        <div
+          id="manageHeader"
+          style={styles.manageHeader}
+        >
+          Manage Streams
+        </div>
+        <div
+          id="closeManage"
+          style={styles.closeManage}
+          onClick={this.handleClose}
+        >
+          Close
+        </div>
+        <form
+          id="manage-form"
+          style={styles.manageForm}
+        >
           {this.renderStreams()}
           <button
             style={styles.submit}
@@ -190,7 +233,7 @@ export default class ManageForm extends Component {
             onClick={this.handleSubmit}
             className="btn-primary"
           >
-            Watch Streams
+            Watch
           </button>
         </form>
       </div>

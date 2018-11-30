@@ -3,4 +3,5 @@ export const colors = {
   body: '#22282C',
   orange: '#FF7F50',
   grey: '#696969',
+  red: '#e3342f',
 };

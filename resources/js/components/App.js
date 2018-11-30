@@ -1,11 +1,16 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import { ApolloClient } from 'apollo-boost';
+// import { ApolloProvider, Query } from 'react-apollo';
+// import gql from 'graphql-tag';
+
 import Header from './layouts/Header';
 import Main from './layouts/Main';
 import Footer from './layouts/Footer';
 
-
 // Functions
+
+// const client = new ApolloClient();
 
 export default class App extends Component {
 
@@ -32,11 +37,11 @@ export default class App extends Component {
 
   render() {
     return (
-      <div>
-        <Header multi={this.state.multi} onMultiChange={this.useMulti} />
-        <Main multi={this.state.multi} />
-        <Footer />
-      </div>
+        <div id="App">
+          <Header multi={this.state.multi} onMultiChange={this.useMulti} />
+          <Main multi={this.state.multi} />
+          <Footer />
+        </div>
     );
   }
 }

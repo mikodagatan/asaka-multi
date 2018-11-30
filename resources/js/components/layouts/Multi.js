@@ -5,6 +5,7 @@ export default class Multi extends Component {
   render() {
     return (
       <div id="multi">
+        
         <ManageForm multi={this.props.multi} />
       </div>
     );
