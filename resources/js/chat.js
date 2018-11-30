@@ -6,8 +6,11 @@ $(window).on('load', function() {
   all_chat_channels = $('.chat-channel iframe');
 
 
-  all_chat_channels[0].setAttribute('class','active');
-  $(all_chat_channels[0]).parent().addClass('active');
+  if (all_chat_channels.length > 0) {
+    all_chat_channels[0].setAttribute('class','active');
+    $(all_chat_channels[0]).parent().addClass('active');
+  }
+
   // Functions
 
   channel_button.on('click', function () {

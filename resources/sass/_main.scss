@@ -17,14 +17,17 @@ nav {
   box-shadow: 2px 2px rgba(0,0,0,.15);
   letter-spacing: 1px;
   text-transform: uppercase;
+  @include transition(background-color 0.5s, box-shadow 0.5s);
 
   .navbar {
     &-brand {
       font-family: $font-2;
+      @include transition(color 0.5s);
     }
     &-nav {
       margin: 0 0 0 10px;
     }
+
   }
 
   .nav {
@@ -33,7 +36,12 @@ nav {
     }
     &-link {
       font-size: 12px;
+      @include transition(color 0.5s, display 0.5s, visibility 0.5s);
+      &.hidden {
+        visibility: hidden;
+      }
     }
+
   }
 
   @include for-desktop-down {
@@ -44,6 +52,14 @@ nav {
         float: left;
         width: 60px;
       }
+    }
+  }
+
+  &.multi-style {
+    background-color: $bg-orange !important;
+    box-shadow: 2px 2px rgba(255,255,255,0.15);
+    .nav-link, a.navbar-brand {
+      color: white !important;
     }
   }
 }
@@ -77,6 +93,11 @@ nav {
   }
 }
 
+a {
+  &:hover {
+    cursor: pointer;
+  }
+}
 a.asaka-link {
   color: #FFF;
   text-decoration: none;

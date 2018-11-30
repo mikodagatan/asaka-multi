@@ -21,6 +21,11 @@ import { Router, Route, Switch } from 'react-router';
 
 require('./components/App');
 
-$('a').not('.asaka-link').on('click', (e) => {
-  preventDefault();
+$(window).on('load', function() {
+  $('a').not('.asaka-link').on('click', (e) => {
+    e.preventDefault();
+  });
+  $('form').not('.asaka-link').on('submit', (e) => {
+    e.preventDefault();
+  });
 });
