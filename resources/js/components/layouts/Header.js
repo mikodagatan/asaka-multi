@@ -100,6 +100,7 @@ export default class Header extends Component {
 
     return (
         <nav
+          id='header'
           style={navbar}
           ref={nav => this.target[0] = nav}
         >

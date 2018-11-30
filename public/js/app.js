@@ -70398,6 +70398,7 @@ var Header = function (_Component) {
       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
         'nav',
         {
+          id: 'header',
           style: navbar,
           ref: function ref(nav) {
             return _this2.target[0] = nav;
@@ -71674,15 +71675,33 @@ var Footer = function (_Component) {
   }
 
   _createClass(Footer, [{
-    key: "render",
+    key: 'render',
     value: function render() {
+      var style = {
+        footer: {
+          height: 25,
+          width: '100%',
+          position: 'absolute',
+          bottom: 0,
+          display: 'flex',
+          justifyContent: 'flex-end',
+          alignItems: 'center',
+          backgroundColor: '#696969'
+        },
+        link: {
+          color: 'white',
+          textDecoration: 'none',
+          fontSize: 10,
+          padding: '0 0.5rem 0 0'
+        }
+      };
       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-        "div",
-        { id: "footer" },
+        'div',
+        { style: style.footer, id: 'footer' },
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-          "a",
-          { href: "http://www.twitch.tv/phantasmaasaka", className: "asaka-link" },
-          "t.tv/PhantasmaAsaka"
+          'a',
+          { style: style.link, href: 'http://www.twitch.tv/phantasmaasaka', className: 'asaka-link' },
+          't.tv/PhantasmaAsaka'
         )
       );
     }
