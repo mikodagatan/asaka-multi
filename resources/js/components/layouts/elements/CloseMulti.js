@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { TimelineMax } from 'gsap';
-import NavLink from './NavLink';
 
 export default class CloseMulti extends Component {
   constructor(props) {

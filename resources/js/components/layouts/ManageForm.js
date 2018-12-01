@@ -38,12 +38,19 @@ export default class ManageForm extends Component {
         delay: 0.2
       });
     this.closeHoverA.label = new TimelineMax({ paused: true })
+      .to(this.closeTarget.label, 0.25, {
+        color: colors.orange,
+        ease: Power4.easeOut
+      }, "together")
       .to(this.closeTarget.label, 0.7, {
         width: 20,
-      });
+        ease: Power3.easeOut
+      }, "together")
+      ;
     this.closeHoverA.close = new TimelineMax({ paused: true })
       .to(this.closeTarget.close, 0.7, {
         width: 400,
+        ease: Power3.easeOut
       });
   }
 
