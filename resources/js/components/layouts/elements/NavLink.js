@@ -8,28 +8,50 @@ export default class NavLink extends Component {
     this.handleClick = this.handleClick.bind(this);
     this.target = null;
     this.animate = null;
-    this.hide = null;
+    this.show = null;
   }
   componentDidMount() {
+    const caseMulti = this.props.multiButton;
+    const caseManage = this.props.manageButton;
+
+    let showDelay;
+    if (caseMulti) {
+      showDelay = 0;
+    } else if (caseManage) {
+      showDelay = 2;
+    }
+
     this.animate = new TimelineMax({ paused: true })
       .to(this.target, 0.3, {
         color: 'white',
         backgroundColor: '#22282Cl',
-        textDecoration: 'none'
+        textDecoration: 'none',
       });
-    this.hide = new TimelineMax({ paused: true })
-      .to(this.target, 0.3, {
+    this.show = new TimelineMax({ paused: true })
+      .from(this.target, 0.3, {
+        display: 'none',
+      })
+      .from(this.target, 0.3, {
         opacity: 0,
       })
-      .to(this.target, 0.3, {
-        display: 'none',
-      });
+      .from(this.target, showDelay, {});
+
+    if (!this.props.multi && this.props.multiButton) {
+      this.show.play();
+    }
   }
   componentDidUpdate() {
-    if (this.props.multi) {
-      this.hide.play();
+    console.log(this.props);
+    const props = this.props;
+    const case1 = !props.multi && props.multiButton;
+    const case2 = props.multi &&
+                  !props.manage &&
+                  props.manageButton;
+
+    if (case1 || case2) {
+      this.show.play();
     } else {
-      this.hide.reverse();
+      this.show.reverse();
     }
   }
   handleHover(e) {
@@ -43,9 +65,12 @@ export default class NavLink extends Component {
       this.animate.reverse();
     }
   }
-  handleClick(e, multi) {
-    if (multi) {
-      this.props.onMultiClick(multi);
+  handleClick() {
+    const props = this.props;
+    if (props.multiButton) {
+      props.onMultiClick(props.multi);
+    } else if (props.manageButton) {
+      props.onManageClick(props.manage);
     }
   }
 
@@ -68,7 +93,7 @@ export default class NavLink extends Component {
         style={link}
         ref={a => this.target = a}
         data-hover='false'
-        onClick={e => this.handleClick(e, this.props.multiButton)}
+        onClick={e => this.handleClick()}
         onMouseEnter={e => this.handleHover(e)}
         onMouseLeave={e => this.handleHover(e)}
         href={this.props.href}

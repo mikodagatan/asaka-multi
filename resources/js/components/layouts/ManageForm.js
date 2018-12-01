@@ -19,6 +19,14 @@ export default class ManageForm extends Component {
 
     this.target = null;
     this.animation = new TimelineMax({ paused: true });
+    this.closeTarget = {
+      label: null,
+      close: null,
+    };
+    this.closeHoverA = {
+      label: null,
+      close: null
+    };
   }
 
   componentDidMount() {
@@ -29,10 +37,19 @@ export default class ManageForm extends Component {
         display: 'block',
         delay: 0.2
       });
+    this.closeHoverA.label = new TimelineMax({ paused: true })
+      .to(this.closeTarget.label, 0.7, {
+        width: 20,
+      });
+    this.closeHoverA.close = new TimelineMax({ paused: true })
+      .to(this.closeTarget.close, 0.7, {
+        width: 400,
+      });
   }
 
   componentDidUpdate() {
-    if (this.props.multi) {
+    console.log(this.props.manage);
+    if (this.props.manage) {
       this.animation.play();
     } else {
       this.animation.reverse();
@@ -53,9 +70,16 @@ export default class ManageForm extends Component {
       ))
     });
   }
-
+  handleCloseHover() {
+    this.closeHoverA.close.play();
+    this.closeHoverA.label.play();
+  }
+  handleCloseHoverR() {
+    this.closeHoverA.close.reverse();
+    this.closeHoverA.label.reverse();
+  }
   handleClose() {
-    this.animation.reverse();
+    this.props.closeManage();
   }
 
   handleChange(index, e) {
@@ -172,25 +196,31 @@ export default class ManageForm extends Component {
         textAlign: 'center',
       },
       manageHeader: {
-        backgroundColor: colors.orange,
-        fontSize: 20,
-        letterSpacing: 1,
-        color: 'white',
-        width: '100%',
+        display: 'flex',
+        width: 300,
         height: 70,
+      },
+      manageLabel: {
+        backgroundColor: colors.orange,
+        fontSize: 14,
+        letterSpacing: 1,
+        textTransform: 'uppercase',
+        color: 'white',
+        width: 250,
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
       },
       closeManage: {
-        width: '100%',
         display: 'flex',
+        width: 50,
         alignItems: 'center',
         justifyContent: 'center',
         color: 'white',
         padding: 2.5,
         backgroundColor: colors.red,
         cursor: 'pointer',
+        overflowX: 'hidden',
       },
       manageForm: {
         padding: '1rem',
@@ -209,19 +239,26 @@ export default class ManageForm extends Component {
         ref={manage => this.target = manage}
         style={styles.manageStyle}
       >
-        <div
-          id="manageHeader"
-          style={styles.manageHeader}
-        >
-          Manage Streams
+        <div id="manageHeader" style={styles.manageHeader}>
+          <div
+            ref={label => this.closeTarget.label = label}
+            id="manageLabel"
+            style={styles.manageLabel}
+          >
+            Manage Streams
+          </div>
+          <div
+            ref={close => this.closeTarget.close = close}
+            id="closeManage"
+            style={styles.closeManage}
+            onClick={this.handleClose}
+            onMouseEnter={e => this.handleCloseHover(e)}
+            onMouseLeave={e => this.handleCloseHoverR(e)}
+          >
+            Close
+          </div>
         </div>
-        <div
-          id="closeManage"
-          style={styles.closeManage}
-          onClick={this.handleClose}
-        >
-          Close
-        </div>
+
         <form
           id="manage-form"
           style={styles.manageForm}

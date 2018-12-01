@@ -12,6 +12,7 @@ export default class Header extends Component {
     super(props);
     this.handleChange = this.handleChange.bind(this);
     this.handleMultiClick = this.handleMultiClick.bind(this);
+    this.handleManageClick = this.handleManageClick.bind(this);
     this.target = [];
     this.animation = new TimelineMax({ paused: true });
     this.multiAnimation = null;
@@ -40,13 +41,12 @@ export default class Header extends Component {
   }
 
   handleMultiClick() {
-    let multi;
-    if (this.props.multi === false) {
-      multi = true;
-    } else {
-      multi = false;
-    }
-    this.props.onMultiChange(multi);
+    this.props.onMultiChange();
+  }
+
+  handleManageClick() {
+    const manage = !this.props.manage;
+    this.props.onManageChange(manage);
   }
 
   handleChange() {
@@ -99,6 +99,12 @@ export default class Header extends Component {
           AsakaMulti
         </a>
         <NavLink
+          manage={this.props.manage}
+          manageButton='true'
+          multi={this.props.multi}
+          onManageClick={this.handleManageClick}
+        >Manage</NavLink>
+        <NavLink
           multi={this.props.multi}
           multiButton='true'
           onMultiClick={this.handleMultiClick}
@@ -107,6 +113,7 @@ export default class Header extends Component {
           multi={this.props.multi}
           onMultiClick={this.handleMultiClick}
         >Exit Multi Mode</CloseMulti>
+
       </nav>
     );
   }

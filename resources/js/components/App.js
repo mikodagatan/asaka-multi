@@ -17,29 +17,41 @@ export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      multi: false
+      multi: false,
+      manage: false
     };
     this.useMulti = this.useMulti.bind(this);
+    this.changeManage = this.changeManage.bind(this);
   }
 
   useMulti() {
-    if (!this.state.multi) {
-      this.setState({
-        multi: true
-      });
-    } else {
-      this.setState({
-        multi: false
-      });
-    }
-    console.log('App-multi: ', this.state.multi);
+    const multi = !this.state.multi;
+    this.setState({
+      multi,
+      manage: true
+    });
+  }
+
+  changeManage() {
+    const manage = !this.state.manage;
+    this.setState({
+      manage
+    });
   }
 
   render() {
     return (
         <div id="App">
-          <Header multi={this.state.multi} onMultiChange={this.useMulti} />
-          <Main multi={this.state.multi} />
+          <Header
+            multi={this.state.multi} onMultiChange={this.useMulti}
+            manage={this.state.manage}
+            onManageChange={this.changeManage}
+          />
+          <Main
+            multi={this.state.multi}
+            manage={this.state.manage}
+            onManageChange={this.changeManage}
+          />
           <Footer />
         </div>
     );
