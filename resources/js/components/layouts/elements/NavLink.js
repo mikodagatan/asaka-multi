@@ -97,7 +97,7 @@ export default class NavLink extends Component {
         style={link}
         ref={a => this.target = a}
         data-hover='false'
-        onClick={e => this.handleClick()}
+        onClick={e => this.handleClick(e)}
         onMouseEnter={e => this.handleHover(e)}
         onMouseLeave={e => this.handleHover(e)}
         href={this.props.href}

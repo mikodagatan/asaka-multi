@@ -7,6 +7,7 @@ export default class CloseMulti extends Component {
     this.handleClick = this.handleClick.bind(this);
     this.target = null;
     this.animate = null;
+    this.hover = null;
   }
 
   componentDidMount() {
@@ -17,6 +18,16 @@ export default class CloseMulti extends Component {
         cursor: 'pointer',
         ease: Power3.easeOut,
         delay: 0.6,
+      });
+    this.hover = new TimelineMax({ paused: true })
+      .to(this.target, 0.1, {
+        right: 32.5
+      })
+      .to(this.target, 0.1, {
+        right: 27.5
+      })
+      .to(this.target, 0.1, {
+        right: 30
       });
   }
 
@@ -31,6 +42,10 @@ export default class CloseMulti extends Component {
   handleClick() {
     this.animate.reverse();
     this.props.onMultiClick(this.props.multi);
+  }
+
+  handleHover() {
+    this.hover.restart();
   }
 
   render() {
@@ -55,7 +70,6 @@ export default class CloseMulti extends Component {
         data-hover='false'
         onClick={e => this.handleClick(e, this.props.multi)}
         onMouseEnter={e => this.handleHover(e)}
-        onMouseLeave={e => this.handleHover(e)}
         href={this.props.href}
       >
         {this.props.children}

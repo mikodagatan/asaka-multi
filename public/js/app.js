@@ -99501,7 +99501,7 @@ var NavLink = function (_Component) {
           },
           'data-hover': 'false',
           onClick: function onClick(e) {
-            return _this2.handleClick();
+            return _this2.handleClick(e);
           },
           onMouseEnter: function onMouseEnter(e) {
             return _this2.handleHover(e);
@@ -99551,6 +99551,7 @@ var CloseMulti = function (_Component) {
     _this.handleClick = _this.handleClick.bind(_this);
     _this.target = null;
     _this.animate = null;
+    _this.hover = null;
     return _this;
   }
 
@@ -99563,6 +99564,13 @@ var CloseMulti = function (_Component) {
         cursor: 'pointer',
         ease: Power3.easeOut,
         delay: 0.6
+      });
+      this.hover = new __WEBPACK_IMPORTED_MODULE_1_gsap__["a" /* TimelineMax */]({ paused: true }).to(this.target, 0.1, {
+        right: 32.5
+      }).to(this.target, 0.1, {
+        right: 27.5
+      }).to(this.target, 0.1, {
+        right: 30
       });
     }
   }, {
@@ -99579,6 +99587,11 @@ var CloseMulti = function (_Component) {
     value: function handleClick() {
       this.animate.reverse();
       this.props.onMultiClick(this.props.multi);
+    }
+  }, {
+    key: 'handleHover',
+    value: function handleHover() {
+      this.hover.restart();
     }
   }, {
     key: 'render',
@@ -99611,9 +99624,6 @@ var CloseMulti = function (_Component) {
             return _this2.handleClick(e, _this2.props.multi);
           },
           onMouseEnter: function onMouseEnter(e) {
-            return _this2.handleHover(e);
-          },
-          onMouseLeave: function onMouseLeave(e) {
             return _this2.handleHover(e);
           },
           href: this.props.href
