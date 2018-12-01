@@ -28,7 +28,7 @@ export default class App extends Component {
     const multi = !this.state.multi;
     this.setState({
       multi,
-      manage: true
+      manage: multi
     });
   }
 

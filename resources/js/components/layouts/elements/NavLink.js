@@ -33,8 +33,8 @@ export default class NavLink extends Component {
       })
       .from(this.target, 0.3, {
         opacity: 0,
-      })
-      .from(this.target, showDelay, {});
+        x: 30,
+      });
 
     if (!this.props.multi && this.props.multiButton) {
       this.show.play();

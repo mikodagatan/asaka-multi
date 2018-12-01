@@ -48,7 +48,6 @@ export default class ManageForm extends Component {
   }
 
   componentDidUpdate() {
-    console.log(this.props.manage);
     if (this.props.manage) {
       this.animation.play();
     } else {

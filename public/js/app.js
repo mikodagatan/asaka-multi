@@ -40052,8 +40052,9 @@ var NavLink = function (_Component) {
       this.show = new __WEBPACK_IMPORTED_MODULE_1_gsap__["a" /* TimelineMax */]({ paused: true }).from(this.target, 0.3, {
         display: 'none'
       }).from(this.target, 0.3, {
-        opacity: 0
-      }).from(this.target, showDelay, {});
+        opacity: 0,
+        x: 30
+      });
 
       if (!this.props.multi && this.props.multiButton) {
         this.show.play();
@@ -66309,7 +66310,7 @@ var App = function (_Component) {
       var multi = !this.state.multi;
       this.setState({
         multi: multi,
-        manage: true
+        manage: multi
       });
     }
   }, {
@@ -99799,7 +99800,6 @@ var ManageForm = function (_Component) {
   }, {
     key: 'componentDidUpdate',
     value: function componentDidUpdate() {
-      console.log(this.props.manage);
       if (this.props.manage) {
         this.animation.play();
       } else {
