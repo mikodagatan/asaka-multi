@@ -7,13 +7,8 @@ export default class ManageForm extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      streams: [{ name: '' }]
-    };
-
     this.handleKeyPress = this.handleKeyPress.bind(this);
     this.handleRemoveStream = this.handleRemoveStream.bind(this);
-    this.storeInput = this.storeInput.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleClose = this.handleClose.bind(this);
 
@@ -41,11 +36,11 @@ export default class ManageForm extends Component {
       .to(this.closeTarget.label, 0.25, {
         color: colors.orange,
         ease: Power4.easeOut
-      }, "together")
+      }, 'together')
       .to(this.closeTarget.label, 0.7, {
         width: 20,
         ease: Power3.easeOut
-      }, "together")
+      }, 'together')
       ;
     this.closeHoverA.close = new TimelineMax({ paused: true })
       .to(this.closeTarget.close, 0.7, {
@@ -62,20 +57,6 @@ export default class ManageForm extends Component {
     }
   }
 
-  addChannelField() {
-    const newStreams = [...this.state.streams, { name: '' }];
-    this.setState({
-      streams: newStreams
-    });
-  }
-
-  storeInput(index, e) {
-    this.setState({
-      streams: this.state.streams.map((stream, sIndex) => (
-            (index === sIndex) ? { name: e.target.value } : stream
-      ))
-    });
-  }
   handleCloseHover() {
     this.closeHoverA.close.play();
     this.closeHoverA.label.play();
@@ -91,15 +72,13 @@ export default class ManageForm extends Component {
   handleChange(index, e) {
     const { target, key } = e;
 
-    this.storeInput(index, e);
-
     if (key === 'Enter') {
       e.preventDefault();
     }
 
-    const fieldAmount = this.state.streams.length;
+    const fieldAmount = this.props.streams.length;
     const add = (a, b) => a + b;
-    const fieldsFilled = this.state.streams.map((stream) => (
+    const fieldsFilled = this.props.streams.map((stream) => (
       (stream.name.length === 0) ? 0 : 1
     )).reduce(add);
 
@@ -107,9 +86,12 @@ export default class ManageForm extends Component {
     const rule2 = index + 1 >= fieldsFilled;
     const rule3 = fieldsFilled >= fieldAmount;
 
+    let addChannel = null;
+
     if (rule1 && rule2 && rule3) {
-      this.addChannelField();
+      addChannel = this.props.addChannel;
     }
+    this.props.storeInput(index, target, addChannel);
   }
 
   handleSumbit(e) {
@@ -119,17 +101,13 @@ export default class ManageForm extends Component {
 
   handleRemoveStream(name, e) {
     e.preventDefault();
-    const { streams } = this.state;
-    const newArray = streams.filter((stream) => (stream.name !== name));
-    this.setState({
-      streams: newArray
-    });
+    this.props.removeStream(name);
   }
 
   handleKeyPress(e) {
-    const fieldAmount = this.state.streams.length;
+    const fieldAmount = this.props.streams.length;
     const add = (a, b) => a + b;
-    const fieldsFilled = this.state.streams.map((stream) => (
+    const fieldsFilled = this.props.streams.map((stream) => (
       (stream.name.length === 0) ? 0 : 1
     )).reduce(add);
 
@@ -138,7 +116,7 @@ export default class ManageForm extends Component {
     if (enterPressed) {
       e.preventDefault();
       if (rule2) {
-        this.addChannelField();
+        this.props.addChannel();
       }
     }
   }
@@ -164,7 +142,7 @@ export default class ManageForm extends Component {
       }
     };
     return (
-      this.state.streams.map((stream, index) => (
+      this.props.streams.map((stream, index) => (
         <div key={`group-#${index}`} className="form-group">
           <input
             type="text"

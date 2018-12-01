@@ -34,6 +34,7 @@ export default class NavLink extends Component {
       .from(this.target, 0.3, {
         opacity: 0,
         x: 30,
+        ease: Power3.easeOut,
       });
 
     if (!this.props.multi && this.props.multiButton) {

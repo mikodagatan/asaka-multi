@@ -18,7 +18,7 @@ export default class App extends Component {
     super(props);
     this.state = {
       multi: false,
-      manage: false
+      manage: false,
     };
     this.useMulti = this.useMulti.bind(this);
     this.changeManage = this.changeManage.bind(this);
