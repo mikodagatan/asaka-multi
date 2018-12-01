@@ -99413,10 +99413,11 @@ var NavLink = function (_Component) {
 
       var showDelay = void 0;
       if (caseMulti) {
-        showDelay = 0;
+        showDelay = 0.4;
       } else if (caseManage) {
-        showDelay = 2;
+        showDelay = 0;
       }
+      console.log(showDelay);
 
       this.animate = new __WEBPACK_IMPORTED_MODULE_1_gsap__["a" /* TimelineMax */]({ paused: true }).to(this.target, 0.3, {
         color: 'white',
@@ -99425,7 +99426,7 @@ var NavLink = function (_Component) {
       });
       this.show = new __WEBPACK_IMPORTED_MODULE_1_gsap__["a" /* TimelineMax */]({ paused: true }).from(this.target, 0.3, {
         display: 'none'
-      }).from(this.target, 0.3, {
+      }).from(this.target, showDelay, {}).from(this.target, 0.3, {
         opacity: 0,
         x: 30,
         ease: Power3.easeOut

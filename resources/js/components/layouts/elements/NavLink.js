@@ -16,10 +16,11 @@ export default class NavLink extends Component {
 
     let showDelay;
     if (caseMulti) {
-      showDelay = 0;
+      showDelay = 0.4;
     } else if (caseManage) {
-      showDelay = 2;
+      showDelay = 0;
     }
+    console.log(showDelay);
 
     this.animate = new TimelineMax({ paused: true })
       .to(this.target, 0.3, {
@@ -31,11 +32,13 @@ export default class NavLink extends Component {
       .from(this.target, 0.3, {
         display: 'none',
       })
+      .from(this.target, showDelay, {})
       .from(this.target, 0.3, {
         opacity: 0,
         x: 30,
         ease: Power3.easeOut,
       });
+
 
     if (!this.props.multi && this.props.multiButton) {
       this.show.play();
