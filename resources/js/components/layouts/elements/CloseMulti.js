@@ -52,7 +52,7 @@ export default class CloseMulti extends Component {
     const style = {
       display: 'flex',
       alignItems: 'center',
-      position: 'absolute',
+      position: 'fixed',
       right: -200,
       lineHeight: 0.9,
       textTransform: 'uppercase',

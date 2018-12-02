@@ -10476,6 +10476,14 @@ a.text-dark:focus {
   margin-bottom: 10px;
 }
 
+::-webkit-scrollbar {
+  display: none;
+}
+
+button:focus {
+  outline: none;
+}
+
 .iframe-container {
   overflow: hidden;
   padding-top: 80vh;

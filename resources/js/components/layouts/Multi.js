@@ -6,11 +6,17 @@ export default class Multi extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      streams: [{ name: '' }]
+      streams: [{ name: '' }],
+      start: false,
+      load: false
     };
     this.addChannelField = this.addChannelField.bind(this);
     this.storeInput = this.storeInput.bind(this);
     this.removeStream = this.removeStream.bind(this);
+    this.changeStart = this.changeStart.bind(this);
+    this.changeLoad = this.changeLoad.bind(this);
+
+    this.renderMultiStream = this.renderMultiStream.bind(this);
   }
 
   addChannelField() {
@@ -21,7 +27,6 @@ export default class Multi extends Component {
   }
 
   storeInput(index, target, addChannel = null) {
-    console.log(target.value);
     this.setState({
       streams: this.state.streams.map((stream, sIndex) => (
             (index === sIndex) ? { name: target.value } : stream
@@ -31,7 +36,6 @@ export default class Multi extends Component {
 
   removeStream(name) {
     const { streams } = this.state;
-    console.log(streams);
 
     const newArray = streams.filter((stream) => (stream.name !== name));
     this.setState({
@@ -39,6 +43,37 @@ export default class Multi extends Component {
     });
   }
 
+  changeLoad() {
+    console.log(this.state);
+    const load = !this.state.load;
+    this.setState({
+      load
+    });
+  }
+
+  changeStart() {
+    if (this.state.start === false) {
+      this.setState({
+        start: true,
+        load: true
+      });
+    }
+  }
+
+  renderMultiStream() {
+    if (this.state.start) {
+      return (
+        <MultiStream
+          multi={this.props.multi}
+          manage={this.props.manage}
+          streams={this.state.streams}
+          start={this.state.start}
+          load={this.state.load}
+          changeLoad={this.changeLoad}
+        />
+      );
+    }
+  }
   render() {
     return (
       <div id="multi">
@@ -50,9 +85,11 @@ export default class Multi extends Component {
           addChannel={this.addChannelField}
           storeInput={this.storeInput}
           removeStream={this.removeStream}
+          start={this.state.start}
+          changeStart={this.changeStart}
+          changeLoad={this.changeLoad}
         />
-        <MultiStream />
-
+        {this.renderMultiStream()}
       </div>
     );
   }

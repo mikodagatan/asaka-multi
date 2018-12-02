@@ -6,6 +6,7 @@
     "jasmine": true,
   },
   "rules": {
-    "no-return-assign": off
+    "no-return-assign": off,
+    "react/no-did-update-set-state": off
     }
 }

@@ -11,6 +11,7 @@ export default class ManageForm extends Component {
     this.handleRemoveStream = this.handleRemoveStream.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleClose = this.handleClose.bind(this);
+    this.handleWatch = this.handleWatch.bind(this);
 
     this.target = null;
     this.animation = new TimelineMax({ paused: true });
@@ -94,34 +95,30 @@ export default class ManageForm extends Component {
     this.props.storeInput(index, target, addChannel);
   }
 
-  handleSumbit(e) {
-    e.preventDefault();
-    // const streams = this.state;
-  }
-
   handleRemoveStream(name, e) {
     e.preventDefault();
     this.props.removeStream(name);
   }
 
   handleKeyPress(e) {
-    const fieldAmount = this.props.streams.length;
-    const add = (a, b) => a + b;
-    const fieldsFilled = this.props.streams.map((stream) => (
-      (stream.name.length === 0) ? 0 : 1
-    )).reduce(add);
-
     const enterPressed = e.key === 'Enter';
-    const rule2 = fieldsFilled >= fieldAmount;
     if (enterPressed) {
       e.preventDefault();
-      if (rule2) {
-        this.props.addChannel();
-      }
+      this.handleWatch(e);
     }
   }
 
-  renderStreams() {
+  handleWatch(e) {
+    e.preventDefault();
+    console.log('handleWatch');
+    if (this.props.start === false) {
+      this.props.changeStart();
+    } else {
+      this.props.changeLoad();
+    }
+  }
+
+  renderStreamFields() {
     const style = {
       input: {
         border: `2px solid ${colors.body}`,
@@ -143,7 +140,7 @@ export default class ManageForm extends Component {
     };
     return (
       this.props.streams.map((stream, index) => (
-        <div key={`group-#${index}`} className="form-group">
+        <div key={`group-${index}`} className="form-group">
           <input
             type="text"
             style={style.input}
@@ -172,12 +169,13 @@ export default class ManageForm extends Component {
         height: '95vh',
         width: 300,
         backgroundColor: colors.nav,
-        position: 'absolute',
+        position: 'fixed',
         top: 30,
         marginBottom: 10,
         left: '-500',
         overflowY: 'scroll',
         textAlign: 'center',
+
       },
       manageHeader: {
         display: 'flex',
@@ -247,11 +245,10 @@ export default class ManageForm extends Component {
           id="manage-form"
           style={styles.manageForm}
         >
-          {this.renderStreams()}
+          {this.renderStreamFields()}
           <button
             style={styles.submit}
-            type="button"
-            onClick={this.handleSubmit}
+            onClick={this.handleWatch}
             className="btn-primary"
           >
             Watch

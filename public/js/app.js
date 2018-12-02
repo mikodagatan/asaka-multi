@@ -40001,7 +40001,7 @@ var colors = {
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(145);
-module.exports = __webpack_require__(277);
+module.exports = __webpack_require__(278);
 
 
 /***/ }),
@@ -66115,7 +66115,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_apollo_boost__ = __webpack_require__(191);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__layouts_Header__ = __webpack_require__(266);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__layouts_Main__ = __webpack_require__(271);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__layouts_Footer__ = __webpack_require__(276);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__layouts_Footer__ = __webpack_require__(277);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -99417,7 +99417,6 @@ var NavLink = function (_Component) {
       } else if (caseManage) {
         showDelay = 0;
       }
-      console.log(showDelay);
 
       this.animate = new __WEBPACK_IMPORTED_MODULE_1_gsap__["a" /* TimelineMax */]({ paused: true }).to(this.target, 0.3, {
         color: 'white',
@@ -99439,7 +99438,6 @@ var NavLink = function (_Component) {
   }, {
     key: 'componentDidUpdate',
     value: function componentDidUpdate() {
-      console.log(this.props);
       var props = this.props;
       var case1 = !props.multi && props.multiButton;
       var case2 = props.multi && !props.manage && props.manageButton;
@@ -99601,7 +99599,7 @@ var CloseMulti = function (_Component) {
       var style = {
         display: 'flex',
         alignItems: 'center',
-        position: 'absolute',
+        position: 'fixed',
         right: -200,
         lineHeight: 0.9,
         textTransform: 'uppercase',
@@ -99646,7 +99644,7 @@ var CloseMulti = function (_Component) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Multi__ = __webpack_require__(272);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Front__ = __webpack_require__(275);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Front__ = __webpack_require__(276);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -99721,11 +99719,17 @@ var Multi = function (_Component) {
     var _this = _possibleConstructorReturn(this, (Multi.__proto__ || Object.getPrototypeOf(Multi)).call(this, props));
 
     _this.state = {
-      streams: [{ name: '' }]
+      streams: [{ name: '' }],
+      start: false,
+      load: false
     };
     _this.addChannelField = _this.addChannelField.bind(_this);
     _this.storeInput = _this.storeInput.bind(_this);
     _this.removeStream = _this.removeStream.bind(_this);
+    _this.changeStart = _this.changeStart.bind(_this);
+    _this.changeLoad = _this.changeLoad.bind(_this);
+
+    _this.renderMultiStream = _this.renderMultiStream.bind(_this);
     return _this;
   }
 
@@ -99742,7 +99746,6 @@ var Multi = function (_Component) {
     value: function storeInput(index, target) {
       var addChannel = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
 
-      console.log(target.value);
       this.setState({
         streams: this.state.streams.map(function (stream, sIndex) {
           return index === sIndex ? { name: target.value } : stream;
@@ -99754,7 +99757,6 @@ var Multi = function (_Component) {
     value: function removeStream(name) {
       var streams = this.state.streams;
 
-      console.log(streams);
 
       var newArray = streams.filter(function (stream) {
         return stream.name !== name;
@@ -99762,6 +99764,39 @@ var Multi = function (_Component) {
       this.setState({
         streams: newArray
       });
+    }
+  }, {
+    key: 'changeLoad',
+    value: function changeLoad() {
+      console.log(this.state);
+      var load = !this.state.load;
+      this.setState({
+        load: load
+      });
+    }
+  }, {
+    key: 'changeStart',
+    value: function changeStart() {
+      if (this.state.start === false) {
+        this.setState({
+          start: true,
+          load: true
+        });
+      }
+    }
+  }, {
+    key: 'renderMultiStream',
+    value: function renderMultiStream() {
+      if (this.state.start) {
+        return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__MultiStream__["a" /* default */], {
+          multi: this.props.multi,
+          manage: this.props.manage,
+          streams: this.state.streams,
+          start: this.state.start,
+          load: this.state.load,
+          changeLoad: this.changeLoad
+        });
+      }
     }
   }, {
     key: 'render',
@@ -99776,9 +99811,12 @@ var Multi = function (_Component) {
           streams: this.state.streams,
           addChannel: this.addChannelField,
           storeInput: this.storeInput,
-          removeStream: this.removeStream
+          removeStream: this.removeStream,
+          start: this.state.start,
+          changeStart: this.changeStart,
+          changeLoad: this.changeLoad
         }),
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__MultiStream__["a" /* default */], null)
+        this.renderMultiStream()
       );
     }
   }]);
@@ -99821,6 +99859,7 @@ var ManageForm = function (_Component) {
     _this.handleRemoveStream = _this.handleRemoveStream.bind(_this);
     _this.handleChange = _this.handleChange.bind(_this);
     _this.handleClose = _this.handleClose.bind(_this);
+    _this.handleWatch = _this.handleWatch.bind(_this);
 
     _this.target = null;
     _this.animation = new __WEBPACK_IMPORTED_MODULE_1_gsap__["a" /* TimelineMax */]({ paused: true });
@@ -99913,12 +99952,6 @@ var ManageForm = function (_Component) {
       this.props.storeInput(index, target, addChannel);
     }
   }, {
-    key: 'handleSumbit',
-    value: function handleSumbit(e) {
-      e.preventDefault();
-      // const streams = this.state;
-    }
-  }, {
     key: 'handleRemoveStream',
     value: function handleRemoveStream(name, e) {
       e.preventDefault();
@@ -99927,26 +99960,26 @@ var ManageForm = function (_Component) {
   }, {
     key: 'handleKeyPress',
     value: function handleKeyPress(e) {
-      var fieldAmount = this.props.streams.length;
-      var add = function add(a, b) {
-        return a + b;
-      };
-      var fieldsFilled = this.props.streams.map(function (stream) {
-        return stream.name.length === 0 ? 0 : 1;
-      }).reduce(add);
-
       var enterPressed = e.key === 'Enter';
-      var rule2 = fieldsFilled >= fieldAmount;
       if (enterPressed) {
         e.preventDefault();
-        if (rule2) {
-          this.props.addChannel();
-        }
+        this.handleWatch(e);
       }
     }
   }, {
-    key: 'renderStreams',
-    value: function renderStreams() {
+    key: 'handleWatch',
+    value: function handleWatch(e) {
+      e.preventDefault();
+      console.log('handleWatch');
+      if (this.props.start === false) {
+        this.props.changeStart();
+      } else {
+        this.props.changeLoad();
+      }
+    }
+  }, {
+    key: 'renderStreamFields',
+    value: function renderStreamFields() {
       var _this2 = this;
 
       var style = {
@@ -99971,7 +100004,7 @@ var ManageForm = function (_Component) {
       return this.props.streams.map(function (stream, index) {
         return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
           'div',
-          { key: 'group-#' + index, className: 'form-group' },
+          { key: 'group-' + index, className: 'form-group' },
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', {
             type: 'text',
             style: style.input,
@@ -100008,12 +100041,13 @@ var ManageForm = function (_Component) {
           height: '95vh',
           width: 300,
           backgroundColor: __WEBPACK_IMPORTED_MODULE_2__variables__["a" /* colors */].nav,
-          position: 'absolute',
+          position: 'fixed',
           top: 30,
           marginBottom: 10,
           left: '-500',
           overflowY: 'scroll',
           textAlign: 'center'
+
         },
         manageHeader: {
           display: 'flex',
@@ -100101,13 +100135,12 @@ var ManageForm = function (_Component) {
             id: 'manage-form',
             style: styles.manageForm
           },
-          this.renderStreams(),
+          this.renderStreamFields(),
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             'button',
             {
               style: styles.submit,
-              type: 'button',
-              onClick: this.handleSubmit,
+              onClick: this.handleWatch,
               className: 'btn-primary'
             },
             'Watch'
@@ -100129,6 +100162,7 @@ var ManageForm = function (_Component) {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Stream__ = __webpack_require__(275);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -100136,6 +100170,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 
 
 
@@ -100149,9 +100184,37 @@ var MultiStream = function (_Component) {
   }
 
   _createClass(MultiStream, [{
-    key: "render",
+    key: 'componentDidMount',
+    value: function componentDidMount() {}
+  }, {
+    key: 'componentDidUpdate',
+    value: function componentDidUpdate() {
+      var case1 = this.props.load === true;
+      if (case1) {
+        console.log('removing load state');
+        this.props.changeLoad();
+      }
+    }
+  }, {
+    key: 'render',
     value: function render() {
-      return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", { id: "MultiStream" });
+      var _this2 = this;
+
+      var streams = this.props.streams;
+
+      return streams.map(function (stream, index) {
+        return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'div',
+          { key: 'stream-' + index },
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__Stream__["a" /* default */], {
+            targetID: 'stream-' + index,
+            index: index,
+            muted: 'false',
+            channel: stream.name,
+            load: _this2.props.load
+          })
+        );
+      });
     }
   }]);
 
@@ -100162,6 +100225,98 @@ var MultiStream = function (_Component) {
 
 /***/ }),
 /* 275 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+
+
+var Stream = function (_Component) {
+  _inherits(Stream, _Component);
+
+  function Stream(props) {
+    _classCallCheck(this, Stream);
+
+    var _this = _possibleConstructorReturn(this, (Stream.__proto__ || Object.getPrototypeOf(Stream)).call(this, props));
+
+    _this.state = {
+      rendered: false
+    };
+    _this.renderStream = _this.renderStream.bind(_this);
+    return _this;
+  }
+
+  _createClass(Stream, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {}
+  }, {
+    key: 'componentDidUpdate',
+    value: function componentDidUpdate(prevProps, prevState) {
+      var case1 = prevState.rendered === false;
+      var case2 = this.props.load === true;
+      if (case1 && case2) {
+        this.renderStream();
+      }
+    }
+  }, {
+    key: 'renderStream',
+    value: function renderStream() {
+      var p = this.props;
+      var player = void 0;
+      if (p.channel !== '') {
+        player = new window.Twitch.Player(p.targetID, {
+          channel: p.channel,
+          width: p.width,
+          height: p.height,
+          muted: p.muted
+        });
+        player.setVolume(0.01);
+        if (player.getMuted() === true) {
+          player.setMuted(false);
+        }
+        this.setState({
+          rendered: true
+        });
+      }
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var style = {
+        color: 'white'
+      };
+      return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        'div',
+        { style: style },
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { id: this.props.targetID })
+      );
+    }
+  }]);
+
+  return Stream;
+}(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);
+
+/* harmony default export */ __webpack_exports__["a"] = (Stream);
+
+Stream.defaultProps = {
+  width: 355,
+  height: 199.6875,
+  targetID: 'twitch-embed',
+  muted: false,
+  channel: 'PhantasmaAsaka'
+};
+
+/***/ }),
+/* 276 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -100203,7 +100358,7 @@ var Front = function (_Component) {
 /* harmony default export */ __webpack_exports__["a"] = (Front);
 
 /***/ }),
-/* 276 */
+/* 277 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -100235,7 +100390,7 @@ var Footer = function (_Component) {
         footer: {
           height: 25,
           width: '100%',
-          position: 'absolute',
+          position: 'fixed',
           bottom: 0,
           display: 'flex',
           justifyContent: 'flex-end',
@@ -100268,7 +100423,7 @@ var Footer = function (_Component) {
 /* harmony default export */ __webpack_exports__["a"] = (Footer);
 
 /***/ }),
-/* 277 */
+/* 278 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin

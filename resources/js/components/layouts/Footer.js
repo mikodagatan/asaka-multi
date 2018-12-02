@@ -6,7 +6,7 @@ export default class Footer extends Component {
       footer: {
         height: 25,
         width: '100%',
-        position: 'absolute',
+        position: 'fixed',
         bottom: 0,
         display: 'flex',
         justifyContent: 'flex-end',

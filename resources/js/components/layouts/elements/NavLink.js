@@ -20,7 +20,6 @@ export default class NavLink extends Component {
     } else if (caseManage) {
       showDelay = 0;
     }
-    console.log(showDelay);
 
     this.animate = new TimelineMax({ paused: true })
       .to(this.target, 0.3, {
@@ -45,7 +44,6 @@ export default class NavLink extends Component {
     }
   }
   componentDidUpdate() {
-    console.log(this.props);
     const props = this.props;
     const case1 = !props.multi && props.multiButton;
     const case2 = props.multi &&
