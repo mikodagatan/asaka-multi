@@ -44,7 +44,6 @@ export default class Multi extends Component {
   }
 
   changeLoad() {
-    console.log(this.state);
     const load = !this.state.load;
     this.setState({
       load
@@ -88,6 +87,7 @@ export default class Multi extends Component {
           start={this.state.start}
           changeStart={this.changeStart}
           changeLoad={this.changeLoad}
+          setLoadScreen={this.props.setLoadScreen}
         />
         {this.renderMultiStream()}
       </div>

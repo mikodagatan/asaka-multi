@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import { ApolloClient } from 'apollo-boost';
+// import { ApolloClient } from 'apollo-boost';
 // import { ApolloProvider, Query } from 'react-apollo';
 // import gql from 'graphql-tag';
 
 import Header from './layouts/Header';
 import Main from './layouts/Main';
 import Footer from './layouts/Footer';
+import Loading from './layouts/Loading';
 
 // Functions
 
@@ -19,9 +20,11 @@ export default class App extends Component {
     this.state = {
       multi: false,
       manage: false,
+      loadingScreen: false,
     };
     this.useMulti = this.useMulti.bind(this);
     this.changeManage = this.changeManage.bind(this);
+    this.loadingAnimation = this.loadingAnimation.bind(this);
   }
 
   useMulti() {
@@ -39,8 +42,16 @@ export default class App extends Component {
     });
   }
 
+  loadingAnimation() {
+    this.setState({
+      loadingScreen: true
+    });
+    console.log('loading: true');
+  }
+
   render() {
     return (
+      <div id="app-container">
         <div id="App">
           <Header
             multi={this.state.multi} onMultiChange={this.useMulti}
@@ -51,9 +62,15 @@ export default class App extends Component {
             multi={this.state.multi}
             manage={this.state.manage}
             onManageChange={this.changeManage}
+            setLoadScreen={this.loadingAnimation}
           />
           <Footer />
         </div>
+        <Loading
+          loadingScreen={this.state.loadingScreen}
+        />
+      </div>
+
     );
   }
 }

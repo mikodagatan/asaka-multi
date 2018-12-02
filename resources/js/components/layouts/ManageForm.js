@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { TimelineMax } from 'gsap';
 import { colors } from './variables';
+import { styles } from './styles/ManageFormS';
 
-
+console.log(styles);
 export default class ManageForm extends Component {
   constructor(props) {
     super(props);
@@ -26,6 +27,8 @@ export default class ManageForm extends Component {
   }
 
   componentDidMount() {
+    // ManageForm Animation
+
     this.animation = this.animation
       .from(this.target, 0.3, {
         x: -500,
@@ -33,6 +36,9 @@ export default class ManageForm extends Component {
         display: 'block',
         delay: 0.2
       });
+
+    // Close Animation
+
     this.closeHoverA.label = new TimelineMax({ paused: true })
       .to(this.closeTarget.label, 0.25, {
         color: colors.orange,
@@ -53,6 +59,8 @@ export default class ManageForm extends Component {
   componentDidUpdate() {
     if (this.props.manage) {
       this.animation.play();
+      document.getElementById('watch')
+        .setAttribute('data-clicked', 'false');
     } else {
       this.animation.reverse();
     }
@@ -110,11 +118,17 @@ export default class ManageForm extends Component {
 
   handleWatch(e) {
     e.preventDefault();
-    console.log('handleWatch');
+    this.props.closeManage();
+    const { target } = e;
     if (this.props.start === false) {
       this.props.changeStart();
+      this.props.setLoadScreen();
+      console.log('load');
     } else {
       this.props.changeLoad();
+    }
+    if (target.getAttribute('data-clicked') === false) {
+      target.setAttribute('data-clicked', 'true');
     }
   }
 
@@ -164,57 +178,6 @@ export default class ManageForm extends Component {
   }
 
   render() {
-    const styles = {
-      manageStyle: {
-        height: '95vh',
-        width: 300,
-        backgroundColor: colors.nav,
-        position: 'fixed',
-        top: 30,
-        marginBottom: 10,
-        left: '-500',
-        overflowY: 'scroll',
-        textAlign: 'center',
-
-      },
-      manageHeader: {
-        display: 'flex',
-        width: 300,
-        height: 70,
-      },
-      manageLabel: {
-        backgroundColor: colors.orange,
-        fontSize: 14,
-        letterSpacing: 1,
-        textTransform: 'uppercase',
-        color: 'white',
-        width: 250,
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-      },
-      closeManage: {
-        display: 'flex',
-        width: 50,
-        alignItems: 'center',
-        justifyContent: 'center',
-        color: 'white',
-        padding: 2.5,
-        backgroundColor: colors.red,
-        cursor: 'pointer',
-        overflowX: 'hidden',
-      },
-      manageForm: {
-        padding: '1rem',
-      },
-      submit: {
-        marginTop: 10,
-        padding: '5px 20px 5px 20px',
-        borderRadius: 5,
-        outline: 'none',
-        cursor: 'pointer'
-      }
-    };
     return (
       <div
         id="manage"
@@ -247,12 +210,15 @@ export default class ManageForm extends Component {
         >
           {this.renderStreamFields()}
           <button
+            id='watch'
             style={styles.submit}
             onClick={this.handleWatch}
+            data-clicked='false'
             className="btn-primary"
           >
             Watch
           </button>
+
         </form>
       </div>
 
