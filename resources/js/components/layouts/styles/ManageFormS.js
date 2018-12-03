@@ -11,6 +11,7 @@ export const styles = {
     marginBottom: 10,
     left: '-500',
     overflowY: 'scroll',
+    overflowX: 'hidden',
     textAlign: 'center',
   },
   manageHeader: {
@@ -41,13 +42,14 @@ export const styles = {
     overflowX: 'hidden',
   },
   manageForm: {
-    padding: '1rem',
+    padding: '10px 10px 10px 10px',
   },
   submit: {
     marginTop: 10,
     padding: '5px 20px 5px 20px',
     borderRadius: 5,
     outline: 'none',
-    cursor: 'pointer'
+    cursor: 'pointer',
+    marginBottom: 30,
   },
 };

@@ -10493,6 +10493,9 @@ button:focus {
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
   margin: 0 0 25px 7px;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
 .multiStream .streamChannel {
@@ -10502,9 +10505,6 @@ button:focus {
 @media (max-width: 768px) {
   .multiStream {
     margin: 0 0 25px;
-    -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
   }
 
   .multiStream .streamChannel {

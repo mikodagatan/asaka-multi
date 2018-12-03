@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import PathToRegexp from 'path-to-regexp';
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 // import { ApolloClient } from 'apollo-boost';
 // import { ApolloProvider, Query } from 'react-apollo';
 // import gql from 'graphql-tag';
@@ -25,6 +27,21 @@ export default class App extends Component {
     this.useMulti = this.useMulti.bind(this);
     this.changeManage = this.changeManage.bind(this);
     this.loadingAnimation = this.loadingAnimation.bind(this);
+    this.setStreamsByUrl = this.setStreamsByUrl.bind(this);
+  }
+
+  componentDidMount() {
+    this.setStreamsByUrl();
+  }
+
+  setStreamsByUrl() {
+    let path = window.location.pathname;
+    if (path !== '/') {
+      path = path.slice(1, path.length);
+      // const streams = path.split('/');
+      // this.loadingAnimation();
+      this.useMulti();
+    }
   }
 
   useMulti() {
@@ -46,31 +63,39 @@ export default class App extends Component {
     this.setState({
       loadingScreen: true
     });
-    console.log('loading: true');
   }
 
   render() {
-    return (
-      <div id="app-container">
-        <div id="App">
-          <Header
-            multi={this.state.multi} onMultiChange={this.useMulti}
-            manage={this.state.manage}
-            onManageChange={this.changeManage}
-          />
-          <Main
-            multi={this.state.multi}
-            manage={this.state.manage}
-            onManageChange={this.changeManage}
-            setLoadScreen={this.loadingAnimation}
-          />
-          <Footer />
-        </div>
-        <Loading
-          loadingScreen={this.state.loadingScreen}
-        />
-      </div>
+    const path = '/:stream1/:stream2/:stream3';
+    const re = PathToRegexp(path);
 
+    return (
+      <Router>
+        <div id="app-container">
+          <div id="App">
+            <Header
+              multi={this.state.multi}
+              onMultiChange={this.useMulti}
+              manage={this.state.manage}
+              onManageChange={this.changeManage}
+            />
+            <Route exact path="/">
+              <Main
+                multi={this.state.multi}
+                manage={this.state.manage}
+                onManageChange={this.changeManage}
+                setLoadScreen={this.loadingAnimation}
+              />
+            </Route>
+            <Footer />
+          </div>
+          <Loading
+            loadingScreen={this.state.loadingScreen}
+            useMulti={this.useMulti}
+            changeManage={this.changeManage}
+          />
+        </div>
+      </Router>
     );
   }
 }

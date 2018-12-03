@@ -15,8 +15,35 @@ export default class Multi extends Component {
     this.removeStream = this.removeStream.bind(this);
     this.changeStart = this.changeStart.bind(this);
     this.changeLoad = this.changeLoad.bind(this);
+    this.setStreamsByUrl = this.setStreamsByUrl.bind(this);
 
     this.renderMultiStream = this.renderMultiStream.bind(this);
+  }
+
+  componentDidMount() {
+    this.setStreamsByUrl();
+    console.log('Multi is mounted. current load: ', this.state.load);
+  }
+  componentDidUpdate() {
+    console.log('Multi: componentDidUpdate, load:', this.state.load);
+  }
+
+  setStreamsByUrl() {
+    let path = window.location.pathname;
+    if (path !== '/') {
+      console.log('Multi: Set streams from URL');
+      path = path.slice(1, path.length);
+      const streams = path.split('/');
+      const urlStreams = streams.map(stream => {
+        const obj = {};
+        obj.name = stream;
+        return obj;
+      });
+      this.setState({
+        streams: [...urlStreams, { name: '' }],
+        load: true
+      });
+    }
   }
 
   addChannelField() {
@@ -48,6 +75,7 @@ export default class Multi extends Component {
     this.setState({
       load
     });
+    console.log('load changing now: ', this.state.load);
   }
 
   changeStart() {

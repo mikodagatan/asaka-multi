@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { styles } from './styles/MultiStreamS';
 
 
 export default class Stream extends Component {
@@ -9,17 +8,43 @@ export default class Stream extends Component {
       rendered: false
     };
     this.renderStream = this.renderStream.bind(this);
+    this.streamUpdate = this.streamUpdate.bind(this);
   }
+
   componentDidMount() {
+    console.log('Stream:', this.props.channel, 'is mounted');
+    this.renderStream();
   }
+
+  shouldComponentUpdate() {
+    const case1 = (this.props.load === true);
+    console.log(this.props.channel, 'should update: ', case1);
+    return (case1);
+  }
+
   componentDidUpdate(prevProps, prevState) {
-    const case1 = (prevState.rendered === false);
-    const case2 = (this.props.load === true);
-    if (case1 && case2) {
+    this.streamUpdate(prevProps, prevState);
+  }
+
+  streamUpdate(prevProps, prevState) {
+    console.log('stream updating');
+    const case1 = (this.state.rendered === false);
+    console.log(
+      this.props.channel,
+      ', rendered: ',
+      prevState.rendered,
+      'load: ',
+      this.props.load,
+      'case1:', case1
+    );
+    if (case1) {
+      console.log('rendering stream:', this.props.channel, 'from streamUpdate');
       this.renderStream();
     }
   }
+
   renderStream() {
+    console.log('Stream: renderStream');
     const p = this.props;
     let player;
     if (p.channel !== '') {
@@ -37,6 +62,7 @@ export default class Stream extends Component {
       this.setState({
         rendered: true
       });
+      console.log('Stream: stream rendered')
     }
   }
   render() {

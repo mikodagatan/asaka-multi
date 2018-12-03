@@ -7,15 +7,18 @@ export default class Loading extends Component {
     super(props);
 
     this.loadAnimation = this.loadAnimation.bind(this);
+    this.loadStart = this.loadStart.bind(this);
     this.loadBase = this.loadBase.bind(this);
     this.twitchMultiply = this.twitchMultiply.bind(this);
     this.loadClose = this.loadClose.bind(this);
+    this.completeAnimation = this.completeAnimation.bind(this);
 
     this.loadT = {
       container: null,
       icon: [],
       textBlock: null,
-      aniText: null
+      aniText: null,
+      viewBlock: null,
     };
     this.loadA = null;
   }
@@ -23,27 +26,35 @@ export default class Loading extends Component {
 
   componentDidMount() {
     this.loadAnimation();
-    this.loadBase();
-    this.twitchMultiply();
-    this.loadClose();
   }
   componentDidUpdate(prev) {
     const current = this.props;
     const rule1 = (prev.loadingScreen === false);
     const rule2 = (current.loadingScreen === true);
 
-    console.log(prev);
-    console.log(current);
     if (rule1 && rule2) {
-      console.log('Now Loading');
       this.loadA.play();
     }
   }
+  completeAnimation() {
+    this.props.useMulti();
+    this.props.changeManage();
+  }
   loadAnimation() {
+    this.loadStart();
+    this.loadBase();
+    this.twitchMultiply();
+    this.loadClose();
+  }
+  loadStart() {
     const c = this.loadT.container;
     const i = this.loadT.icon;
+    const vBlock = this.loadT.viewBlock;
 
-    this.loadA = new TimelineMax({ paused: true })
+
+    this.loadA = new TimelineMax({
+      paused: true
+    })
       .to(c, 0, {
         position: 'fixed',
         overflow: 'hidden',
@@ -67,7 +78,15 @@ export default class Loading extends Component {
         left: -100,
         scale: 1.5,
         margin: '-37.5px 0 0 -37.5px',
-      }, 'init');
+      }, 'init')
+      .to(vBlock, 0, {
+        height: '100vh',
+        width: '100vw',
+        zIndex: 10,
+        position: 'fixed',
+        top: 0,
+        backgroundColor: colors.body
+      });
   }
   loadBase() {
     const c = this.loadT.container;
@@ -75,6 +94,7 @@ export default class Loading extends Component {
     const block = this.loadT.textBlock;
     const text = this.loadT.aniText;
     this.loadA = this.loadA
+
     .to(c, 0.5, {
       left: '50%',
     }, 'move')
@@ -192,14 +212,13 @@ export default class Loading extends Component {
           ease: Power3.easeOut
         }), 'multiply');
     }
-
   }
   loadClose() {
     const c = this.loadT.container;
     const i = this.loadT.icon;
     const block = this.loadT.textBlock;
     const text = this.loadT.aniText;
-
+    const vBlock = this.loadT.viewBlock;
     this.loadA = this.loadA
       .to(block, 0.5, {
         display: 'none'
@@ -215,6 +234,9 @@ export default class Loading extends Component {
         left: 3000
       }, 'exit-right')
       .to(text, 0.5, {
+        left: 3000
+      }, 'exit-right')
+      .to(vBlock, 0.5, {
         left: 3000
       }, 'exit-right');
   }
@@ -287,6 +309,11 @@ export default class Loading extends Component {
           Asakamulti
           </div>
         </div>
+        <div
+          id='view-block'
+          ref={viewBlock => this.loadT.viewBlock = viewBlock}
+          styles={styles.viewBlock}
+        />
       </div>
     );
   }

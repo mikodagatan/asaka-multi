@@ -42,6 +42,7 @@ export default class Header extends Component {
 
   handleMultiClick() {
     this.props.onMultiChange();
+    this.props.onManageChange();
   }
 
   handleManageClick() {
@@ -72,7 +73,7 @@ export default class Header extends Component {
         margin: 'auto',
         alignItems: 'center',
         overflowY: 'hidden',
-        zIndex: 10,
+        zIndex: 9,
       },
       brand: {
         display: 'inline-block',

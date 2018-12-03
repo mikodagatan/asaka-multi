@@ -18,6 +18,7 @@ button:focus {
   display: flex;
   flex-wrap: wrap;
   margin: 0 0 25px 7px;
+  justify-content: center;
 
   .streamChannel {
     margin: 0 0 -1px 5px;
@@ -25,7 +26,6 @@ button:focus {
 
   @media(max-width: 768px) {
     margin: 0 0 25px;
-    justify-content: center;
     .streamChannel {
       margin: 0 0 -1px 0;
     }

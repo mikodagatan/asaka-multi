@@ -3,7 +3,6 @@ import { TimelineMax } from 'gsap';
 import { colors } from './variables';
 import { styles } from './styles/ManageFormS';
 
-console.log(styles);
 export default class ManageForm extends Component {
   constructor(props) {
     super(props);
@@ -45,13 +44,13 @@ export default class ManageForm extends Component {
         ease: Power4.easeOut
       }, 'together')
       .to(this.closeTarget.label, 0.7, {
-        width: 20,
+        width: 0,
         ease: Power3.easeOut
       }, 'together')
       ;
     this.closeHoverA.close = new TimelineMax({ paused: true })
       .to(this.closeTarget.close, 0.7, {
-        width: 400,
+        width: 300,
         ease: Power3.easeOut
       });
   }
@@ -123,8 +122,8 @@ export default class ManageForm extends Component {
     if (this.props.start === false) {
       this.props.changeStart();
       this.props.setLoadScreen();
-      console.log('load');
     } else {
+      console.log('changeload from watchbutton');
       this.props.changeLoad();
     }
     if (target.getAttribute('data-clicked') === false) {
@@ -154,7 +153,10 @@ export default class ManageForm extends Component {
     };
     return (
       this.props.streams.map((stream, index) => (
-        <div key={`group-${index}`} className="form-group">
+        <div
+          key={`group-${index}`}
+          className="form-group"
+        >
           <input
             type="text"
             style={style.input}
