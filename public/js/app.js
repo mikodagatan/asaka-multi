@@ -70522,6 +70522,8 @@ var Header = function (_Component) {
       var styles = {
         navbar: {
           backgroundColor: __WEBPACK_IMPORTED_MODULE_2__variables__["a" /* colors */].nav,
+          position: 'fixed',
+          top: 0,
           display: 'flex',
           width: '100%',
           height: '60px',
