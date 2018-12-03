@@ -10484,6 +10484,44 @@ button:focus {
   outline: none;
 }
 
+.multiStream {
+  width: 100%;
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  margin: 0 0 25px 7px;
+}
+
+.multiStream .streamChannel {
+  margin: 0 0 -1px 5px;
+}
+
+@media (max-width: 768px) {
+  .multiStream {
+    margin: 0 0 25px;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+  }
+
+  .multiStream .streamChannel {
+    margin: 0 0 -1px 0;
+  }
+}
+
+.aniText {
+  font-size: 50px;
+}
+
+@media (max-width: 768px) {
+  .aniText {
+    font-size: 24px;
+  }
+}
+
 .iframe-container {
   overflow: hidden;
   padding-top: 80vh;

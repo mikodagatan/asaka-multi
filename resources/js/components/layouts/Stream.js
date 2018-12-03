@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { styles } from './styles/MultiStreamS';
+
 
 export default class Stream extends Component {
   constructor(props) {
@@ -38,19 +40,18 @@ export default class Stream extends Component {
     }
   }
   render() {
-    const style = {
-      color: 'white',
-    };
     return (
-      <div style={style}>
-        <div id={this.props.targetID} />
-      </div>
+      <div
+        key={this.props.targetID}
+        id={this.props.targetID}
+        className="streamChannel"
+      />
     );
   }
 }
 Stream.defaultProps = {
-  width: 355,
-  height: 199.6875,
+  width: 350,
+  height: 196.875,
   targetID: 'twitch-embed',
   muted: false,
   channel: 'PhantasmaAsaka'

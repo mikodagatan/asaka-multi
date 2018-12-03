@@ -60,18 +60,16 @@ export default class Multi extends Component {
   }
 
   renderMultiStream() {
-    if (this.state.start) {
-      return (
-        <MultiStream
-          multi={this.props.multi}
-          manage={this.props.manage}
-          streams={this.state.streams}
-          start={this.state.start}
-          load={this.state.load}
-          changeLoad={this.changeLoad}
-        />
-      );
-    }
+    return (
+      <MultiStream
+        multi={this.props.multi}
+        manage={this.props.manage}
+        streams={this.state.streams}
+        start={this.state.start}
+        load={this.state.load}
+        changeLoad={this.changeLoad}
+      />
+    );
   }
   render() {
     return (

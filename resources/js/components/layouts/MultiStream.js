@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+
 import Stream from './Stream';
+import { styles } from './styles/MultiStreamS';
 
 export default class MultiStream extends Component {
   componentDidMount() {
@@ -13,18 +15,19 @@ export default class MultiStream extends Component {
   }
   render() {
     const { streams } = this.props;
+
     return (
-      streams.map((stream, index) => (
-        <div key={`stream-${index}`}>
-          <Stream
-            targetID={`stream-${index}`}
-            index={index}
-            muted='false'
-            channel={stream.name}
-            load={this.props.load}
-          />
-        </div>
-      ))
+      <div className="multiStream">
+        {streams.map((stream, index) => (
+            <Stream
+              targetID={`stream-${index}`}
+              index={index}
+              muted='false'
+              channel={stream.name}
+              load={this.props.load}
+            />
+        ))}
+      </div>
     );
   }
 }

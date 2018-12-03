@@ -123,35 +123,76 @@ export default class Loading extends Component {
   }
   twitchMultiply() {
     const i = this.loadT.icon;
-    this.loadA = this.loadA
-      .to(i, 0.5, {
-        rotationX: 30,
-        rotationY: 30
-      })
-      .add(TweenMax.to(i[0], 0.5, {
-        left: '30%',
-        repeat: 1,
-        yoyo: true,
-        ease: Power3.easeOut
-      }), 'multiply')
-      .add(TweenMax.to(i[1], 0.5, {
-        left: '40%',
-        repeat: 1,
-        yoyo: true,
-        ease: Power3.easeOut
-      }), 'multiply')
-      .add(TweenMax.to(i[3], 0.5, {
-        left: '60%',
-        repeat: 1,
-        yoyo: true,
-        ease: Power3.easeOut
-      }), 'multiply')
-      .add(TweenMax.to(i[4], 0.5, {
-        left: '70%',
-        repeat: 1,
-        yoyo: true,
-        ease: Power3.easeOut
-      }), 'multiply');
+    const block = this.loadT.textBlock;
+
+    const smallScreen = window.matchMedia('(max-width: 768px)');
+
+    if (smallScreen.matches) {
+      this.loadA = this.loadA
+        .to(block, 0, {
+          zIndex: 1,
+        })
+        .to(i, 0.5, {
+          rotationX: 30,
+          rotationY: 30,
+          zIndex: 12,
+        })
+        .add(TweenMax.to(i[0], 0.5, {
+          top: '10%',
+          repeat: 1,
+          yoyo: true,
+          ease: Power3.easeOut
+        }), 'multiply')
+        .add(TweenMax.to(i[1], 0.5, {
+          top: '30%',
+          repeat: 1,
+          yoyo: true,
+          ease: Power3.easeOut
+        }), 'multiply')
+        .add(TweenMax.to(i[3], 0.5, {
+          top: '70%',
+          repeat: 1,
+          yoyo: true,
+          ease: Power3.easeOut
+        }), 'multiply')
+        .add(TweenMax.to(i[4], 0.5, {
+          top: '90%',
+          repeat: 1,
+          yoyo: true,
+          ease: Power3.easeOut
+        }), 'multiply');
+    } else {
+      this.loadA = this.loadA
+        .to(i, 0.5, {
+          rotationX: 30,
+          rotationY: 30
+        })
+        .add(TweenMax.to(i[0], 0.5, {
+          left: '30%',
+          repeat: 1,
+          yoyo: true,
+          ease: Power3.easeOut
+        }), 'multiply')
+        .add(TweenMax.to(i[1], 0.5, {
+          left: '40%',
+          repeat: 1,
+          yoyo: true,
+          ease: Power3.easeOut
+        }), 'multiply')
+        .add(TweenMax.to(i[3], 0.5, {
+          left: '60%',
+          repeat: 1,
+          yoyo: true,
+          ease: Power3.easeOut
+        }), 'multiply')
+        .add(TweenMax.to(i[4], 0.5, {
+          left: '70%',
+          repeat: 1,
+          yoyo: true,
+          ease: Power3.easeOut
+        }), 'multiply');
+    }
+
   }
   loadClose() {
     const c = this.loadT.container;
@@ -214,7 +255,6 @@ export default class Loading extends Component {
       },
       aniText: {
         color: 'white',
-        fontSize: '50px',
         display: 'none',
         textTransform: 'uppercase',
         letterSpacing: 15,
@@ -241,6 +281,7 @@ export default class Loading extends Component {
           id='ani-text'
           ref={text => this.loadT.aniText = text}
           style={styles.aniText}
+          className="aniText"
         >
           <div>
           Asakamulti

@@ -11,3 +11,33 @@
 button:focus {
   outline: none;
 }
+
+.multiStream {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 0 25px 7px;
+
+  .streamChannel {
+    margin: 0 0 -1px 5px;
+  }
+
+  @media(max-width: 768px) {
+    margin: 0 0 25px;
+    justify-content: center;
+    .streamChannel {
+      margin: 0 0 -1px 0;
+    }
+  }
+
+}
+
+// loadingScreen
+
+.aniText {
+  font-size: 50px;
+  @media(max-width: 768px) {
+    font-size: 24px;
+  }
+}
