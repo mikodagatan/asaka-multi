@@ -39,7 +39,7 @@ export default class App extends Component {
     if (path !== '/') {
       path = path.slice(1, path.length);
       // const streams = path.split('/');
-      // this.loadingAnimation();
+      this.loadingAnimation();
       this.useMulti();
     }
   }

@@ -49429,7 +49429,7 @@ var App = function (_Component) {
       if (path !== '/') {
         path = path.slice(1, path.length);
         // const streams = path.split('/');
-        // this.loadingAnimation();
+        this.loadingAnimation();
         this.useMulti();
       }
     }
@@ -73333,12 +73333,14 @@ var Loading = function (_Component) {
       var i = this.loadT.icon;
       var block = this.loadT.textBlock;
       var text = this.loadT.aniText;
-      this.loadA = this.loadA.to(c, 0.5, {
-        left: '50%'
-      }, 'move').to(i, 0.5, {
-        left: '50%'
+      this.loadA = this.loadA.to(c, 1, {
+        left: '50%',
+        ease: Power3.easeOut
+      }, 'move').to(i, 1, {
+        left: '50%',
+        ease: Power3.easeOut
       }, 'move').to(c, 2, {
-        scale: '100',
+        scale: '20',
         ease: Power0.easeNone
       }, 'grow').to(i, 1, {
         repeat: 1,
@@ -73375,14 +73377,22 @@ var Loading = function (_Component) {
       var block = this.loadT.textBlock;
 
       var smallScreen = window.matchMedia('(max-width: 768px)');
-
+      this.loadA = this.loadA.to(block, 0, {
+        zIndex: 1
+      }).to(i, 0, {
+        backgroundColor: __WEBPACK_IMPORTED_MODULE_2__variables__["a" /* colors */].orange,
+        zIndex: 12
+      }).to(i[2], 0, {
+        zIndex: 30
+      }).to(i[0], 0, {
+        zIndex: 11
+      }).to(i[4], 0, {
+        zIndex: 11
+      });
       if (smallScreen.matches) {
-        this.loadA = this.loadA.to(block, 0, {
-          zIndex: 1
-        }).to(i, 0.5, {
+        this.loadA = this.loadA.to(i, 0.5, {
           rotationX: 30,
-          rotationY: 30,
-          zIndex: 12
+          rotationY: 30
         }).add(__WEBPACK_IMPORTED_MODULE_1_gsap__["b" /* TweenMax */].to(i[0], 0.5, {
           top: '10%',
           repeat: 1,
@@ -73444,13 +73454,13 @@ var Loading = function (_Component) {
       }).to(c, 0, {
         borderRadius: 0,
         scale: 10
-      }).to(c, 0.5, {
+      }).to(c, 2, {
         left: 3000
-      }, 'exit-right').to(i, 0.5, {
+      }, 'exit-right').to(i, 2, {
         left: 3000
-      }, 'exit-right').to(text, 0.5, {
+      }, 'exit-right').to(text, 2, {
         left: 3000
-      }, 'exit-right').to(vBlock, 0.5, {
+      }, 'exit-right').to(vBlock, 2, {
         left: 3000
       }, 'exit-right');
     }

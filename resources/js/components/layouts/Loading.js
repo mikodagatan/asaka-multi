@@ -95,14 +95,16 @@ export default class Loading extends Component {
     const text = this.loadT.aniText;
     this.loadA = this.loadA
 
-    .to(c, 0.5, {
+    .to(c, 1, {
       left: '50%',
+      ease: Power3.easeOut,
     }, 'move')
-    .to(i, 0.5, {
+    .to(i, 1, {
       left: '50%',
+      ease: Power3.easeOut,
     }, 'move')
     .to(c, 2, {
-      scale: '100',
+      scale: '20',
       ease: Power0.easeNone,
     }, 'grow')
     .to(i, 1, {
@@ -146,16 +148,28 @@ export default class Loading extends Component {
     const block = this.loadT.textBlock;
 
     const smallScreen = window.matchMedia('(max-width: 768px)');
-
+    this.loadA = this.loadA
+      .to(block, 0, {
+        zIndex: 1,
+      })
+      .to(i, 0, {
+        backgroundColor: colors.orange,
+        zIndex: 12,
+      })
+      .to(i[2], 0, {
+        zIndex: 30,
+      })
+      .to(i[0], 0, {
+        zIndex: 11,
+      })
+      .to(i[4], 0, {
+        zIndex: 11,
+      });
     if (smallScreen.matches) {
       this.loadA = this.loadA
-        .to(block, 0, {
-          zIndex: 1,
-        })
         .to(i, 0.5, {
           rotationX: 30,
           rotationY: 30,
-          zIndex: 12,
         })
         .add(TweenMax.to(i[0], 0.5, {
           top: '10%',
@@ -227,16 +241,16 @@ export default class Loading extends Component {
         borderRadius: 0,
         scale: 10,
       })
-      .to(c, 0.5, {
+      .to(c, 2, {
         left: 3000
       }, 'exit-right')
-      .to(i, 0.5, {
+      .to(i, 2, {
         left: 3000
       }, 'exit-right')
-      .to(text, 0.5, {
+      .to(text, 2, {
         left: 3000
       }, 'exit-right')
-      .to(vBlock, 0.5, {
+      .to(vBlock, 2, {
         left: 3000
       }, 'exit-right');
   }
