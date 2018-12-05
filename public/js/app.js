@@ -72423,7 +72423,8 @@ var Multi = function (_Component) {
     _this.state = {
       streams: [{ name: '' }],
       start: false,
-      load: false
+      load: false,
+      startWithURL: false
     };
     _this.addChannelField = _this.addChannelField.bind(_this);
     _this.storeInput = _this.storeInput.bind(_this);
@@ -72431,6 +72432,7 @@ var Multi = function (_Component) {
     _this.changeStart = _this.changeStart.bind(_this);
     _this.changeLoad = _this.changeLoad.bind(_this);
     _this.setStreamsByUrl = _this.setStreamsByUrl.bind(_this);
+    _this.setUrlByForm = _this.setUrlByForm.bind(_this);
 
     _this.renderMultiStream = _this.renderMultiStream.bind(_this);
     return _this;
@@ -72440,19 +72442,36 @@ var Multi = function (_Component) {
     key: 'componentDidMount',
     value: function componentDidMount() {
       this.setStreamsByUrl();
-      console.log('Multi is mounted. current load: ', this.state.load);
     }
   }, {
     key: 'componentDidUpdate',
     value: function componentDidUpdate() {
-      console.log('Multi: componentDidUpdate, load:', this.state.load);
+      if (this.state.load) {
+        this.setUrlByForm();
+      }
+    }
+  }, {
+    key: 'setUrlByForm',
+    value: function setUrlByForm() {
+      var streams = this.state.streams;
+
+      var url = streams.map(function (stream) {
+        return stream.name;
+      }).filter(function (stream) {
+        return stream !== '';
+      }).join('/');
+
+      url = '/' + url;
+
+      console.log('THIS IS THE URL', url);
+      window.history.pushState('nothing', 'Title', url);
     }
   }, {
     key: 'setStreamsByUrl',
     value: function setStreamsByUrl() {
       var path = window.location.pathname;
-      if (path !== '/') {
-        console.log('Multi: Set streams from URL');
+      var startByURL = this.state.startByUrL;
+      if (path !== '/' && !startByURL) {
         path = path.slice(1, path.length);
         var streams = path.split('/');
         var urlStreams = streams.map(function (stream) {
@@ -72462,7 +72481,8 @@ var Multi = function (_Component) {
         });
         this.setState({
           streams: [].concat(_toConsumableArray(urlStreams), [{ name: '' }]),
-          load: true
+          load: true,
+          startByURL: true
         });
       }
     }
@@ -72505,7 +72525,6 @@ var Multi = function (_Component) {
       this.setState({
         load: load
       });
-      console.log('load changing now: ', this.state.load);
     }
   }, {
     key: 'changeStart',
@@ -72717,7 +72736,6 @@ var ManageForm = function (_Component) {
         this.props.changeStart();
         this.props.setLoadScreen();
       } else {
-        console.log('changeload from watchbutton');
         this.props.changeLoad();
       }
       if (target.getAttribute('data-clicked') === false) {
@@ -72951,12 +72969,16 @@ var MultiStream = function (_Component) {
   _createClass(MultiStream, [{
     key: 'componentDidMount',
     value: function componentDidMount() {}
+    // shouldComponentUpdate() {
+    //   const case1 = (this.props.load === true);
+    //   return case1;
+    // }
+
   }, {
     key: 'componentDidUpdate',
     value: function componentDidUpdate() {
       var case1 = this.props.load === true;
       if (case1) {
-        console.log('changeload from multistream');
         this.props.changeLoad();
       }
     }
@@ -72974,8 +72996,8 @@ var MultiStream = function (_Component) {
         { className: 'multiStream' },
         streams.map(function (stream, index) {
           return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__Stream__["a" /* default */], {
-            targetID: 'stream-' + index,
-            key: 'Stream-' + index,
+            targetID: 'stream-' + stream.name,
+            key: 'Stream-' + stream.name,
             index: index,
             muted: 'false',
             channel: stream.name,
@@ -73028,14 +73050,13 @@ var Stream = function (_Component) {
     _this.enterAnimation = null;
     _this.renderStream = _this.renderStream.bind(_this);
     _this.streamUpdate = _this.streamUpdate.bind(_this);
-    _this.setAnimation = _this.setAnimation.bind(_this);
+    // this.setAnimation = this.setAnimation.bind(this);
     return _this;
   }
 
   _createClass(Stream, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
-      console.log('Stream:', this.props.channel, 'is mounted');
       this.renderStream();
       this.enterAnimation = new __WEBPACK_IMPORTED_MODULE_1_gsap__["a" /* TimelineLite */]({
         paused: true
@@ -73045,7 +73066,6 @@ var Stream = function (_Component) {
     key: 'shouldComponentUpdate',
     value: function shouldComponentUpdate() {
       var case1 = this.props.load === true;
-      console.log(this.props.channel, 'should update: ', case1);
       return case1;
     }
   }, {
@@ -73053,29 +73073,26 @@ var Stream = function (_Component) {
     value: function componentDidUpdate(prevProps, prevState) {
       this.streamUpdate(prevProps, prevState);
     }
-  }, {
-    key: 'setAnimation',
-    value: function setAnimation(target) {
-      this.enterAnimation = this.enterAnimation.from(target, 2, {
-        visibility: 0,
-        y: 30
-      });
-    }
+
+    // setAnimation(target) {
+    //   this.enterAnimation = this.enterAnimation
+    //     .from(target, 2, {
+    //       visibility: 0,
+    //       y: 30
+    //     });
+    // }
+
   }, {
     key: 'streamUpdate',
     value: function streamUpdate(prevProps, prevState) {
-      console.log('stream updating');
       var case1 = this.state.rendered === false;
-      console.log(this.props.channel, ', rendered: ', prevState.rendered, 'load: ', this.props.load, 'case1:', case1);
       if (case1) {
-        console.log('rendering stream:', this.props.channel, 'from streamUpdate');
         this.renderStream();
       }
     }
   }, {
     key: 'renderStream',
     value: function renderStream() {
-      console.log('Stream: renderStream');
       var p = this.props;
       var player = void 0;
       if (p.channel !== '') {
@@ -73095,12 +73112,9 @@ var Stream = function (_Component) {
         // this.aniTarget = player;
         // this.setAnimation(this.aniTarget);
         // const case1 = this.aniTarget !== null;
-        // console.log('video ready:', player);
         // player.addEventListener(window.Twitch.Player.VIDEO_READY, function () {
         //   this.enterAnimation.play();
-        //   console.log('Stream Animation done!');
         // });
-        console.log('Stream: stream rendered');
       }
     }
   }, {

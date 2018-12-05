@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { TimelineLite } from 'gsap';
 
-
 export default class Stream extends Component {
   constructor(props) {
     super(props);
@@ -13,11 +12,10 @@ export default class Stream extends Component {
     this.enterAnimation = null;
     this.renderStream = this.renderStream.bind(this);
     this.streamUpdate = this.streamUpdate.bind(this);
-    this.setAnimation = this.setAnimation.bind(this);
+    // this.setAnimation = this.setAnimation.bind(this);
   }
 
   componentDidMount() {
-    console.log('Stream:', this.props.channel, 'is mounted');
     this.renderStream();
     this.enterAnimation = new TimelineLite({
       paused: true,
@@ -26,7 +24,6 @@ export default class Stream extends Component {
 
   shouldComponentUpdate() {
     const case1 = (this.props.load === true);
-    console.log(this.props.channel, 'should update: ', case1);
     return (case1);
   }
 
@@ -34,33 +31,22 @@ export default class Stream extends Component {
     this.streamUpdate(prevProps, prevState);
   }
 
-  setAnimation(target) {
-    this.enterAnimation = this.enterAnimation
-      .from(target, 2, {
-        visibility: 0,
-        y: 30
-      });
-  }
+  // setAnimation(target) {
+  //   this.enterAnimation = this.enterAnimation
+  //     .from(target, 2, {
+  //       visibility: 0,
+  //       y: 30
+  //     });
+  // }
 
   streamUpdate(prevProps, prevState) {
-    console.log('stream updating');
     const case1 = (this.state.rendered === false);
-    console.log(
-      this.props.channel,
-      ', rendered: ',
-      prevState.rendered,
-      'load: ',
-      this.props.load,
-      'case1:', case1
-    );
     if (case1) {
-      console.log('rendering stream:', this.props.channel, 'from streamUpdate');
       this.renderStream();
     }
   }
 
   renderStream() {
-    console.log('Stream: renderStream');
     const p = this.props;
     let player;
     if (p.channel !== '') {
@@ -81,12 +67,9 @@ export default class Stream extends Component {
       // this.aniTarget = player;
       // this.setAnimation(this.aniTarget);
       // const case1 = this.aniTarget !== null;
-      // console.log('video ready:', player);
       // player.addEventListener(window.Twitch.Player.VIDEO_READY, function () {
       //   this.enterAnimation.play();
-      //   console.log('Stream Animation done!');
       // });
-      console.log('Stream: stream rendered');
     }
   }
   render() {

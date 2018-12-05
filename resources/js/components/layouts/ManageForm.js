@@ -123,7 +123,6 @@ export default class ManageForm extends Component {
       this.props.changeStart();
       this.props.setLoadScreen();
     } else {
-      console.log('changeload from watchbutton');
       this.props.changeLoad();
     }
     if (target.getAttribute('data-clicked') === false) {

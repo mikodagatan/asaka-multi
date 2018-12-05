@@ -8,7 +8,8 @@ export default class Multi extends Component {
     this.state = {
       streams: [{ name: '' }],
       start: false,
-      load: false
+      load: false,
+      startWithURL: false,
     };
     this.addChannelField = this.addChannelField.bind(this);
     this.storeInput = this.storeInput.bind(this);
@@ -16,22 +17,37 @@ export default class Multi extends Component {
     this.changeStart = this.changeStart.bind(this);
     this.changeLoad = this.changeLoad.bind(this);
     this.setStreamsByUrl = this.setStreamsByUrl.bind(this);
+    this.setUrlByForm = this.setUrlByForm.bind(this);
 
     this.renderMultiStream = this.renderMultiStream.bind(this);
   }
 
   componentDidMount() {
     this.setStreamsByUrl();
-    console.log('Multi is mounted. current load: ', this.state.load);
   }
   componentDidUpdate() {
-    console.log('Multi: componentDidUpdate, load:', this.state.load);
+    if (this.state.load) {
+      this.setUrlByForm();
+    }
+  }
+  setUrlByForm() {
+    const streams = this.state.streams;
+
+    let url = streams.map(stream => stream.name)
+      .filter((stream) => stream !== '')
+      .join('/');
+
+    url = `/${url}`;
+
+
+    console.log('THIS IS THE URL', url);
+    window.history.pushState('nothing', 'Title', url);
   }
 
   setStreamsByUrl() {
     let path = window.location.pathname;
-    if (path !== '/') {
-      console.log('Multi: Set streams from URL');
+    const startByURL = this.state.startByUrL;
+    if (path !== '/' && !startByURL) {
       path = path.slice(1, path.length);
       const streams = path.split('/');
       const urlStreams = streams.map(stream => {
@@ -41,7 +57,8 @@ export default class Multi extends Component {
       });
       this.setState({
         streams: [...urlStreams, { name: '' }],
-        load: true
+        load: true,
+        startByURL: true,
       });
     }
   }
@@ -75,7 +92,6 @@ export default class Multi extends Component {
     this.setState({
       load
     });
-    console.log('load changing now: ', this.state.load);
   }
 
   changeStart() {

@@ -5,10 +5,13 @@ import Stream from './Stream';
 export default class MultiStream extends Component {
   componentDidMount() {
   }
+  // shouldComponentUpdate() {
+  //   const case1 = (this.props.load === true);
+  //   return case1;
+  // }
   componentDidUpdate() {
     const case1 = (this.props.load === true);
     if (case1) {
-      console.log('changeload from multistream');
       this.props.changeLoad();
     }
   }
@@ -20,8 +23,8 @@ export default class MultiStream extends Component {
       <div className="multiStream">
         {streams.map((stream, index) => (
             <Stream
-              targetID={`stream-${index}`}
-              key={`Stream-${index}`}
+              targetID={`stream-${stream.name}`}
+              key={`Stream-${stream.name}`}
               index={index}
               muted='false'
               channel={stream.name}
