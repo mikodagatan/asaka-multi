@@ -103,7 +103,7 @@ export default class Loading extends Component {
       left: '50%',
       ease: Power3.easeOut,
     }, 'move')
-    .to(c, 2, {
+    .to(c, 1, {
       scale: '20',
       ease: Power0.easeNone,
     }, 'grow')
@@ -234,7 +234,7 @@ export default class Loading extends Component {
     const text = this.loadT.aniText;
     const vBlock = this.loadT.viewBlock;
     this.loadA = this.loadA
-      .to(block, 0.5, {
+      .to(block, 1, {
         display: 'none'
       })
       .to(c, 0, {

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { TimelineLite } from 'gsap';
 
 
 export default class Stream extends Component {
@@ -7,13 +8,20 @@ export default class Stream extends Component {
     this.state = {
       rendered: false
     };
+
+    this.aniTarget = null;
+    this.enterAnimation = null;
     this.renderStream = this.renderStream.bind(this);
     this.streamUpdate = this.streamUpdate.bind(this);
+    this.setAnimation = this.setAnimation.bind(this);
   }
 
   componentDidMount() {
     console.log('Stream:', this.props.channel, 'is mounted');
     this.renderStream();
+    this.enterAnimation = new TimelineLite({
+      paused: true,
+    });
   }
 
   shouldComponentUpdate() {
@@ -24,6 +32,14 @@ export default class Stream extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     this.streamUpdate(prevProps, prevState);
+  }
+
+  setAnimation(target) {
+    this.enterAnimation = this.enterAnimation
+      .from(target, 2, {
+        visibility: 0,
+        y: 30
+      });
   }
 
   streamUpdate(prevProps, prevState) {
@@ -53,7 +69,7 @@ export default class Stream extends Component {
           channel: p.channel,
           width: p.width,
           height: p.height,
-          muted: p.muted
+          muted: p.muted,
         });
       player.setVolume(0.01);
       if (player.getMuted() === true) {
@@ -62,12 +78,21 @@ export default class Stream extends Component {
       this.setState({
         rendered: true
       });
-      console.log('Stream: stream rendered')
+      // this.aniTarget = player;
+      // this.setAnimation(this.aniTarget);
+      // const case1 = this.aniTarget !== null;
+      // console.log('video ready:', player);
+      // player.addEventListener(window.Twitch.Player.VIDEO_READY, function () {
+      //   this.enterAnimation.play();
+      //   console.log('Stream Animation done!');
+      // });
+      console.log('Stream: stream rendered');
     }
   }
   render() {
     return (
       <div
+        // ref={div => this.aniTarget = div}
         key={this.props.targetID}
         id={this.props.targetID}
         className="streamChannel"

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import PathToRegexp from 'path-to-regexp';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 // import { ApolloClient } from 'apollo-boost';
 // import { ApolloProvider, Query } from 'react-apollo';
 // import gql from 'graphql-tag';
@@ -61,7 +61,7 @@ export default class App extends Component {
 
   loadingAnimation() {
     this.setState({
-      loadingScreen: true
+      // loadingScreen: true
     });
   }
 

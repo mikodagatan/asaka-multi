@@ -2661,9 +2661,9 @@ var createPath = function createPath(location) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__EasePack_js__ = __webpack_require__(47);
 /* unused harmony reexport default */
 /* unused harmony reexport TweenLite */
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_3__TweenMax_js__["a"]; });
-/* unused harmony reexport TimelineLite */
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_2__TimelineMax_js__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return __WEBPACK_IMPORTED_MODULE_3__TweenMax_js__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_1__TimelineLite_js__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_2__TimelineMax_js__["a"]; });
 /* unused harmony reexport CSSPlugin */
 /* unused harmony reexport AttrPlugin */
 /* unused harmony reexport BezierPlugin */
@@ -49454,7 +49454,7 @@ var App = function (_Component) {
     key: 'loadingAnimation',
     value: function loadingAnimation() {
       this.setState({
-        loadingScreen: true
+        // loadingScreen: true
       });
     }
   }, {
@@ -71170,7 +71170,7 @@ var Header = function (_Component) {
     _this.handleMultiClick = _this.handleMultiClick.bind(_this);
     _this.handleManageClick = _this.handleManageClick.bind(_this);
     _this.target = [];
-    _this.animation = new __WEBPACK_IMPORTED_MODULE_1_gsap__["a" /* TimelineMax */]({ paused: true });
+    _this.animation = new __WEBPACK_IMPORTED_MODULE_1_gsap__["b" /* TimelineMax */]({ paused: true });
     _this.multiAnimation = null;
     return _this;
   }
@@ -71183,7 +71183,7 @@ var Header = function (_Component) {
         ease: Bounce.easeOut
       }).play();
 
-      this.multiAnimation = new __WEBPACK_IMPORTED_MODULE_1_gsap__["a" /* TimelineMax */]({ paused: true }).to(this.target[0], 0.3, {
+      this.multiAnimation = new __WEBPACK_IMPORTED_MODULE_1_gsap__["b" /* TimelineMax */]({ paused: true }).to(this.target[0], 0.3, {
         backgroundColor: __WEBPACK_IMPORTED_MODULE_2__variables__["a" /* colors */].orange,
         height: 30
       }).to(this.target[0], 0.3, {});
@@ -72119,12 +72119,12 @@ var NavLink = function (_Component) {
         showDelay = 0;
       }
 
-      this.animate = new __WEBPACK_IMPORTED_MODULE_1_gsap__["a" /* TimelineMax */]({ paused: true }).to(this.target, 0.3, {
+      this.animate = new __WEBPACK_IMPORTED_MODULE_1_gsap__["b" /* TimelineMax */]({ paused: true }).to(this.target, 0.3, {
         color: 'white',
         backgroundColor: '#22282Cl',
         textDecoration: 'none'
       });
-      this.show = new __WEBPACK_IMPORTED_MODULE_1_gsap__["a" /* TimelineMax */]({ paused: true }).from(this.target, 0.3, {
+      this.show = new __WEBPACK_IMPORTED_MODULE_1_gsap__["b" /* TimelineMax */]({ paused: true }).from(this.target, 0.3, {
         display: 'none'
       }).from(this.target, showDelay, {}).from(this.target, 0.3, {
         opacity: 0,
@@ -72257,14 +72257,14 @@ var CloseMulti = function (_Component) {
   _createClass(CloseMulti, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
-      this.animate = new __WEBPACK_IMPORTED_MODULE_1_gsap__["a" /* TimelineMax */]({ paused: true }).to(this.target, 0.3, {
+      this.animate = new __WEBPACK_IMPORTED_MODULE_1_gsap__["b" /* TimelineMax */]({ paused: true }).to(this.target, 0.3, {
         right: 30,
         visibility: 'visible',
         cursor: 'pointer',
         ease: Power3.easeOut,
         delay: 0.6
       });
-      this.hover = new __WEBPACK_IMPORTED_MODULE_1_gsap__["a" /* TimelineMax */]({ paused: true }).to(this.target, 0.1, {
+      this.hover = new __WEBPACK_IMPORTED_MODULE_1_gsap__["b" /* TimelineMax */]({ paused: true }).to(this.target, 0.1, {
         right: 32.5
       }).to(this.target, 0.1, {
         right: 27.5
@@ -72596,7 +72596,7 @@ var ManageForm = function (_Component) {
     _this.handleWatch = _this.handleWatch.bind(_this);
 
     _this.target = null;
-    _this.animation = new __WEBPACK_IMPORTED_MODULE_1_gsap__["a" /* TimelineMax */]({ paused: true });
+    _this.animation = new __WEBPACK_IMPORTED_MODULE_1_gsap__["b" /* TimelineMax */]({ paused: true });
     _this.closeTarget = {
       label: null,
       close: null
@@ -72622,14 +72622,14 @@ var ManageForm = function (_Component) {
 
       // Close Animation
 
-      this.closeHoverA.label = new __WEBPACK_IMPORTED_MODULE_1_gsap__["a" /* TimelineMax */]({ paused: true }).to(this.closeTarget.label, 0.25, {
+      this.closeHoverA.label = new __WEBPACK_IMPORTED_MODULE_1_gsap__["b" /* TimelineMax */]({ paused: true }).to(this.closeTarget.label, 0.25, {
         color: __WEBPACK_IMPORTED_MODULE_2__variables__["a" /* colors */].orange,
         ease: Power4.easeOut
       }, 'together').to(this.closeTarget.label, 0.7, {
         width: 0,
         ease: Power3.easeOut
       }, 'together');
-      this.closeHoverA.close = new __WEBPACK_IMPORTED_MODULE_1_gsap__["a" /* TimelineMax */]({ paused: true }).to(this.closeTarget.close, 0.7, {
+      this.closeHoverA.close = new __WEBPACK_IMPORTED_MODULE_1_gsap__["b" /* TimelineMax */]({ paused: true }).to(this.closeTarget.close, 0.7, {
         width: 300,
         ease: Power3.easeOut
       });
@@ -73000,6 +73000,7 @@ var MultiStream = function (_Component) {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_gsap__ = __webpack_require__(8);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -73007,6 +73008,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 
 
 
@@ -73021,8 +73023,12 @@ var Stream = function (_Component) {
     _this.state = {
       rendered: false
     };
+
+    _this.aniTarget = null;
+    _this.enterAnimation = null;
     _this.renderStream = _this.renderStream.bind(_this);
     _this.streamUpdate = _this.streamUpdate.bind(_this);
+    _this.setAnimation = _this.setAnimation.bind(_this);
     return _this;
   }
 
@@ -73031,6 +73037,9 @@ var Stream = function (_Component) {
     value: function componentDidMount() {
       console.log('Stream:', this.props.channel, 'is mounted');
       this.renderStream();
+      this.enterAnimation = new __WEBPACK_IMPORTED_MODULE_1_gsap__["a" /* TimelineLite */]({
+        paused: true
+      });
     }
   }, {
     key: 'shouldComponentUpdate',
@@ -73043,6 +73052,14 @@ var Stream = function (_Component) {
     key: 'componentDidUpdate',
     value: function componentDidUpdate(prevProps, prevState) {
       this.streamUpdate(prevProps, prevState);
+    }
+  }, {
+    key: 'setAnimation',
+    value: function setAnimation(target) {
+      this.enterAnimation = this.enterAnimation.from(target, 2, {
+        visibility: 0,
+        y: 30
+      });
     }
   }, {
     key: 'streamUpdate',
@@ -73075,6 +73092,14 @@ var Stream = function (_Component) {
         this.setState({
           rendered: true
         });
+        // this.aniTarget = player;
+        // this.setAnimation(this.aniTarget);
+        // const case1 = this.aniTarget !== null;
+        // console.log('video ready:', player);
+        // player.addEventListener(window.Twitch.Player.VIDEO_READY, function () {
+        //   this.enterAnimation.play();
+        //   console.log('Stream Animation done!');
+        // });
         console.log('Stream: stream rendered');
       }
     }
@@ -73082,6 +73107,7 @@ var Stream = function (_Component) {
     key: 'render',
     value: function render() {
       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', {
+        // ref={div => this.aniTarget = div}
         key: this.props.targetID,
         id: this.props.targetID,
         className: 'streamChannel'
@@ -73293,7 +73319,7 @@ var Loading = function (_Component) {
       var i = this.loadT.icon;
       var vBlock = this.loadT.viewBlock;
 
-      this.loadA = new __WEBPACK_IMPORTED_MODULE_1_gsap__["a" /* TimelineMax */]({
+      this.loadA = new __WEBPACK_IMPORTED_MODULE_1_gsap__["b" /* TimelineMax */]({
         paused: true
       }).to(c, 0, {
         position: 'fixed',
@@ -73339,7 +73365,7 @@ var Loading = function (_Component) {
       }, 'move').to(i, 1, {
         left: '50%',
         ease: Power3.easeOut
-      }, 'move').to(c, 2, {
+      }, 'move').to(c, 1, {
         scale: '20',
         ease: Power0.easeNone
       }, 'grow').to(i, 1, {
@@ -73393,22 +73419,22 @@ var Loading = function (_Component) {
         this.loadA = this.loadA.to(i, 0.5, {
           rotationX: 30,
           rotationY: 30
-        }).add(__WEBPACK_IMPORTED_MODULE_1_gsap__["b" /* TweenMax */].to(i[0], 0.5, {
+        }).add(__WEBPACK_IMPORTED_MODULE_1_gsap__["c" /* TweenMax */].to(i[0], 0.5, {
           top: '10%',
           repeat: 1,
           yoyo: true,
           ease: Power3.easeOut
-        }), 'multiply').add(__WEBPACK_IMPORTED_MODULE_1_gsap__["b" /* TweenMax */].to(i[1], 0.5, {
+        }), 'multiply').add(__WEBPACK_IMPORTED_MODULE_1_gsap__["c" /* TweenMax */].to(i[1], 0.5, {
           top: '30%',
           repeat: 1,
           yoyo: true,
           ease: Power3.easeOut
-        }), 'multiply').add(__WEBPACK_IMPORTED_MODULE_1_gsap__["b" /* TweenMax */].to(i[3], 0.5, {
+        }), 'multiply').add(__WEBPACK_IMPORTED_MODULE_1_gsap__["c" /* TweenMax */].to(i[3], 0.5, {
           top: '70%',
           repeat: 1,
           yoyo: true,
           ease: Power3.easeOut
-        }), 'multiply').add(__WEBPACK_IMPORTED_MODULE_1_gsap__["b" /* TweenMax */].to(i[4], 0.5, {
+        }), 'multiply').add(__WEBPACK_IMPORTED_MODULE_1_gsap__["c" /* TweenMax */].to(i[4], 0.5, {
           top: '90%',
           repeat: 1,
           yoyo: true,
@@ -73418,22 +73444,22 @@ var Loading = function (_Component) {
         this.loadA = this.loadA.to(i, 0.5, {
           rotationX: 30,
           rotationY: 30
-        }).add(__WEBPACK_IMPORTED_MODULE_1_gsap__["b" /* TweenMax */].to(i[0], 0.5, {
+        }).add(__WEBPACK_IMPORTED_MODULE_1_gsap__["c" /* TweenMax */].to(i[0], 0.5, {
           left: '30%',
           repeat: 1,
           yoyo: true,
           ease: Power3.easeOut
-        }), 'multiply').add(__WEBPACK_IMPORTED_MODULE_1_gsap__["b" /* TweenMax */].to(i[1], 0.5, {
+        }), 'multiply').add(__WEBPACK_IMPORTED_MODULE_1_gsap__["c" /* TweenMax */].to(i[1], 0.5, {
           left: '40%',
           repeat: 1,
           yoyo: true,
           ease: Power3.easeOut
-        }), 'multiply').add(__WEBPACK_IMPORTED_MODULE_1_gsap__["b" /* TweenMax */].to(i[3], 0.5, {
+        }), 'multiply').add(__WEBPACK_IMPORTED_MODULE_1_gsap__["c" /* TweenMax */].to(i[3], 0.5, {
           left: '60%',
           repeat: 1,
           yoyo: true,
           ease: Power3.easeOut
-        }), 'multiply').add(__WEBPACK_IMPORTED_MODULE_1_gsap__["b" /* TweenMax */].to(i[4], 0.5, {
+        }), 'multiply').add(__WEBPACK_IMPORTED_MODULE_1_gsap__["c" /* TweenMax */].to(i[4], 0.5, {
           left: '70%',
           repeat: 1,
           yoyo: true,
@@ -73449,7 +73475,7 @@ var Loading = function (_Component) {
       var block = this.loadT.textBlock;
       var text = this.loadT.aniText;
       var vBlock = this.loadT.viewBlock;
-      this.loadA = this.loadA.to(block, 0.5, {
+      this.loadA = this.loadA.to(block, 1, {
         display: 'none'
       }).to(c, 0, {
         borderRadius: 0,
