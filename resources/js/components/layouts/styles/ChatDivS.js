@@ -1,5 +1,6 @@
 import { colors } from '../variables';
 
+// const footerHeight = document.getElementById('footer').offsetHeight;
 // eslint-disable-next-line no-unused-vars
 export const styles = {
   ChatDiv: {
@@ -7,13 +8,12 @@ export const styles = {
     top: 30,
     right: 0,
     flexWrap: 'wrap',
-    height: '95vh',
+    height: 'calc(100% - 60px)',
     width: 400,
     backgroundColor: colors.nav,
     overflowY: 'scroll',
     overflowX: 'hidden',
     zIndex: 2,
-    marginBottom: 10
   },
   chatHeader: {
     display: 'flex',
@@ -42,12 +42,14 @@ export const styles = {
     overflowX: 'hidden',
   },
   chatBody: {
+    height: 'calc(100% - 70px)',
     width: '100%',
     display: 'flex'
   },
   streamHeaders: {
     width: 100,
     backgroundColor: 'blue',
+    paddingBottom: 5,
   },
   streamHead: {
     cursor: 'pointer',
@@ -65,6 +67,7 @@ export const styles = {
     overflowX: 'hidden',
   },
   streamChat: {
+    height: '100%',
     width: 300,
     backgroundColor: 'green'
   }

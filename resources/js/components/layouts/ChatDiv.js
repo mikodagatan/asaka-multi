@@ -77,8 +77,10 @@ export default class ChatDiv extends Component {
   }
 
   streamHeaders() {
+    const streams = this.props.streams.filter((stream) => stream.name !== '');
+
     return (
-      this.props.streams.map((stream, index) => (
+      streams.map((stream) => (
         <div
           style={styles.streamHead}
         >
@@ -89,13 +91,28 @@ export default class ChatDiv extends Component {
   }
 
   streamChat() {
+    const streams = this.props.streams.filter((stream) => stream.name !== '');
+    // const chatHeight = document.getElementById('chatBody').offsetHeight();
+
     return (
-      this.props.streams.map((stream, index) => (
+      streams.map((stream) => (
         <div>
-          {stream.name}
+          <iframe
+            key={`chat-${stream.name}`}
+            className='streamChat'
+            frameBorder="0"
+            scrolling="yes"
+            id={`chat-${stream.name}`}
+            src={`https://www.twitch.tv/embed/${stream.name}/chat`}
+          />
         </div>
       ))
-    )
+    );
+  }
+
+  resizeChat() {
+    const chatHeight = document.getElementById('chatBody').height();
+
   }
 
   render() {

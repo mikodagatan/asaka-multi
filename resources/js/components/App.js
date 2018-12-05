@@ -35,6 +35,7 @@ export default class App extends Component {
   componentDidMount() {
     this.setStreamsByUrl();
     this.loadingAnimation();
+    this.bodyHeight();
   }
 
   setStreamsByUrl() {
@@ -44,6 +45,17 @@ export default class App extends Component {
       this.loadingAnimation();
       this.useMulti();
     }
+  }
+
+  bodyHeight() {
+    // const headerH = document
+    //   .getElementById('header')
+    //   .offsetHeight();
+    // const footerH = document
+    //   .getElementById('footer')
+    //   .offsetHeight();
+    // const bodyH = window.offsetHeight() - (headerH + footerH);
+    // document.getElementById('main').style.height = bodyH;
   }
 
   useMulti() {

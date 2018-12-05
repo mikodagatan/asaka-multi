@@ -4,7 +4,7 @@ export default class Footer extends Component {
   render() {
     const style = {
       footer: {
-        height: 25,
+        height: 30,
         width: '100%',
         position: 'fixed',
         bottom: 0,

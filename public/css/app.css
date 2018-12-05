@@ -10466,6 +10466,26 @@ a.text-dark:focus {
   }
 }
 
+body {
+  height: 100vh;
+  width: 100vw;
+}
+
+body #app {
+  height: 100%;
+  width: 100%;
+}
+
+body #app #app-container {
+  height: 100%;
+  width: 100%;
+}
+
+body #app #app-container #App {
+  height: 100%;
+  width: 100%;
+}
+
 .form-group {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -10492,7 +10512,7 @@ button:focus {
   display: flex;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
-  margin: 0 0 25px 0px;
+  padding: 10px;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
