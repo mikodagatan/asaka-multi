@@ -72446,9 +72446,7 @@ var Multi = function (_Component) {
   }, {
     key: 'componentDidUpdate',
     value: function componentDidUpdate() {
-      if (this.state.load) {
-        this.setUrlByForm();
-      }
+      this.setUrlByForm();
     }
   }, {
     key: 'setUrlByForm',
@@ -72463,7 +72461,6 @@ var Multi = function (_Component) {
 
       url = '/' + url;
 
-      console.log('THIS IS THE URL', url);
       window.history.pushState('nothing', 'Title', url);
     }
   }, {

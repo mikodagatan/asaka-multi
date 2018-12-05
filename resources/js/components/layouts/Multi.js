@@ -26,9 +26,7 @@ export default class Multi extends Component {
     this.setStreamsByUrl();
   }
   componentDidUpdate() {
-    if (this.state.load) {
-      this.setUrlByForm();
-    }
+    this.setUrlByForm();
   }
   setUrlByForm() {
     const streams = this.state.streams;
@@ -39,8 +37,6 @@ export default class Multi extends Component {
 
     url = `/${url}`;
 
-
-    console.log('THIS IS THE URL', url);
     window.history.pushState('nothing', 'Title', url);
   }
 
