@@ -45,10 +45,12 @@ export default class Header extends Component {
     this.props.onMultiChange();
   }
 
+
   handleManageClick() {
     const manage = !this.props.manage;
     this.props.onManageChange(manage);
   }
+
   handleChatClick() {
     this.props.onChatChange();
   }
@@ -105,17 +107,17 @@ export default class Header extends Component {
           AsakaMulti
         </a>
         <NavLink
-          manage={this.props.manage}
-          manageButton='true'
-          multi={this.props.multi}
-          onManageClick={this.handleManageClick}
-        >Manage</NavLink>
-        <NavLink
           chat={this.props.chat}
           chatButton='true'
           multi={this.props.multi}
           onChatClick={this.handleChatClick}
         >Chat</NavLink>
+        <NavLink
+          manage={this.props.manage}
+          manageButton='true'
+          multi={this.props.multi}
+          onManageClick={this.handleManageClick}
+        >Manage</NavLink>
         <NavLink
           multi={this.props.multi}
           multiButton='true'

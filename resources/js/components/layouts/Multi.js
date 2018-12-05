@@ -134,6 +134,8 @@ export default class Multi extends Component {
         <ChatDiv
           multi={this.props.multi}
           streams={this.state.streams}
+          chat={this.props.chat}
+          closeChat={this.props.closeChat}
         />
       </div>
     );

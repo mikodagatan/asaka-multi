@@ -25,40 +25,39 @@ export default class ChatDiv extends Component {
   componentDidMount() {
     // ChatForm Animation
 
-    // this.animation = this.animation
-    //   .from(this.target, 0.3, {
-    //     x: -500,
-    //     ease: Power3.easeOut,
-    //     display: 'block',
-    //     delay: 0.2
-    //   });
-    //
-    // // Close Animation
-    //
-    // this.closeHoverA.label = new TimelineMax({ paused: true })
-    //   .to(this.closeTarget.label, 0.25, {
-    //     color: colors.orange,
-    //     ease: Power4.easeOut
-    //   }, 'together')
-    //   .to(this.closeTarget.label, 0.7, {
-    //     width: 0,
-    //     ease: Power3.easeOut
-    //   }, 'together')
-    //   ;
-    // this.closeHoverA.close = new TimelineMax({ paused: true })
-    //   .to(this.closeTarget.close, 0.7, {
-    //     width: 300,
-    //     ease: Power3.easeOut
-    //   });
+    this.animation = this.animation
+      .from(this.target, 0.3, {
+        x: 500,
+        ease: Power3.easeOut,
+        display: 'block',
+        delay: 0.2
+      });
+    // Close Animation
+
+    this.closeHoverA.label = new TimelineMax({ paused: true })
+      .to(this.closeTarget.label, 0.25, {
+        color: colors.orange,
+        ease: Power4.easeOut
+      }, 'together')
+      .to(this.closeTarget.label, 0.7, {
+        width: 0,
+        ease: Power3.easeOut
+      }, 'together')
+      ;
+    this.closeHoverA.close = new TimelineMax({ paused: true })
+      .to(this.closeTarget.close, 0.7, {
+        width: 400,
+        ease: Power3.easeOut
+      });
   }
 
   componentDidUpdate() {
     if (this.props.chat) {
-      // this.animation.play();
+      this.animation.play();
       // document.getElementById('watch')
         // .setAttribute('data-clicked', 'false');
     } else {
-      // this.animation.reverse();
+      this.animation.reverse();
     }
   }
 

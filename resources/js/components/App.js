@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import PathToRegexp from 'path-to-regexp';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 // import { ApolloClient } from 'apollo-boost';
 // import { ApolloProvider, Query } from 'react-apollo';
@@ -30,6 +29,7 @@ export default class App extends Component {
     this.loadingAnimation = this.loadingAnimation.bind(this);
     this.setStreamsByUrl = this.setStreamsByUrl.bind(this);
     this.useMultiOnLoad = this.useMultiOnLoad.bind(this);
+    this.changeChat = this.changeChat.bind(this);
   }
 
   componentDidMount() {
@@ -62,7 +62,8 @@ export default class App extends Component {
     const multi = !this.state.multi;
     this.setState({
       multi,
-      manage: multi
+      manage: multi,
+      chat: multi
     });
   }
 
@@ -81,8 +82,9 @@ export default class App extends Component {
   }
 
   changeChat() {
+    const chat = !this.state.chat;
     this.setState({
-      chat: !this.state.chat
+      chat
     });
   }
 
@@ -110,6 +112,8 @@ export default class App extends Component {
                 multi={this.state.multi}
                 manage={this.state.manage}
                 onManageChange={this.changeManage}
+                chat={this.state.chat}
+                onChatChange={this.changeChat}
               />
             </Route>
             <Footer />

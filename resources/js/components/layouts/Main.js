@@ -16,7 +16,7 @@ export default class Main extends Component {
   render() {
     const styles = {
       main: {
-        height: 'calc(100% - 60px)',
+        height: '100%',
         paddingTop: 30,
         paddingBottom: 30,
         overflowY: 'hidden',
@@ -31,7 +31,9 @@ export default class Main extends Component {
         <Multi
           multi={this.props.multi}
           manage={this.props.manage}
+          chat={this.props.chat}
           closeManage={this.props.onManageChange}
+          closeChat={this.props.onChatChange}
         />
       </div>
     );

@@ -49,8 +49,9 @@ export default class NavLink extends Component {
     const case2 = props.multi &&
                   !props.manage &&
                   props.manageButton;
+    const case3 = props.multi && !props.chat && props.chatButton;
 
-    if (case1 || case2) {
+    if (case1 || case2 || case3) {
       this.show.play();
     } else {
       this.show.reverse();
