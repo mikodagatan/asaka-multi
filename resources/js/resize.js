@@ -7,7 +7,7 @@ window.onresize = () => {
 
 function resizeChat() {
   console.log('resize.js');
-  const chatHeight = document.getElementById('chatBody').offsetHeight;
+  const chatHeight = document.getElementById('streamChat').offsetHeight;
   const chatColl = document.getElementsByClassName('streamChat');
 
   console.log('chatBody height:', chatHeight);
@@ -19,14 +19,10 @@ function resizeChat() {
   }
 }
 
-function resizeAll() {
-  const header = document.getElementById('header');
-  const footer = document.getElementById('footer');
-  const main = document.getElementById('main');
-
-  const footerH = footer.offsetHeight();
-  const headerH = header.offsetHeight();
-  const windowH = window.offsetHeight();
-
-  main.style.height = `${windowH - headerH - footerH}px`;
-}
+// function resizeAll() {
+//   const streamChat = document.getElementById('streamChat');
+//
+//   const streamChatH = streamChat.offsetHeight();
+//
+//   main.style.height = `${streamChatH}px`;
+// }

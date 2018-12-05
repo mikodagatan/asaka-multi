@@ -45916,7 +45916,7 @@ window.onresize = function () {
 
 function resizeChat() {
   console.log('resize.js');
-  var chatHeight = document.getElementById('chatBody').offsetHeight;
+  var chatHeight = document.getElementById('streamChat').offsetHeight;
   var chatColl = document.getElementsByClassName('streamChat');
 
   console.log('chatBody height:', chatHeight);
@@ -45928,17 +45928,13 @@ function resizeChat() {
   }
 }
 
-function resizeAll() {
-  var header = document.getElementById('header');
-  var footer = document.getElementById('footer');
-  var main = document.getElementById('main');
-
-  var footerH = footer.offsetHeight();
-  var headerH = header.offsetHeight();
-  var windowH = window.offsetHeight();
-
-  main.style.height = windowH - headerH - footerH + 'px';
-}
+// function resizeAll() {
+//   const streamChat = document.getElementById('streamChat');
+//
+//   const streamChatH = streamChat.offsetHeight();
+//
+//   main.style.height = `${streamChatH}px`;
+// }
 
 /***/ }),
 /* 75 */
@@ -72130,6 +72126,7 @@ var Main = function (_Component) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ManageForm__ = __webpack_require__(113);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__MultiStream__ = __webpack_require__(115);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ChatDiv__ = __webpack_require__(117);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_gsap__ = __webpack_require__(6);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
@@ -72139,6 +72136,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 
 
 
@@ -72166,8 +72164,13 @@ var Multi = function (_Component) {
     _this.changeLoad = _this.changeLoad.bind(_this);
     _this.setStreamsByUrl = _this.setStreamsByUrl.bind(_this);
     _this.setUrlByForm = _this.setUrlByForm.bind(_this);
+    _this.initAnimation = _this.initAnimation.bind(_this);
+    _this.playAnimation = _this.playAnimation.bind(_this);
 
     _this.renderMultiStream = _this.renderMultiStream.bind(_this);
+
+    _this.multiTarget = null;
+    _this.moveAnimation = null;
     return _this;
   }
 
@@ -72175,11 +72178,13 @@ var Multi = function (_Component) {
     key: 'componentDidMount',
     value: function componentDidMount() {
       this.setStreamsByUrl();
+      this.initAnimation();
     }
   }, {
     key: 'componentDidUpdate',
     value: function componentDidUpdate() {
       this.setUrlByForm();
+      this.playAnimation();
     }
   }, {
     key: 'setUrlByForm',
@@ -72214,6 +72219,25 @@ var Multi = function (_Component) {
           load: true,
           startByURL: true
         });
+      }
+    }
+  }, {
+    key: 'initAnimation',
+    value: function initAnimation() {
+      var width = window.innerWidth - 400;
+      this.moveAnimation = new __WEBPACK_IMPORTED_MODULE_4_gsap__["a" /* TimelineLite */]({ paused: true }).to(this.multiTarget, 0.5, {
+        x: 0,
+        width: width,
+        ease: Power2.easeOut
+      });
+    }
+  }, {
+    key: 'playAnimation',
+    value: function playAnimation() {
+      if (this.props.chat === true) {
+        this.moveAnimation.play();
+      } else {
+        this.moveAnimation.reverse();
       }
     }
   }, {
@@ -72281,10 +72305,24 @@ var Multi = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
+      var _this2 = this;
+
+      var styles = {
+        multi: {
+          width: '100%',
+          height: '100%',
+          position: 'fixed',
+          top: 30
+        }
+      };
       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
         'div',
         {
-          id: 'multi'
+          id: 'multi',
+          ref: function ref(multi) {
+            return _this2.multiTarget = multi;
+          },
+          style: styles.multi
         },
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__ManageForm__["a" /* default */], {
           multi: this.props.multi,
@@ -72629,11 +72667,11 @@ var ManageForm = function (_Component) {
 // eslint-disable-next-line no-unused-vars
 var styles = {
   manageStyle: {
-    height: 'calc(100% - 60px)',
+    height: '100%',
     width: 300,
     backgroundColor: __WEBPACK_IMPORTED_MODULE_0__variables__["a" /* colors */].nav,
     position: 'fixed',
-    top: 30,
+    top: 0,
     left: '-500',
     overflowY: 'scroll',
     overflowX: 'hidden',
@@ -72894,6 +72932,7 @@ Stream.defaultProps = {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_gsap__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__variables__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__styles_ChatDivS__ = __webpack_require__(118);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Chat__ = __webpack_require__(127);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -72901,6 +72940,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+
 
 
 
@@ -72915,9 +72956,18 @@ var ChatDiv = function (_Component) {
 
     var _this = _possibleConstructorReturn(this, (ChatDiv.__proto__ || Object.getPrototypeOf(ChatDiv)).call(this, props));
 
+    _this.state = {
+      active: null
+    };
+
     _this.handleClose = _this.handleClose.bind(_this);
     _this.streamHeaders = _this.streamHeaders.bind(_this);
+    _this.handleChatLoad = _this.handleChatLoad.bind(_this);
+    _this.streamChat = _this.streamChat.bind(_this);
+    _this.setActive = _this.setActive.bind(_this);
 
+    _this.streamChatRef = null;
+    _this.streamButton = [];
     _this.target = null;
     _this.animation = new __WEBPACK_IMPORTED_MODULE_1_gsap__["b" /* TimelineMax */]({ paused: true });
     _this.closeTarget = {
@@ -72935,22 +72985,19 @@ var ChatDiv = function (_Component) {
     key: 'componentDidMount',
     value: function componentDidMount() {
       // ChatForm Animation
-
-      this.animation = this.animation.from(this.target, 0.3, {
-        x: 500,
-        ease: Power3.easeOut,
-        display: 'block',
-        delay: 0.2
+      this.animation = this.animation.from(this.target, 1, {
+        ease: Power3.easeOut
       });
       // Close Animation
 
       this.closeHoverA.label = new __WEBPACK_IMPORTED_MODULE_1_gsap__["b" /* TimelineMax */]({ paused: true }).to(this.closeTarget.label, 0.25, {
-        color: __WEBPACK_IMPORTED_MODULE_2__variables__["a" /* colors */].orange,
+        color: __WEBPACK_IMPORTED_MODULE_2__variables__["a" /* colors */].body,
         ease: Power4.easeOut
       }, 'together').to(this.closeTarget.label, 0.7, {
         width: 0,
         ease: Power3.easeOut
       }, 'together');
+
       this.closeHoverA.close = new __WEBPACK_IMPORTED_MODULE_1_gsap__["b" /* TimelineMax */]({ paused: true }).to(this.closeTarget.close, 0.7, {
         width: 400,
         ease: Power3.easeOut
@@ -72959,13 +73006,24 @@ var ChatDiv = function (_Component) {
   }, {
     key: 'componentDidUpdate',
     value: function componentDidUpdate() {
+      if (this.state.active === null) {
+        this.setState({
+          active: this.props.streams[0].name
+        });
+      }
       if (this.props.chat) {
         this.animation.play();
-        // document.getElementById('watch')
-        // .setAttribute('data-clicked', 'false');
       } else {
         this.animation.reverse();
       }
+    }
+  }, {
+    key: 'setActive',
+    value: function setActive(name, e) {
+      console.log(e);
+      this.setState({
+        active: name
+      });
     }
   }, {
     key: 'handleCloseHover',
@@ -72985,17 +73043,29 @@ var ChatDiv = function (_Component) {
       this.props.closeChat();
     }
   }, {
+    key: 'handleChatLoad',
+    value: function handleChatLoad(target, streamChatRef) {
+      console.log(streamChatRef);
+      var height = streamChatRef.offsetHeight;
+      target.style.height = height + 'px';
+    }
+  }, {
     key: 'streamHeaders',
     value: function streamHeaders() {
+      var _this2 = this;
+
       var streams = this.props.streams.filter(function (stream) {
         return stream.name !== '';
       });
-
       return streams.map(function (stream) {
         return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
           'div',
           {
-            style: __WEBPACK_IMPORTED_MODULE_3__styles_ChatDivS__["a" /* styles */].streamHead
+            style: _this2.state.active === stream.name ? __WEBPACK_IMPORTED_MODULE_3__styles_ChatDivS__["a" /* styles */].streamHeadActive : __WEBPACK_IMPORTED_MODULE_3__styles_ChatDivS__["a" /* styles */].streamHead,
+            key: 'streamChatButton-' + stream.name,
+            onClick: function onClick(e) {
+              return _this2.setActive(stream.name, e);
+            }
           },
           stream.name
         );
@@ -73004,42 +73074,33 @@ var ChatDiv = function (_Component) {
   }, {
     key: 'streamChat',
     value: function streamChat() {
+      var _this3 = this;
+
       var streams = this.props.streams.filter(function (stream) {
         return stream.name !== '';
       });
-      // const chatHeight = document.getElementById('chatBody').offsetHeight();
 
       return streams.map(function (stream) {
-        return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-          'div',
-          null,
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('iframe', {
-            key: 'chat-' + stream.name,
-            className: 'streamChat',
-            frameBorder: '0',
-            scrolling: 'yes',
-            id: 'chat-' + stream.name,
-            src: 'https://www.twitch.tv/embed/' + stream.name + '/chat'
-          })
-        );
+        return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__Chat__["a" /* default */], {
+          key: 'streamChatComp-' + stream.name,
+          name: stream.name,
+          onChatLoad: _this3.handleChatLoad,
+          streamChatRef: _this3.streamChatRef,
+          active: _this3.state.active
+        });
       });
-    }
-  }, {
-    key: 'resizeChat',
-    value: function resizeChat() {
-      var chatHeight = document.getElementById('chatBody').height();
     }
   }, {
     key: 'render',
     value: function render() {
-      var _this2 = this;
+      var _this4 = this;
 
       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
         'div',
         {
           id: 'chatDiv',
           ref: function ref(chat) {
-            return _this2.target = chat;
+            return _this4.target = chat;
           },
           style: __WEBPACK_IMPORTED_MODULE_3__styles_ChatDivS__["a" /* styles */].ChatDiv
         },
@@ -73050,27 +73111,27 @@ var ChatDiv = function (_Component) {
             'div',
             {
               ref: function ref(label) {
-                return _this2.closeTarget.label = label;
+                return _this4.closeTarget.label = label;
               },
               id: 'chatLabel',
               style: __WEBPACK_IMPORTED_MODULE_3__styles_ChatDivS__["a" /* styles */].chatLabel
             },
-            'Stream Chat'
+            '' + this.state.active
           ),
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             'div',
             {
               ref: function ref(close) {
-                return _this2.closeTarget.close = close;
+                return _this4.closeTarget.close = close;
               },
               id: 'closeChat',
               style: __WEBPACK_IMPORTED_MODULE_3__styles_ChatDivS__["a" /* styles */].closeChat,
               onClick: this.handleClose,
               onMouseEnter: function onMouseEnter(e) {
-                return _this2.handleCloseHover(e);
+                return _this4.handleCloseHover(e);
               },
               onMouseLeave: function onMouseLeave(e) {
-                return _this2.handleCloseHoverR(e);
+                return _this4.handleCloseHoverR(e);
               }
             },
             'Close'
@@ -73094,6 +73155,9 @@ var ChatDiv = function (_Component) {
             'div',
             {
               id: 'streamChat',
+              ref: function ref(s) {
+                return _this4.streamChatRef = s;
+              },
               style: __WEBPACK_IMPORTED_MODULE_3__styles_ChatDivS__["a" /* styles */].streamChat
             },
             this.streamChat()
@@ -73122,12 +73186,12 @@ var ChatDiv = function (_Component) {
 var styles = {
   ChatDiv: {
     position: 'fixed',
-    top: 30,
-    right: 0,
+    top: 0,
+    right: -400,
     flexWrap: 'wrap',
     height: 'calc(100% - 60px)',
-    width: 400,
     backgroundColor: __WEBPACK_IMPORTED_MODULE_0__variables__["a" /* colors */].nav,
+    width: 400,
     overflowY: 'scroll',
     overflowX: 'hidden',
     zIndex: 2
@@ -73138,7 +73202,7 @@ var styles = {
     height: 70
   },
   chatLabel: {
-    backgroundColor: __WEBPACK_IMPORTED_MODULE_0__variables__["a" /* colors */].orange,
+    backgroundColor: __WEBPACK_IMPORTED_MODULE_0__variables__["a" /* colors */].body,
     fontSize: 14,
     textTransform: 'uppercase',
     color: 'white',
@@ -73160,33 +73224,44 @@ var styles = {
   },
   chatBody: {
     height: 'calc(100% - 70px)',
-    width: '100%',
-    display: 'flex'
+    width: '100%'
   },
   streamHeaders: {
-    width: 100,
-    backgroundColor: 'blue',
-    paddingBottom: 5
+    width: 400,
+    backgroundColor: __WEBPACK_IMPORTED_MODULE_0__variables__["a" /* colors */].orange,
+    padding: 5,
+    display: 'flex',
+    justifyContent: 'start'
   },
   streamHead: {
     cursor: 'pointer',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    width: 90,
-    backgroundColor: __WEBPACK_IMPORTED_MODULE_0__variables__["a" /* colors */].orange,
-    color: 'white',
-    margin: '5px 0 0 5px',
+    backgroundColor: __WEBPACK_IMPORTED_MODULE_0__variables__["a" /* colors */].nav,
+    color: 'black',
+    margin: '0 5px 0 0',
     fontSize: 11,
-    padding: 2,
+    padding: '2px 5px 2px 5px',
     borderRadius: 5,
-    textOverflow: 'ellipsis',
+    overflowX: 'hidden'
+  },
+  streamHeadActive: {
+    cursor: 'pointer',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: __WEBPACK_IMPORTED_MODULE_0__variables__["a" /* colors */].body,
+    color: 'white',
+    margin: '0 5px 0 0',
+    fontSize: 11,
+    padding: '2px 5px 2px 5px',
+    borderRadius: 5,
     overflowX: 'hidden'
   },
   streamChat: {
-    height: '100%',
-    width: 300,
-    backgroundColor: 'green'
+    height: 'calc(100% - 30px)',
+    width: 400
   }
 };
 
@@ -73660,6 +73735,109 @@ var Loading = function (_Component) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 123 */,
+/* 124 */,
+/* 125 */,
+/* 126 */,
+/* 127 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_gsap__ = __webpack_require__(6);
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+
+
+
+var Chat = function (_Component) {
+  _inherits(Chat, _Component);
+
+  function Chat(props) {
+    _classCallCheck(this, Chat);
+
+    var _this = _possibleConstructorReturn(this, (Chat.__proto__ || Object.getPrototypeOf(Chat)).call(this, props));
+
+    _this.chatLoad = _this.chatLoad.bind(_this);
+    _this.node = null;
+    _this.animation = null;
+    return _this;
+  }
+
+  _createClass(Chat, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      this.chatLoad();
+      this.animation = new __WEBPACK_IMPORTED_MODULE_1_gsap__["a" /* TimelineLite */]({ paused: true }).from(this.node, 0, {
+        display: 'none'
+      });
+      // .from(this.node, 0.3, {})
+      // .from(this.node, 0.3, {
+      //   x: 400,
+      //   visibility: 0,
+      // });
+    }
+  }, {
+    key: 'componentDidUpdate',
+    value: function componentDidUpdate() {
+      this.chatLoad();
+      console.log('chat did update');
+      console.log('active', this.props.active);
+      console.log('this name:', this.props.name);
+      if (this.props.active === this.props.name) {
+        console.log('should animate');
+        this.animation.restart();
+      } else {
+        this.animation.reverse();
+      }
+    }
+  }, {
+    key: 'chatLoad',
+    value: function chatLoad() {
+      var _this2 = this;
+
+      var chat = this.node;
+      chat.addEventListener('load', function () {
+        _this2.props.onChatLoad(chat, _this2.props.streamChatRef);
+        _this2.animation.play();
+      });
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var _this3 = this;
+
+      // const style = {
+      //   display: 'none',
+      // };
+      return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('iframe', {
+        key: 'chat-' + this.props.name,
+        ref: function ref(node) {
+          return _this3.node = node;
+        },
+        className: 'streamChat',
+        frameBorder: '0',
+        scrolling: 'yes',
+        width: '400',
+        id: 'chat-' + this.props.name,
+        src: 'https://www.twitch.tv/embed/' + this.props.name + '/chat'
+      });
+    }
+  }]);
+
+  return Chat;
+}(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);
+
+/* harmony default export */ __webpack_exports__["a"] = (Chat);
 
 /***/ })
 /******/ ]);

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ManageForm from './ManageForm';
 import MultiStream from './MultiStream';
 import ChatDiv from './ChatDiv';
+import { TimelineLite } from 'gsap'
 
 
 export default class Multi extends Component {
@@ -20,16 +21,24 @@ export default class Multi extends Component {
     this.changeLoad = this.changeLoad.bind(this);
     this.setStreamsByUrl = this.setStreamsByUrl.bind(this);
     this.setUrlByForm = this.setUrlByForm.bind(this);
+    this.initAnimation = this.initAnimation.bind(this);
+    this.playAnimation = this.playAnimation.bind(this);
 
     this.renderMultiStream = this.renderMultiStream.bind(this);
+
+    this.multiTarget = null;
+    this.moveAnimation = null;
   }
 
   componentDidMount() {
     this.setStreamsByUrl();
+    this.initAnimation();
   }
   componentDidUpdate() {
     this.setUrlByForm();
+    this.playAnimation();
   }
+
   setUrlByForm() {
     const streams = this.state.streams;
 
@@ -58,6 +67,24 @@ export default class Multi extends Component {
         load: true,
         startByURL: true,
       });
+    }
+  }
+
+  initAnimation() {
+    const width = window.innerWidth - 400;
+    this.moveAnimation = new TimelineLite({ paused: true })
+      .to(this.multiTarget, 0.5, {
+        x: 0,
+        width,
+        ease: Power2.easeOut
+      });
+  }
+
+  playAnimation() {
+    if (this.props.chat === true) {
+      this.moveAnimation.play();
+    } else {
+      this.moveAnimation.reverse();
     }
   }
 
@@ -114,9 +141,19 @@ export default class Multi extends Component {
     );
   }
   render() {
+    const styles = {
+      multi: {
+        width: '100%',
+        height: '100%',
+        position: 'fixed',
+        top: 30,
+      }
+    };
     return (
       <div
         id="multi"
+        ref={multi => this.multiTarget = multi}
+        style={styles.multi}
       >
         <ManageForm
           multi={this.props.multi}

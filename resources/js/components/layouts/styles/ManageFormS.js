@@ -3,11 +3,11 @@ import { colors } from '../variables';
 // eslint-disable-next-line no-unused-vars
 export const styles = {
   manageStyle: {
-    height: 'calc(100% - 60px)',
+    height: '100%',
     width: 300,
     backgroundColor: colors.nav,
     position: 'fixed',
-    top: 30,
+    top: 0,
     left: '-500',
     overflowY: 'scroll',
     overflowX: 'hidden',
