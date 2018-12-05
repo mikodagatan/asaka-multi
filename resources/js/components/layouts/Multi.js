@@ -125,7 +125,6 @@ export default class Multi extends Component {
           start={this.state.start}
           changeStart={this.changeStart}
           changeLoad={this.changeLoad}
-          setLoadScreen={this.props.setLoadScreen}
         />
         {this.renderMultiStream()}
       </div>

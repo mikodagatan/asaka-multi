@@ -49414,6 +49414,7 @@ var App = function (_Component) {
     _this.changeManage = _this.changeManage.bind(_this);
     _this.loadingAnimation = _this.loadingAnimation.bind(_this);
     _this.setStreamsByUrl = _this.setStreamsByUrl.bind(_this);
+    _this.useMultiOnLoad = _this.useMultiOnLoad.bind(_this);
     return _this;
   }
 
@@ -49421,6 +49422,7 @@ var App = function (_Component) {
     key: 'componentDidMount',
     value: function componentDidMount() {
       this.setStreamsByUrl();
+      this.loadingAnimation();
     }
   }, {
     key: 'setStreamsByUrl',
@@ -49428,7 +49430,6 @@ var App = function (_Component) {
       var path = window.location.pathname;
       if (path !== '/') {
         path = path.slice(1, path.length);
-        // const streams = path.split('/');
         this.loadingAnimation();
         this.useMulti();
       }
@@ -49443,6 +49444,14 @@ var App = function (_Component) {
       });
     }
   }, {
+    key: 'useMultiOnLoad',
+    value: function useMultiOnLoad() {
+      var multi = !this.state.multi;
+      this.setState({
+        multi: multi
+      });
+    }
+  }, {
     key: 'changeManage',
     value: function changeManage() {
       var manage = !this.state.manage;
@@ -49454,7 +49463,7 @@ var App = function (_Component) {
     key: 'loadingAnimation',
     value: function loadingAnimation() {
       this.setState({
-        // loadingScreen: true
+        loadingScreen: true
       });
     }
   }, {
@@ -49484,15 +49493,14 @@ var App = function (_Component) {
               __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_5__layouts_Main__["a" /* default */], {
                 multi: this.state.multi,
                 manage: this.state.manage,
-                onManageChange: this.changeManage,
-                setLoadScreen: this.loadingAnimation
+                onManageChange: this.changeManage
               })
             ),
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__layouts_Footer__["a" /* default */], null)
           ),
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_7__layouts_Loading__["a" /* default */], {
             loadingScreen: this.state.loadingScreen,
-            useMulti: this.useMulti,
+            useMulti: this.useMultiOnLoad,
             changeManage: this.changeManage
           })
         )
@@ -72377,8 +72385,7 @@ var Main = function (_Component) {
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__Multi__["a" /* default */], {
           multi: this.props.multi,
           manage: this.props.manage,
-          closeManage: this.props.onManageChange,
-          setLoadScreen: this.props.setLoadScreen
+          closeManage: this.props.onManageChange
         })
       );
     }
@@ -72561,8 +72568,7 @@ var Multi = function (_Component) {
           removeStream: this.removeStream,
           start: this.state.start,
           changeStart: this.changeStart,
-          changeLoad: this.changeLoad,
-          setLoadScreen: this.props.setLoadScreen
+          changeLoad: this.changeLoad
         }),
         this.renderMultiStream()
       );
@@ -72610,6 +72616,7 @@ var ManageForm = function (_Component) {
     _this.handleChange = _this.handleChange.bind(_this);
     _this.handleClose = _this.handleClose.bind(_this);
     _this.handleWatch = _this.handleWatch.bind(_this);
+    _this.watchButton = _this.watchButton.bind(_this);
 
     _this.target = null;
     _this.animation = new __WEBPACK_IMPORTED_MODULE_1_gsap__["b" /* TimelineMax */]({ paused: true });
@@ -72655,7 +72662,8 @@ var ManageForm = function (_Component) {
     value: function componentDidUpdate() {
       if (this.props.manage) {
         this.animation.play();
-        document.getElementById('watch').setAttribute('data-clicked', 'false');
+        // document.getElementById('watch')
+        // .setAttribute('data-clicked', 'false');
       } else {
         this.animation.reverse();
       }
@@ -72797,6 +72805,21 @@ var ManageForm = function (_Component) {
       });
     }
   }, {
+    key: 'watchButton',
+    value: function watchButton() {
+      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        'button',
+        {
+          id: 'watch',
+          style: __WEBPACK_IMPORTED_MODULE_3__styles_ManageFormS__["a" /* styles */].submit,
+          onClick: this.handleWatch,
+          'data-clicked': 'false',
+          className: 'btn-primary'
+        },
+        'Watch'
+      );
+    }
+  }, {
     key: 'render',
     value: function render() {
       var _this3 = this;
@@ -72849,18 +72872,7 @@ var ManageForm = function (_Component) {
             id: 'manage-form',
             style: __WEBPACK_IMPORTED_MODULE_3__styles_ManageFormS__["a" /* styles */].manageForm
           },
-          this.renderStreamFields(),
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-            'button',
-            {
-              id: 'watch',
-              style: __WEBPACK_IMPORTED_MODULE_3__styles_ManageFormS__["a" /* styles */].submit,
-              onClick: this.handleWatch,
-              'data-clicked': 'false',
-              className: 'btn-primary'
-            },
-            'Watch'
-          )
+          this.renderStreamFields()
         )
       );
     }
@@ -73313,7 +73325,6 @@ var Loading = function (_Component) {
     key: 'completeAnimation',
     value: function completeAnimation() {
       this.props.useMulti();
-      this.props.changeManage();
     }
   }, {
     key: 'loadAnimation',
@@ -73370,16 +73381,16 @@ var Loading = function (_Component) {
       var i = this.loadT.icon;
       var block = this.loadT.textBlock;
       var text = this.loadT.aniText;
-      this.loadA = this.loadA.to(c, 1, {
+      this.loadA = this.loadA.to(c, 2, {
         left: '50%',
         ease: Power3.easeOut
-      }, 'move').to(i, 1, {
+      }, 'move').to(i, 2, {
         left: '50%',
         ease: Power3.easeOut
-      }, 'move').to(c, 1, {
+      }, 'move').to(c, 2, {
         scale: '20',
         ease: Power0.easeNone
-      }, 'grow').to(i, 1, {
+      }, 'grow').to(i, 2, {
         repeat: 1,
         rotation: '+=360',
         ease: Power0.easeNone

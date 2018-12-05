@@ -28,17 +28,18 @@ export default class App extends Component {
     this.changeManage = this.changeManage.bind(this);
     this.loadingAnimation = this.loadingAnimation.bind(this);
     this.setStreamsByUrl = this.setStreamsByUrl.bind(this);
+    this.useMultiOnLoad = this.useMultiOnLoad.bind(this);
   }
 
   componentDidMount() {
     this.setStreamsByUrl();
+    this.loadingAnimation();
   }
 
   setStreamsByUrl() {
     let path = window.location.pathname;
     if (path !== '/') {
       path = path.slice(1, path.length);
-      // const streams = path.split('/');
       this.loadingAnimation();
       this.useMulti();
     }
@@ -52,6 +53,13 @@ export default class App extends Component {
     });
   }
 
+  useMultiOnLoad() {
+    const multi = !this.state.multi;
+    this.setState({
+      multi,
+    });
+  }
+
   changeManage() {
     const manage = !this.state.manage;
     this.setState({
@@ -61,7 +69,7 @@ export default class App extends Component {
 
   loadingAnimation() {
     this.setState({
-      // loadingScreen: true
+      loadingScreen: true
     });
   }
 
@@ -84,14 +92,13 @@ export default class App extends Component {
                 multi={this.state.multi}
                 manage={this.state.manage}
                 onManageChange={this.changeManage}
-                setLoadScreen={this.loadingAnimation}
               />
             </Route>
             <Footer />
           </div>
           <Loading
             loadingScreen={this.state.loadingScreen}
-            useMulti={this.useMulti}
+            useMulti={this.useMultiOnLoad}
             changeManage={this.changeManage}
           />
         </div>

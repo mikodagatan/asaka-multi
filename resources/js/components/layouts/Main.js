@@ -11,7 +11,6 @@ export default class Main extends Component {
           multi={this.props.multi}
           manage={this.props.manage}
           closeManage={this.props.onManageChange}
-          setLoadScreen={this.props.setLoadScreen}
         />
       </div>
     );

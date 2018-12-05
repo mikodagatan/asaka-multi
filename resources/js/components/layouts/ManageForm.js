@@ -12,6 +12,7 @@ export default class ManageForm extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleClose = this.handleClose.bind(this);
     this.handleWatch = this.handleWatch.bind(this);
+    this.watchButton = this.watchButton.bind(this);
 
     this.target = null;
     this.animation = new TimelineMax({ paused: true });
@@ -58,8 +59,8 @@ export default class ManageForm extends Component {
   componentDidUpdate() {
     if (this.props.manage) {
       this.animation.play();
-      document.getElementById('watch')
-        .setAttribute('data-clicked', 'false');
+      // document.getElementById('watch')
+        // .setAttribute('data-clicked', 'false');
     } else {
       this.animation.reverse();
     }
@@ -177,6 +178,17 @@ export default class ManageForm extends Component {
       ))
     );
   }
+  watchButton() {
+    <button
+      id='watch'
+      style={styles.submit}
+      onClick={this.handleWatch}
+      data-clicked='false'
+      className="btn-primary"
+    >
+      Watch
+    </button>
+  }
 
   render() {
     return (
@@ -210,15 +222,7 @@ export default class ManageForm extends Component {
           style={styles.manageForm}
         >
           {this.renderStreamFields()}
-          <button
-            id='watch'
-            style={styles.submit}
-            onClick={this.handleWatch}
-            data-clicked='false'
-            className="btn-primary"
-          >
-            Watch
-          </button>
+
 
         </form>
       </div>

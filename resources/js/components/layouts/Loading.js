@@ -38,7 +38,6 @@ export default class Loading extends Component {
   }
   completeAnimation() {
     this.props.useMulti();
-    this.props.changeManage();
   }
   loadAnimation() {
     this.loadStart();
@@ -95,19 +94,19 @@ export default class Loading extends Component {
     const text = this.loadT.aniText;
     this.loadA = this.loadA
 
-    .to(c, 1, {
+    .to(c, 2, {
       left: '50%',
       ease: Power3.easeOut,
     }, 'move')
-    .to(i, 1, {
+    .to(i, 2, {
       left: '50%',
       ease: Power3.easeOut,
     }, 'move')
-    .to(c, 1, {
+    .to(c, 2, {
       scale: '20',
       ease: Power0.easeNone,
     }, 'grow')
-    .to(i, 1, {
+    .to(i, 2, {
       repeat: 1,
       rotation: '+=360',
       ease: Power0.easeNone
