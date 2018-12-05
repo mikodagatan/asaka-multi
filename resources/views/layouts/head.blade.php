@@ -17,4 +17,4 @@
   </script>
 
 
-  <title>AsakaMulti - Can Mobile! @yield('title')</title>
+  <title>AsakaMulti v2.00 @yield('title')</title>

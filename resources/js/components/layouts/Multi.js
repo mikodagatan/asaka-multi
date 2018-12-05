@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import ManageForm from './ManageForm';
 import MultiStream from './MultiStream';
+import ChatDiv from './ChatDiv';
+
 
 export default class Multi extends Component {
   constructor(props) {
@@ -127,6 +129,10 @@ export default class Multi extends Component {
           changeLoad={this.changeLoad}
         />
         {this.renderMultiStream()}
+        <ChatDiv
+          multi={this.props.multi}
+          streams={this.state.streams}
+        />
       </div>
     );
   }

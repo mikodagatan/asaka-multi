@@ -13,6 +13,7 @@ export default class Header extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleMultiClick = this.handleMultiClick.bind(this);
     this.handleManageClick = this.handleManageClick.bind(this);
+    this.handleChatClick = this.handleChatClick.bind(this);
     this.target = [];
     this.animation = new TimelineMax({ paused: true });
     this.multiAnimation = null;
@@ -42,12 +43,14 @@ export default class Header extends Component {
 
   handleMultiClick() {
     this.props.onMultiChange();
-    this.props.onManageChange();
   }
 
   handleManageClick() {
     const manage = !this.props.manage;
     this.props.onManageChange(manage);
+  }
+  handleChatClick() {
+    this.props.onChatChange();
   }
 
   handleChange() {
@@ -108,6 +111,12 @@ export default class Header extends Component {
           onManageClick={this.handleManageClick}
         >Manage</NavLink>
         <NavLink
+          chat={this.props.chat}
+          chatButton='true'
+          multi={this.props.multi}
+          onChatClick={this.handleChatClick}
+        >Chat</NavLink>
+        <NavLink
           multi={this.props.multi}
           multiButton='true'
           onMultiClick={this.handleMultiClick}
@@ -115,7 +124,7 @@ export default class Header extends Component {
         <CloseMulti
           multi={this.props.multi}
           onMultiClick={this.handleMultiClick}
-        >Exit Multi Mode</CloseMulti>
+        >Exit</CloseMulti>
 
       </nav>
     );

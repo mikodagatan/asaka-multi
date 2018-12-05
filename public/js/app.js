@@ -49408,6 +49408,7 @@ var App = function (_Component) {
     _this.state = {
       multi: false,
       manage: false,
+      chat: false,
       loadingScreen: false
     };
     _this.useMulti = _this.useMulti.bind(_this);
@@ -49460,18 +49461,22 @@ var App = function (_Component) {
       });
     }
   }, {
+    key: 'changeChat',
+    value: function changeChat() {
+      this.setState({
+        chat: !this.state.chat
+      });
+    }
+  }, {
     key: 'loadingAnimation',
     value: function loadingAnimation() {
       this.setState({
-        loadingScreen: true
+        // loadingScreen: true
       });
     }
   }, {
     key: 'render',
     value: function render() {
-      var path = '/:stream1/:stream2/:stream3';
-      var re = __WEBPACK_IMPORTED_MODULE_2_path_to_regexp___default()(path);
-
       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
         __WEBPACK_IMPORTED_MODULE_3_react_router_dom__["a" /* BrowserRouter */],
         null,
@@ -49485,7 +49490,9 @@ var App = function (_Component) {
               multi: this.state.multi,
               onMultiChange: this.useMulti,
               manage: this.state.manage,
-              onManageChange: this.changeManage
+              onManageChange: this.changeManage,
+              chat: this.state.chat,
+              onChatChange: this.changeChat
             }),
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
               __WEBPACK_IMPORTED_MODULE_3_react_router_dom__["b" /* Route */],
@@ -71177,6 +71184,7 @@ var Header = function (_Component) {
     _this.handleChange = _this.handleChange.bind(_this);
     _this.handleMultiClick = _this.handleMultiClick.bind(_this);
     _this.handleManageClick = _this.handleManageClick.bind(_this);
+    _this.handleChatClick = _this.handleChatClick.bind(_this);
     _this.target = [];
     _this.animation = new __WEBPACK_IMPORTED_MODULE_1_gsap__["b" /* TimelineMax */]({ paused: true });
     _this.multiAnimation = null;
@@ -71209,13 +71217,17 @@ var Header = function (_Component) {
     key: 'handleMultiClick',
     value: function handleMultiClick() {
       this.props.onMultiChange();
-      this.props.onManageChange();
     }
   }, {
     key: 'handleManageClick',
     value: function handleManageClick() {
       var manage = !this.props.manage;
       this.props.onManageChange(manage);
+    }
+  }, {
+    key: 'handleChatClick',
+    value: function handleChatClick() {
+      this.props.onChatChange();
     }
   }, {
     key: 'handleChange',
@@ -71296,6 +71308,16 @@ var Header = function (_Component) {
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
           __WEBPACK_IMPORTED_MODULE_3__elements_NavLink__["a" /* default */],
           {
+            chat: this.props.chat,
+            chatButton: 'true',
+            multi: this.props.multi,
+            onChatClick: this.handleChatClick
+          },
+          'Chat'
+        ),
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          __WEBPACK_IMPORTED_MODULE_3__elements_NavLink__["a" /* default */],
+          {
             multi: this.props.multi,
             multiButton: 'true',
             onMultiClick: this.handleMultiClick
@@ -71308,7 +71330,7 @@ var Header = function (_Component) {
             multi: this.props.multi,
             onMultiClick: this.handleMultiClick
           },
-          'Exit Multi Mode'
+          'Exit'
         )
       );
     }
@@ -72179,6 +72201,8 @@ var NavLink = function (_Component) {
         props.onMultiClick(props.multi);
       } else if (props.manageButton) {
         props.onManageClick(props.manage);
+      } else if (props.chatButton) {
+        props.onChatClick(props.chat);
       }
     }
   }, {
@@ -72405,6 +72429,7 @@ var Main = function (_Component) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ManageForm__ = __webpack_require__(112);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__MultiStream__ = __webpack_require__(114);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ChatDiv__ = __webpack_require__(124);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
@@ -72414,6 +72439,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 
 
 
@@ -72570,7 +72596,11 @@ var Multi = function (_Component) {
           changeStart: this.changeStart,
           changeLoad: this.changeLoad
         }),
-        this.renderMultiStream()
+        this.renderMultiStream(),
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__ChatDiv__["a" /* default */], {
+          multi: this.props.multi,
+          streams: this.state.streams
+        })
       );
     }
   }]);
@@ -72807,7 +72837,7 @@ var ManageForm = function (_Component) {
   }, {
     key: 'watchButton',
     value: function watchButton() {
-      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+      return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
         'button',
         {
           id: 'watch',
@@ -73351,7 +73381,7 @@ var Loading = function (_Component) {
         border: '0',
         display: 'flex',
         top: '50%',
-        left: -100,
+        left: '50%',
         width: 150,
         height: 150,
         margin: '-87.5px 0 0 -87.5px',
@@ -73362,7 +73392,7 @@ var Loading = function (_Component) {
         zIndex: 15,
         display: 'flex',
         top: '50%',
-        left: -100,
+        left: '50%',
         scale: 1.5,
         margin: '-37.5px 0 0 -37.5px'
       }, 'init').to(vBlock, 0, {
@@ -73381,12 +73411,12 @@ var Loading = function (_Component) {
       var i = this.loadT.icon;
       var block = this.loadT.textBlock;
       var text = this.loadT.aniText;
-      this.loadA = this.loadA.to(c, 2, {
-        left: '50%',
-        ease: Power3.easeOut
-      }, 'move').to(i, 2, {
-        left: '50%',
-        ease: Power3.easeOut
+      this.loadA = this.loadA.to(c, 1, {
+        // left: '50%',
+        // ease: Power3.easeOut,
+      }, 'move').to(i, 1, {
+        // left: '50%',
+        // ease: Power3.easeOut,
       }, 'move').to(c, 2, {
         scale: '20',
         ease: Power0.easeNone
@@ -73621,6 +73651,298 @@ var Loading = function (_Component) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 120 */,
+/* 121 */,
+/* 122 */,
+/* 123 */,
+/* 124 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_gsap__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__variables__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__styles_ChatDivS__ = __webpack_require__(125);
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+
+
+
+
+
+var ChatDiv = function (_Component) {
+  _inherits(ChatDiv, _Component);
+
+  function ChatDiv(props) {
+    _classCallCheck(this, ChatDiv);
+
+    var _this = _possibleConstructorReturn(this, (ChatDiv.__proto__ || Object.getPrototypeOf(ChatDiv)).call(this, props));
+
+    _this.handleClose = _this.handleClose.bind(_this);
+    _this.streamHeaders = _this.streamHeaders.bind(_this);
+
+    _this.target = null;
+    _this.animation = new __WEBPACK_IMPORTED_MODULE_1_gsap__["b" /* TimelineMax */]({ paused: true });
+    _this.closeTarget = {
+      label: null,
+      close: null
+    };
+    _this.closeHoverA = {
+      label: null,
+      close: null
+    };
+    return _this;
+  }
+
+  _createClass(ChatDiv, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      // ChatForm Animation
+
+      // this.animation = this.animation
+      //   .from(this.target, 0.3, {
+      //     x: -500,
+      //     ease: Power3.easeOut,
+      //     display: 'block',
+      //     delay: 0.2
+      //   });
+      //
+      // // Close Animation
+      //
+      // this.closeHoverA.label = new TimelineMax({ paused: true })
+      //   .to(this.closeTarget.label, 0.25, {
+      //     color: colors.orange,
+      //     ease: Power4.easeOut
+      //   }, 'together')
+      //   .to(this.closeTarget.label, 0.7, {
+      //     width: 0,
+      //     ease: Power3.easeOut
+      //   }, 'together')
+      //   ;
+      // this.closeHoverA.close = new TimelineMax({ paused: true })
+      //   .to(this.closeTarget.close, 0.7, {
+      //     width: 300,
+      //     ease: Power3.easeOut
+      //   });
+    }
+  }, {
+    key: 'componentDidUpdate',
+    value: function componentDidUpdate() {
+      if (this.props.chat) {
+        // this.animation.play();
+        // document.getElementById('watch')
+        // .setAttribute('data-clicked', 'false');
+      } else {
+          // this.animation.reverse();
+        }
+    }
+  }, {
+    key: 'handleCloseHover',
+    value: function handleCloseHover() {
+      this.closeHoverA.close.play();
+      this.closeHoverA.label.play();
+    }
+  }, {
+    key: 'handleCloseHoverR',
+    value: function handleCloseHoverR() {
+      this.closeHoverA.close.reverse();
+      this.closeHoverA.label.reverse();
+    }
+  }, {
+    key: 'handleClose',
+    value: function handleClose() {
+      this.props.closeChat();
+    }
+  }, {
+    key: 'streamHeaders',
+    value: function streamHeaders() {
+      return this.props.streams.map(function (stream, index) {
+        return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'div',
+          {
+            style: __WEBPACK_IMPORTED_MODULE_3__styles_ChatDivS__["a" /* styles */].streamHead
+          },
+          stream.name
+        );
+      });
+    }
+  }, {
+    key: 'streamChat',
+    value: function streamChat() {
+      return this.props.streams.map(function (stream, index) {
+        return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'div',
+          null,
+          stream.name
+        );
+      });
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var _this2 = this;
+
+      return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        'div',
+        {
+          id: 'chatDiv',
+          ref: function ref(chat) {
+            return _this2.target = chat;
+          },
+          style: __WEBPACK_IMPORTED_MODULE_3__styles_ChatDivS__["a" /* styles */].ChatDiv
+        },
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'div',
+          { id: 'chatHeader', style: __WEBPACK_IMPORTED_MODULE_3__styles_ChatDivS__["a" /* styles */].chatHeader },
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'div',
+            {
+              ref: function ref(label) {
+                return _this2.closeTarget.label = label;
+              },
+              id: 'chatLabel',
+              style: __WEBPACK_IMPORTED_MODULE_3__styles_ChatDivS__["a" /* styles */].chatLabel
+            },
+            'Stream Chat'
+          ),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'div',
+            {
+              ref: function ref(close) {
+                return _this2.closeTarget.close = close;
+              },
+              id: 'closeChat',
+              style: __WEBPACK_IMPORTED_MODULE_3__styles_ChatDivS__["a" /* styles */].closeChat,
+              onClick: this.handleClose,
+              onMouseEnter: function onMouseEnter(e) {
+                return _this2.handleCloseHover(e);
+              },
+              onMouseLeave: function onMouseLeave(e) {
+                return _this2.handleCloseHoverR(e);
+              }
+            },
+            'Close'
+          )
+        ),
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'div',
+          {
+            id: 'chatBody',
+            style: __WEBPACK_IMPORTED_MODULE_3__styles_ChatDivS__["a" /* styles */].chatBody
+          },
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'div',
+            {
+              id: 'streamHeaders',
+              style: __WEBPACK_IMPORTED_MODULE_3__styles_ChatDivS__["a" /* styles */].streamHeaders
+            },
+            this.streamHeaders()
+          ),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'div',
+            {
+              id: 'streamChat',
+              style: __WEBPACK_IMPORTED_MODULE_3__styles_ChatDivS__["a" /* styles */].streamChat
+            },
+            this.streamChat()
+          )
+        )
+      );
+    }
+  }]);
+
+  return ChatDiv;
+}(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);
+
+/* harmony default export */ __webpack_exports__["a"] = (ChatDiv);
+
+/***/ }),
+/* 125 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return styles; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__variables__ = __webpack_require__(13);
+
+
+// eslint-disable-next-line no-unused-vars
+var styles = {
+  ChatDiv: {
+    position: 'fixed',
+    top: 30,
+    right: 0,
+    flexWrap: 'wrap',
+    height: '95vh',
+    width: 400,
+    backgroundColor: __WEBPACK_IMPORTED_MODULE_0__variables__["a" /* colors */].nav,
+    overflowY: 'scroll',
+    overflowX: 'hidden',
+    zIndex: 2,
+    marginBottom: 10
+  },
+  chatHeader: {
+    display: 'flex',
+    width: 400,
+    height: 70
+  },
+  chatLabel: {
+    backgroundColor: __WEBPACK_IMPORTED_MODULE_0__variables__["a" /* colors */].orange,
+    fontSize: 14,
+    textTransform: 'uppercase',
+    color: 'white',
+    width: 350,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  closeChat: {
+    display: 'flex',
+    width: 50,
+    alignItems: 'center',
+    justifyContent: 'center',
+    color: 'white',
+    padding: 2.5,
+    backgroundColor: __WEBPACK_IMPORTED_MODULE_0__variables__["a" /* colors */].red,
+    cursor: 'pointer',
+    overflowX: 'hidden'
+  },
+  chatBody: {
+    width: '100%',
+    display: 'flex'
+  },
+  streamHeaders: {
+    width: 100,
+    backgroundColor: 'blue'
+  },
+  streamHead: {
+    cursor: 'pointer',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: 90,
+    backgroundColor: __WEBPACK_IMPORTED_MODULE_0__variables__["a" /* colors */].orange,
+    color: 'white',
+    margin: '5px 0 0 5px',
+    fontSize: 11,
+    padding: 2,
+    borderRadius: 5,
+    textOverflow: 'ellipsis',
+    overflowX: 'hidden'
+  },
+  streamChat: {
+    width: 300,
+    backgroundColor: 'green'
+  }
+};
 
 /***/ })
 /******/ ]);

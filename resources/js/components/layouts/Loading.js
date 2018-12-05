@@ -62,7 +62,7 @@ export default class Loading extends Component {
         border: '0',
         display: 'flex',
         top: '50%',
-        left: -100,
+        left: '50%',
         width: 150,
         height: 150,
         margin: '-87.5px 0 0 -87.5px',
@@ -74,7 +74,7 @@ export default class Loading extends Component {
         zIndex: 15,
         display: 'flex',
         top: '50%',
-        left: -100,
+        left: '50%',
         scale: 1.5,
         margin: '-37.5px 0 0 -37.5px',
       }, 'init')
@@ -94,13 +94,13 @@ export default class Loading extends Component {
     const text = this.loadT.aniText;
     this.loadA = this.loadA
 
-    .to(c, 2, {
-      left: '50%',
-      ease: Power3.easeOut,
+    .to(c, 1, {
+      // left: '50%',
+      // ease: Power3.easeOut,
     }, 'move')
-    .to(i, 2, {
-      left: '50%',
-      ease: Power3.easeOut,
+    .to(i, 1, {
+      // left: '50%',
+      // ease: Power3.easeOut,
     }, 'move')
     .to(c, 2, {
       scale: '20',

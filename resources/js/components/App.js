@@ -22,6 +22,7 @@ export default class App extends Component {
     this.state = {
       multi: false,
       manage: false,
+      chat: false,
       loadingScreen: false,
     };
     this.useMulti = this.useMulti.bind(this);
@@ -67,16 +68,19 @@ export default class App extends Component {
     });
   }
 
+  changeChat() {
+    this.setState({
+      chat: !this.state.chat
+    });
+  }
+
   loadingAnimation() {
     this.setState({
-      loadingScreen: true
+      // loadingScreen: true
     });
   }
 
   render() {
-    const path = '/:stream1/:stream2/:stream3';
-    const re = PathToRegexp(path);
-
     return (
       <Router>
         <div id="app-container">
@@ -86,6 +90,8 @@ export default class App extends Component {
               onMultiChange={this.useMulti}
               manage={this.state.manage}
               onManageChange={this.changeManage}
+              chat={this.state.chat}
+              onChatChange={this.changeChat}
             />
             <Route exact path="/">
               <Main

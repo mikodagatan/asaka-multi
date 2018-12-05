@@ -73,6 +73,8 @@ export default class NavLink extends Component {
       props.onMultiClick(props.multi);
     } else if (props.manageButton) {
       props.onManageClick(props.manage);
+    } else if (props.chatButton) {
+      props.onChatClick(props.chat);
     }
   }
 

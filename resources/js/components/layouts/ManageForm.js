@@ -179,15 +179,17 @@ export default class ManageForm extends Component {
     );
   }
   watchButton() {
-    <button
-      id='watch'
-      style={styles.submit}
-      onClick={this.handleWatch}
-      data-clicked='false'
-      className="btn-primary"
-    >
-      Watch
-    </button>
+    return (
+      <button
+        id='watch'
+        style={styles.submit}
+        onClick={this.handleWatch}
+        data-clicked='false'
+        className="btn-primary"
+      >
+        Watch
+      </button>
+    );
   }
 
   render() {
