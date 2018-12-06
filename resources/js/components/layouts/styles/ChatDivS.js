@@ -51,6 +51,7 @@ export const styles = {
     padding: 5,
     display: 'flex',
     justifyContent: 'start',
+    flexWrap: 'wrap',
   },
   streamHead: {
     cursor: 'pointer',
@@ -59,7 +60,7 @@ export const styles = {
     justifyContent: 'center',
     backgroundColor: colors.nav,
     color: 'black',
-    margin: '0 5px 0 0',
+    margin: '0 5px 5px 0',
     fontSize: 11,
     padding: '2px 5px 2px 5px',
     borderRadius: 5,
@@ -72,14 +73,14 @@ export const styles = {
     justifyContent: 'center',
     backgroundColor: colors.body,
     color: 'white',
-    margin: '0 5px 0 0',
+    margin: '0 5px 5px 0',
     fontSize: 11,
     padding: '2px 5px 2px 5px',
     borderRadius: 5,
     overflowX: 'hidden',
   },
   streamChat: {
-    height: 'calc(100% - 30px)',
+    height: '100%',
     width: 400,
   }
 };

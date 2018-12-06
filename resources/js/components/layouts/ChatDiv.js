@@ -21,6 +21,7 @@ export default class ChatDiv extends Component {
     this.setActive = this.setActive.bind(this);
 
     this.streamChatRef = null;
+    this.streamHeadersRef = null;
     this.streamButton = [];
     this.target = null;
     this.animation = new TimelineMax({ paused: true });
@@ -94,10 +95,13 @@ export default class ChatDiv extends Component {
     this.props.closeChat();
   }
 
-  handleChatLoad(target, streamChatRef) {
+  handleChatLoad(target, streamChatRef, streamHeadersRef) {
     console.log(streamChatRef);
+    console.log(streamHeadersRef);
     const height = streamChatRef.offsetHeight;
-    target.style.height = `${height}px`;
+    const headerHeight = streamHeadersRef.offsetHeight;
+    const totalHeight = height - headerHeight;
+    target.style.height = `${totalHeight}px`;
   }
 
   streamHeaders() {
@@ -125,6 +129,7 @@ export default class ChatDiv extends Component {
           name={stream.name}
           onChatLoad={this.handleChatLoad}
           streamChatRef={this.streamChatRef}
+          streamHeadersRef={this.streamHeadersRef}
           active={this.state.active}
         />
       ))
@@ -163,6 +168,7 @@ export default class ChatDiv extends Component {
         >
           <div
             id='streamHeaders'
+            ref={s => this.streamHeadersRef = s}
             style={styles.streamHeaders}
           >
             {this.streamHeaders()}

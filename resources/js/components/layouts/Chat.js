@@ -10,11 +10,10 @@ export default class Chat extends Component {
     this.animation = null;
   }
   componentDidMount() {
-    this.chatLoad();
-    this.animation = new TimelineLite({ paused: true })
-      .from(this.node, 0, {
-        display: 'none',
-      });
+    this.animation = new TimelineLite({ paused: true });
+      // .to(this.node, 0, {
+      //   display: 'block',
+      // });
       // .from(this.node, 0.3, {})
       // .from(this.node, 0.3, {
       //   x: 400,
@@ -26,28 +25,29 @@ export default class Chat extends Component {
     console.log('chat did update');
     console.log('active', this.props.active);
     console.log('this name:', this.props.name);
-    if (this.props.active === this.props.name) {
-      console.log('should animate');
-      this.animation.restart();
-    } else {
-      this.animation.reverse();
-    }
   }
   chatLoad() {
     const chat = this.node;
+    console.log(this.props);
     chat.addEventListener('load', () => {
-      this.props.onChatLoad(chat, this.props.streamChatRef);
+      this.props.onChatLoad(chat, this.props.streamChatRef, this.props.streamHeadersRef);
       this.animation.play();
     });
   }
   render() {
-    // const style = {
-    //   display: 'none',
-    // };
+    const styles = {
+      active: {
+        display: 'block',
+      },
+      normal: {
+        display: 'none',
+      }
+    };
     return (
       <iframe
         key={`chat-${this.props.name}`}
         ref={node => this.node = node}
+        style={(this.props.active === this.props.name) ? styles.active : styles.normal}
         className='streamChat'
         frameBorder="0"
         scrolling="yes"
