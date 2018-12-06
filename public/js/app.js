@@ -45907,9 +45907,9 @@ module.exports = function spread(callback) {
 /* 74 */
 /***/ (function(module, exports) {
 
-window.onload = function () {
-  resizeChat();
-};
+// window.onload = () => {
+//   resizeChat();
+// };
 window.onresize = function () {
   resizeChat();
 };
@@ -72958,15 +72958,17 @@ var ChatDiv = function (_Component) {
     var _this = _possibleConstructorReturn(this, (ChatDiv.__proto__ || Object.getPrototypeOf(ChatDiv)).call(this, props));
 
     _this.state = {
-      active: null
+      active: null,
+      streamHeadersHeight: null
     };
 
     _this.handleClose = _this.handleClose.bind(_this);
     _this.streamHeaders = _this.streamHeaders.bind(_this);
-    _this.handleChatLoad = _this.handleChatLoad.bind(_this);
     _this.streamChat = _this.streamChat.bind(_this);
     _this.setActive = _this.setActive.bind(_this);
+    _this.handleStreamHeaderResize = _this.handleStreamHeaderResize.bind(_this);
 
+    _this.streamBodyRef = null;
     _this.streamChatRef = null;
     _this.streamHeadersRef = null;
     _this.streamButton = [];
@@ -73007,16 +73009,19 @@ var ChatDiv = function (_Component) {
     }
   }, {
     key: 'componentDidUpdate',
-    value: function componentDidUpdate() {
+    value: function componentDidUpdate(prevProps, prevState) {
       if (this.state.active === null) {
         this.setState({
           active: this.props.streams[0].name
         });
       }
-      if (this.props.chat) {
-        this.animation.play();
-      } else {
-        this.animation.reverse();
+
+      var streamHeadersHeight = this.streamHeadersRef.offsetHeight;
+      if (prevState.streamHeadersHeight !== streamHeadersHeight) {
+        this.handleStreamHeaderResize();
+        this.setState({
+          streamHeadersHeight: streamHeadersHeight
+        });
       }
     }
   }, {
@@ -73045,14 +73050,13 @@ var ChatDiv = function (_Component) {
       this.props.closeChat();
     }
   }, {
-    key: 'handleChatLoad',
-    value: function handleChatLoad(target, streamChatRef, streamHeadersRef) {
-      console.log(streamChatRef);
-      console.log(streamHeadersRef);
-      var height = streamChatRef.offsetHeight;
-      var headerHeight = streamHeadersRef.offsetHeight;
-      var totalHeight = height - headerHeight;
-      target.style.height = totalHeight + 'px';
+    key: 'handleStreamHeaderResize',
+    value: function handleStreamHeaderResize() {
+      var streamHeaders = this.streamHeadersRef;
+      var streamChat = this.streamChatRef;
+      var streamBody = this.streamBodyRef;
+      var height = streamBody.offsetHeight - streamHeaders.offsetHeight;
+      streamChat.style.height = height + 'px';
     }
   }, {
     key: 'streamHeaders',
@@ -73089,9 +73093,8 @@ var ChatDiv = function (_Component) {
         return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__Chat__["a" /* default */], {
           key: 'streamChatComp-' + stream.name,
           name: stream.name,
-          onChatLoad: _this3.handleChatLoad,
-          streamChatRef: _this3.streamChatRef,
-          streamHeadersRef: _this3.streamHeadersRef,
+          streamChatHeight: _this3.streamChatRef.offsetHeight,
+          streamHeadersHeight: _this3.state.streamHeadersHeight,
           active: _this3.state.active
         });
       });
@@ -73147,7 +73150,10 @@ var ChatDiv = function (_Component) {
           'div',
           {
             id: 'chatBody',
-            style: __WEBPACK_IMPORTED_MODULE_3__styles_ChatDivS__["a" /* styles */].chatBody
+            style: __WEBPACK_IMPORTED_MODULE_3__styles_ChatDivS__["a" /* styles */].chatBody,
+            ref: function ref(s) {
+              return _this4.streamBodyRef = s;
+            }
           },
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             'div',
@@ -73199,10 +73205,10 @@ var styles = {
     right: -400,
     flexWrap: 'wrap',
     height: 'calc(100% - 60px)',
+    maxHeight: 'calc(100% - 60px)',
     backgroundColor: __WEBPACK_IMPORTED_MODULE_0__variables__["a" /* colors */].nav,
     width: 400,
-    overflowY: 'scroll',
-    overflowX: 'hidden',
+    overflowY: 'hidden',
     zIndex: 2
   },
   chatHeader: {
@@ -73233,12 +73239,13 @@ var styles = {
   },
   chatBody: {
     height: 'calc(100% - 70px)',
+    maxHeight: 'calc(100% - 70px)',
     width: '100%'
   },
   streamHeaders: {
     width: 400,
     backgroundColor: __WEBPACK_IMPORTED_MODULE_0__variables__["a" /* colors */].orange,
-    padding: 5,
+    padding: '5px 5px 0 5px',
     display: 'flex',
     justifyContent: 'start',
     flexWrap: 'wrap'
@@ -73300,9 +73307,12 @@ var Chat = function (_Component) {
   function Chat(props) {
     _classCallCheck(this, Chat);
 
+    // this.chatLoad = this.chatLoad.bind(this);
+    // this.headersExpand = this.headersExpand.bind(this);
     var _this = _possibleConstructorReturn(this, (Chat.__proto__ || Object.getPrototypeOf(Chat)).call(this, props));
 
-    _this.chatLoad = _this.chatLoad.bind(_this);
+    _this.chatResize = _this.chatResize.bind(_this);
+
     _this.node = null;
     _this.animation = null;
     return _this;
@@ -73323,28 +73333,42 @@ var Chat = function (_Component) {
     }
   }, {
     key: 'componentDidUpdate',
-    value: function componentDidUpdate() {
-      this.chatLoad();
-      console.log('chat did update');
-      console.log('active', this.props.active);
-      console.log('this name:', this.props.name);
-    }
-  }, {
-    key: 'chatLoad',
-    value: function chatLoad() {
-      var _this2 = this;
+    value: function componentDidUpdate(prev) {
+      // const case1 = (prev.streamChatHeight !== this.props.streamChatHeight);
+      var case2 = prev.streamHeadersHeight !== this.props.streamHeadersHeight;
+      // const case3 = (prev.name !== this.props.name);
 
+      if (case2) {
+        console.log('props received for', this.props.name, 'streamHeadersHeight:', this.props.streamHeadersHeight);
+
+        this.chatResize();
+      }
+    }
+    // chatLoad() {
+    //   const chat = this.node;
+    //   chat.addEventListener('load', () => {
+    //     this.chatResize();
+    //   });
+    // }
+    // headersExpand() {
+    //   const streamHeaders = this.props.streamHeaders;
+    //   streamHeaders.addEventListener('resize', () => {
+    //     this.chatResize();
+    //   });
+    // }
+
+  }, {
+    key: 'chatResize',
+    value: function chatResize() {
       var chat = this.node;
-      console.log(this.props);
-      chat.addEventListener('load', function () {
-        _this2.props.onChatLoad(chat, _this2.props.streamChatRef, _this2.props.streamHeadersRef);
-        _this2.animation.play();
-      });
+      var height = this.props.streamChatHeight;
+
+      chat.style.height = height + 'px';
     }
   }, {
     key: 'render',
     value: function render() {
-      var _this3 = this;
+      var _this2 = this;
 
       var styles = {
         active: {
@@ -73357,12 +73381,13 @@ var Chat = function (_Component) {
       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('iframe', {
         key: 'chat-' + this.props.name,
         ref: function ref(node) {
-          return _this3.node = node;
+          return _this2.node = node;
         },
         style: this.props.active === this.props.name ? styles.active : styles.normal,
         className: 'streamChat',
         frameBorder: '0',
         scrolling: 'yes',
+        height: '539',
         width: '400',
         id: 'chat-' + this.props.name,
         src: 'https://www.twitch.tv/embed/' + this.props.name + '/chat'

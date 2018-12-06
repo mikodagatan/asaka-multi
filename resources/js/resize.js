@@ -1,6 +1,6 @@
-window.onload = () => {
-  resizeChat();
-};
+// window.onload = () => {
+//   resizeChat();
+// };
 window.onresize = () => {
   resizeChat();
 };

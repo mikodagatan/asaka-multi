@@ -11,15 +11,17 @@ export default class ChatDiv extends Component {
     super(props);
 
     this.state = {
-      active: null
+      active: null,
+      streamHeadersHeight: null,
     };
 
     this.handleClose = this.handleClose.bind(this);
     this.streamHeaders = this.streamHeaders.bind(this);
-    this.handleChatLoad = this.handleChatLoad.bind(this);
     this.streamChat = this.streamChat.bind(this);
     this.setActive = this.setActive.bind(this);
+    this.handleStreamHeaderResize = this.handleStreamHeaderResize.bind(this);
 
+    this.streamBodyRef = null;
     this.streamChatRef = null;
     this.streamHeadersRef = null;
     this.streamButton = [];
@@ -61,16 +63,21 @@ export default class ChatDiv extends Component {
       });
   }
 
-  componentDidUpdate() {
+  componentDidUpdate(prevProps, prevState) {
     if (this.state.active === null) {
       this.setState({
         active: this.props.streams[0].name
       });
     }
-    if (this.props.chat) {
-      this.animation.play();
-    } else {
-      this.animation.reverse();
+
+    const streamHeadersHeight = this
+      .streamHeadersRef
+      .offsetHeight;
+    if (prevState.streamHeadersHeight !== streamHeadersHeight) {
+      this.handleStreamHeaderResize();
+      this.setState({
+        streamHeadersHeight
+      });
     }
   }
 
@@ -95,13 +102,12 @@ export default class ChatDiv extends Component {
     this.props.closeChat();
   }
 
-  handleChatLoad(target, streamChatRef, streamHeadersRef) {
-    console.log(streamChatRef);
-    console.log(streamHeadersRef);
-    const height = streamChatRef.offsetHeight;
-    const headerHeight = streamHeadersRef.offsetHeight;
-    const totalHeight = height - headerHeight;
-    target.style.height = `${totalHeight}px`;
+  handleStreamHeaderResize() {
+    const streamHeaders = this.streamHeadersRef;
+    const streamChat = this.streamChatRef;
+    const streamBody = this.streamBodyRef;
+    const height = streamBody.offsetHeight - streamHeaders.offsetHeight;
+    streamChat.style.height = `${height}px`;
   }
 
   streamHeaders() {
@@ -127,9 +133,8 @@ export default class ChatDiv extends Component {
         <Chat
           key={`streamChatComp-${stream.name}`}
           name={stream.name}
-          onChatLoad={this.handleChatLoad}
-          streamChatRef={this.streamChatRef}
-          streamHeadersRef={this.streamHeadersRef}
+          streamChatHeight={this.streamChatRef.offsetHeight}
+          streamHeadersHeight={this.state.streamHeadersHeight}
           active={this.state.active}
         />
       ))
@@ -165,6 +170,7 @@ export default class ChatDiv extends Component {
         <div
           id='chatBody'
           style={styles.chatBody}
+          ref={s => this.streamBodyRef = s}
         >
           <div
             id='streamHeaders'

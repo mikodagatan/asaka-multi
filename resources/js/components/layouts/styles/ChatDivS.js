@@ -9,10 +9,10 @@ export const styles = {
     right: -400,
     flexWrap: 'wrap',
     height: 'calc(100% - 60px)',
+    maxHeight: 'calc(100% - 60px)',
     backgroundColor: colors.nav,
     width: 400,
-    overflowY: 'scroll',
-    overflowX: 'hidden',
+    overflowY: 'hidden',
     zIndex: 2,
   },
   chatHeader: {
@@ -43,12 +43,13 @@ export const styles = {
   },
   chatBody: {
     height: 'calc(100% - 70px)',
+    maxHeight: 'calc(100% - 70px)',
     width: '100%',
   },
   streamHeaders: {
     width: 400,
     backgroundColor: colors.orange,
-    padding: 5,
+    padding: '5px 5px 0 5px',
     display: 'flex',
     justifyContent: 'start',
     flexWrap: 'wrap',

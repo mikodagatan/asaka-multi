@@ -5,7 +5,10 @@ export default class Chat extends Component {
   constructor(props) {
     super(props);
 
-    this.chatLoad = this.chatLoad.bind(this);
+    // this.chatLoad = this.chatLoad.bind(this);
+    // this.headersExpand = this.headersExpand.bind(this);
+    this.chatResize = this.chatResize.bind(this);
+
     this.node = null;
     this.animation = null;
   }
@@ -20,19 +23,36 @@ export default class Chat extends Component {
       //   visibility: 0,
       // });
   }
-  componentDidUpdate() {
-    this.chatLoad();
-    console.log('chat did update');
-    console.log('active', this.props.active);
-    console.log('this name:', this.props.name);
+  componentDidUpdate(prev) {
+    // const case1 = (prev.streamChatHeight !== this.props.streamChatHeight);
+    const case2 = (prev.streamHeadersHeight !== this.props.streamHeadersHeight);
+    // const case3 = (prev.name !== this.props.name);
+
+    if (case2) {
+      console.log('props received for', this.props.name,
+      'streamHeadersHeight:',
+      this.props.streamHeadersHeight);
+
+      this.chatResize();
+    }
   }
-  chatLoad() {
+  // chatLoad() {
+  //   const chat = this.node;
+  //   chat.addEventListener('load', () => {
+  //     this.chatResize();
+  //   });
+  // }
+  // headersExpand() {
+  //   const streamHeaders = this.props.streamHeaders;
+  //   streamHeaders.addEventListener('resize', () => {
+  //     this.chatResize();
+  //   });
+  // }
+  chatResize() {
     const chat = this.node;
-    console.log(this.props);
-    chat.addEventListener('load', () => {
-      this.props.onChatLoad(chat, this.props.streamChatRef, this.props.streamHeadersRef);
-      this.animation.play();
-    });
+    const height = this.props.streamChatHeight;
+
+    chat.style.height = `${height}px`;
   }
   render() {
     const styles = {
@@ -51,6 +71,7 @@ export default class Chat extends Component {
         className='streamChat'
         frameBorder="0"
         scrolling="yes"
+        height='539'
         width='400'
         id={`chat-${this.props.name}`}
         src={`https://www.twitch.tv/embed/${this.props.name}/chat`}
