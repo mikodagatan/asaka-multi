@@ -35,16 +35,20 @@ button:focus {
   display: flex;
   flex-wrap: wrap;
   padding: 10px;
+  align-content: flex-start;
+  align-items: flex-start;
   justify-content: center;
 
   .streamChannel {
-    margin: 0 0 -1px 5px;
+    margin: 0 0 5px 5px;
+    overflow-x: hidden;
+    display: flex;
   }
 
   @media(max-width: 768px) {
     margin: 0 0 25px;
     .streamChannel {
-      margin: 0 0 -1px 0;
+      margin: 0 0 5px 0;
     }
   }
 

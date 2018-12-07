@@ -8,11 +8,8 @@ export default class Stream extends Component {
       rendered: false
     };
 
-    this.aniTarget = null;
-    this.enterAnimation = null;
     this.renderStream = this.renderStream.bind(this);
     this.streamUpdate = this.streamUpdate.bind(this);
-    // this.setAnimation = this.setAnimation.bind(this);
   }
 
   componentDidMount() {
@@ -31,15 +28,7 @@ export default class Stream extends Component {
     this.streamUpdate(prevProps, prevState);
   }
 
-  // setAnimation(target) {
-  //   this.enterAnimation = this.enterAnimation
-  //     .from(target, 2, {
-  //       visibility: 0,
-  //       y: 30
-  //     });
-  // }
-
-  streamUpdate(prevProps, prevState) {
+  streamUpdate() {
     const case1 = (this.state.rendered === false);
     if (case1) {
       this.renderStream();
@@ -64,18 +53,11 @@ export default class Stream extends Component {
       this.setState({
         rendered: true
       });
-      // this.aniTarget = player;
-      // this.setAnimation(this.aniTarget);
-      // const case1 = this.aniTarget !== null;
-      // player.addEventListener(window.Twitch.Player.VIDEO_READY, function () {
-      //   this.enterAnimation.play();
-      // });
     }
   }
   render() {
     return (
       <div
-        // ref={div => this.aniTarget = div}
         key={this.props.targetID}
         id={this.props.targetID}
         className="streamChannel"

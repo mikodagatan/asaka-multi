@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ManageForm from './ManageForm';
 import MultiStream from './MultiStream';
 import ChatDiv from './ChatDiv';
-import { TimelineLite } from 'gsap'
+import { TimelineLite } from 'gsap';
 
 
 export default class Multi extends Component {
@@ -23,6 +23,7 @@ export default class Multi extends Component {
     this.setUrlByForm = this.setUrlByForm.bind(this);
     this.initAnimation = this.initAnimation.bind(this);
     this.playAnimation = this.playAnimation.bind(this);
+    this.changeAnimation = this.changeAnimation.bind(this);
 
     this.renderMultiStream = this.renderMultiStream.bind(this);
 
@@ -34,8 +35,10 @@ export default class Multi extends Component {
     this.setStreamsByUrl();
     this.initAnimation();
   }
+
   componentDidUpdate() {
     this.setUrlByForm();
+    // window.addEventListener('resize', this.changeAnimation());
     this.playAnimation();
   }
 
@@ -48,7 +51,7 @@ export default class Multi extends Component {
 
     url = `/${url}`;
 
-    window.history.pushState('nothing', 'Title', url);
+    window.history.replaceState('nothing', 'Title', url);
   }
 
   setStreamsByUrl() {
@@ -78,6 +81,18 @@ export default class Multi extends Component {
         width,
         ease: Power2.easeOut
       });
+  }
+
+  changeAnimation() {
+    const width = window.innerWidth - 400;
+    this.moveAnimation = this.moveAnimation
+      .clear()
+      .to(this.multiTarget, 0.5, {
+        x: 0,
+        width,
+        ease: Power2.easeOut
+      });
+    console.log(this.moveAnimation);
   }
 
   playAnimation() {
@@ -145,7 +160,7 @@ export default class Multi extends Component {
       multi: {
         width: '100%',
         height: '100%',
-        position: 'fixed',
+        // position: 'fixed',
         top: 30,
       }
     };

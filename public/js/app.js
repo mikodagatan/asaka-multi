@@ -45910,25 +45910,25 @@ module.exports = function spread(callback) {
 // window.onload = () => {
 //   resizeChat();
 // };
-window.onresize = function () {
-  resizeChat();
-};
-
-function resizeChat() {
-  console.log('resize.js');
-  var chatHeight = document.getElementById('streamChat').offsetHeight;
-  var headerHeight = document.getElementById('streamHeaders').offsetHeight;
-  var totalHeight = chatHeight - headerHeight;
-  var chatColl = document.getElementsByClassName('streamChat');
-
-  console.log('chatBody height:', totalHeight);
-  console.log('collection:', chatColl);
-
-  for (var i = 0, j = chatColl.length; i < j; i++) {
-    console.log('element ' + (i + 1) + ': ' + chatColl[i]);
-    chatColl[i].style.height = totalHeight + 'px';
-  }
-}
+// window.onresize = () => {
+//   resizeChat();
+// };
+//
+// function resizeChat() {
+//   console.log('resize.js');
+//   const chatHeight = document.getElementById('streamChat').offsetHeight;
+//   const headerHeight = document.getElementById('streamHeaders').offsetHeight;
+//   const totalHeight = chatHeight - headerHeight;
+//   const chatColl = document.getElementsByClassName('streamChat');
+//
+//   console.log('chatBody height:', totalHeight);
+//   console.log('collection:', chatColl);
+//
+//   for (let i = 0, j = chatColl.length; i < j; i++) {
+//     console.log(`element ${i + 1}: ${chatColl[i]}`);
+//     chatColl[i].style.height = `${totalHeight}px`;
+//   }
+// }
 
 // function resizeAll() {
 //   const streamChat = document.getElementById('streamChat');
@@ -72167,6 +72167,7 @@ var Multi = function (_Component) {
     _this.setUrlByForm = _this.setUrlByForm.bind(_this);
     _this.initAnimation = _this.initAnimation.bind(_this);
     _this.playAnimation = _this.playAnimation.bind(_this);
+    _this.changeAnimation = _this.changeAnimation.bind(_this);
 
     _this.renderMultiStream = _this.renderMultiStream.bind(_this);
 
@@ -72185,6 +72186,7 @@ var Multi = function (_Component) {
     key: 'componentDidUpdate',
     value: function componentDidUpdate() {
       this.setUrlByForm();
+      // window.addEventListener('resize', this.changeAnimation());
       this.playAnimation();
     }
   }, {
@@ -72200,7 +72202,7 @@ var Multi = function (_Component) {
 
       url = '/' + url;
 
-      window.history.pushState('nothing', 'Title', url);
+      window.history.replaceState('nothing', 'Title', url);
     }
   }, {
     key: 'setStreamsByUrl',
@@ -72231,6 +72233,17 @@ var Multi = function (_Component) {
         width: width,
         ease: Power2.easeOut
       });
+    }
+  }, {
+    key: 'changeAnimation',
+    value: function changeAnimation() {
+      var width = window.innerWidth - 400;
+      this.moveAnimation = this.moveAnimation.clear().to(this.multiTarget, 0.5, {
+        x: 0,
+        width: width,
+        ease: Power2.easeOut
+      });
+      console.log(this.moveAnimation);
     }
   }, {
     key: 'playAnimation',
@@ -72312,7 +72325,7 @@ var Multi = function (_Component) {
         multi: {
           width: '100%',
           height: '100%',
-          position: 'fixed',
+          // position: 'fixed',
           top: 30
         }
       };
@@ -72827,11 +72840,8 @@ var Stream = function (_Component) {
       rendered: false
     };
 
-    _this.aniTarget = null;
-    _this.enterAnimation = null;
     _this.renderStream = _this.renderStream.bind(_this);
     _this.streamUpdate = _this.streamUpdate.bind(_this);
-    // this.setAnimation = this.setAnimation.bind(this);
     return _this;
   }
 
@@ -72854,18 +72864,9 @@ var Stream = function (_Component) {
     value: function componentDidUpdate(prevProps, prevState) {
       this.streamUpdate(prevProps, prevState);
     }
-
-    // setAnimation(target) {
-    //   this.enterAnimation = this.enterAnimation
-    //     .from(target, 2, {
-    //       visibility: 0,
-    //       y: 30
-    //     });
-    // }
-
   }, {
     key: 'streamUpdate',
-    value: function streamUpdate(prevProps, prevState) {
+    value: function streamUpdate() {
       var case1 = this.state.rendered === false;
       if (case1) {
         this.renderStream();
@@ -72890,19 +72891,12 @@ var Stream = function (_Component) {
         this.setState({
           rendered: true
         });
-        // this.aniTarget = player;
-        // this.setAnimation(this.aniTarget);
-        // const case1 = this.aniTarget !== null;
-        // player.addEventListener(window.Twitch.Player.VIDEO_READY, function () {
-        //   this.enterAnimation.play();
-        // });
       }
     }
   }, {
     key: 'render',
     value: function render() {
       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', {
-        // ref={div => this.aniTarget = div}
         key: this.props.targetID,
         id: this.props.targetID,
         className: 'streamChannel'
@@ -72959,14 +72953,14 @@ var ChatDiv = function (_Component) {
 
     _this.state = {
       active: null,
-      streamHeadersHeight: null
+      streamHeadersHeight: null,
+      windowHeight: null
     };
 
     _this.handleClose = _this.handleClose.bind(_this);
     _this.streamHeaders = _this.streamHeaders.bind(_this);
     _this.streamChat = _this.streamChat.bind(_this);
     _this.setActive = _this.setActive.bind(_this);
-    _this.handleStreamHeaderResize = _this.handleStreamHeaderResize.bind(_this);
 
     _this.streamBodyRef = null;
     _this.streamChatRef = null;
@@ -73009,18 +73003,10 @@ var ChatDiv = function (_Component) {
     }
   }, {
     key: 'componentDidUpdate',
-    value: function componentDidUpdate(prevProps, prevState) {
+    value: function componentDidUpdate(prevProps) {
       if (this.state.active === null) {
         this.setState({
           active: this.props.streams[0].name
-        });
-      }
-
-      var streamHeadersHeight = this.streamHeadersRef.offsetHeight;
-      if (prevState.streamHeadersHeight !== streamHeadersHeight) {
-        this.handleStreamHeaderResize();
-        this.setState({
-          streamHeadersHeight: streamHeadersHeight
         });
       }
     }
@@ -73048,15 +73034,6 @@ var ChatDiv = function (_Component) {
     key: 'handleClose',
     value: function handleClose() {
       this.props.closeChat();
-    }
-  }, {
-    key: 'handleStreamHeaderResize',
-    value: function handleStreamHeaderResize() {
-      var streamHeaders = this.streamHeadersRef;
-      var streamChat = this.streamChatRef;
-      var streamBody = this.streamBodyRef;
-      var height = streamBody.offsetHeight - streamHeaders.offsetHeight;
-      streamChat.style.height = height + 'px';
     }
   }, {
     key: 'streamHeaders',
@@ -73125,7 +73102,7 @@ var ChatDiv = function (_Component) {
               id: 'chatLabel',
               style: __WEBPACK_IMPORTED_MODULE_3__styles_ChatDivS__["a" /* styles */].chatLabel
             },
-            '' + this.state.active
+            this.state.active ? this.state.active : 'Stream Chat'
           ),
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             'div',
@@ -73204,8 +73181,7 @@ var styles = {
     top: 0,
     right: -400,
     flexWrap: 'wrap',
-    height: 'calc(100% - 60px)',
-    maxHeight: 'calc(100% - 60px)',
+    height: '100%',
     backgroundColor: __WEBPACK_IMPORTED_MODULE_0__variables__["a" /* colors */].nav,
     width: 400,
     overflowY: 'hidden',
@@ -73277,8 +73253,10 @@ var styles = {
     overflowX: 'hidden'
   },
   streamChat: {
-    height: '100%',
-    width: 400
+    height: 'calc(100% - 31px)',
+    maxHeight: 'calc(100% - 31px)',
+    width: 400,
+    right: 0
   }
 };
 
@@ -73322,48 +73300,20 @@ var Chat = function (_Component) {
     key: 'componentDidMount',
     value: function componentDidMount() {
       this.animation = new __WEBPACK_IMPORTED_MODULE_1_gsap__["a" /* TimelineLite */]({ paused: true });
-      // .to(this.node, 0, {
-      //   display: 'block',
-      // });
-      // .from(this.node, 0.3, {})
-      // .from(this.node, 0.3, {
-      //   x: 400,
-      //   visibility: 0,
-      // });
     }
   }, {
     key: 'componentDidUpdate',
-    value: function componentDidUpdate(prev) {
-      // const case1 = (prev.streamChatHeight !== this.props.streamChatHeight);
-      var case2 = prev.streamHeadersHeight !== this.props.streamHeadersHeight;
-      // const case3 = (prev.name !== this.props.name);
-
-      if (case2) {
-        console.log('props received for', this.props.name, 'streamHeadersHeight:', this.props.streamHeadersHeight);
-
-        this.chatResize();
-      }
+    value: function componentDidUpdate() {
+      // this.chatResize();
     }
-    // chatLoad() {
-    //   const chat = this.node;
-    //   chat.addEventListener('load', () => {
-    //     this.chatResize();
-    //   });
-    // }
-    // headersExpand() {
-    //   const streamHeaders = this.props.streamHeaders;
-    //   streamHeaders.addEventListener('resize', () => {
-    //     this.chatResize();
-    //   });
-    // }
-
   }, {
     key: 'chatResize',
     value: function chatResize() {
       var chat = this.node;
-      var height = this.props.streamChatHeight;
+      // const height = this.props.streamChatHeight;
+      // console.log('chat: chatResize');
 
-      chat.style.height = height + 'px';
+      chat.style.height = '100%';
     }
   }, {
     key: 'render',
@@ -73372,10 +73322,12 @@ var Chat = function (_Component) {
 
       var styles = {
         active: {
-          display: 'block'
+          display: 'block',
+          height: '100%'
         },
         normal: {
-          display: 'none'
+          display: 'none',
+          height: '100%'
         }
       };
       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('iframe', {

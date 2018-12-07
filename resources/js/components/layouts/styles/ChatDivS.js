@@ -8,8 +8,7 @@ export const styles = {
     top: 0,
     right: -400,
     flexWrap: 'wrap',
-    height: 'calc(100% - 60px)',
-    maxHeight: 'calc(100% - 60px)',
+    height: '100%',
     backgroundColor: colors.nav,
     width: 400,
     overflowY: 'hidden',
@@ -81,7 +80,9 @@ export const styles = {
     overflowX: 'hidden',
   },
   streamChat: {
-    height: '100%',
+    height: 'calc(100% - 31px)',
+    maxHeight: 'calc(100% - 31px)',
     width: 400,
+    right: 0,
   }
 };

@@ -13,13 +13,13 @@ export default class ChatDiv extends Component {
     this.state = {
       active: null,
       streamHeadersHeight: null,
+      windowHeight: null,
     };
 
     this.handleClose = this.handleClose.bind(this);
     this.streamHeaders = this.streamHeaders.bind(this);
     this.streamChat = this.streamChat.bind(this);
     this.setActive = this.setActive.bind(this);
-    this.handleStreamHeaderResize = this.handleStreamHeaderResize.bind(this);
 
     this.streamBodyRef = null;
     this.streamChatRef = null;
@@ -63,20 +63,10 @@ export default class ChatDiv extends Component {
       });
   }
 
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate(prevProps) {
     if (this.state.active === null) {
       this.setState({
         active: this.props.streams[0].name
-      });
-    }
-
-    const streamHeadersHeight = this
-      .streamHeadersRef
-      .offsetHeight;
-    if (prevState.streamHeadersHeight !== streamHeadersHeight) {
-      this.handleStreamHeaderResize();
-      this.setState({
-        streamHeadersHeight
       });
     }
   }
@@ -100,14 +90,6 @@ export default class ChatDiv extends Component {
 
   handleClose() {
     this.props.closeChat();
-  }
-
-  handleStreamHeaderResize() {
-    const streamHeaders = this.streamHeadersRef;
-    const streamChat = this.streamChatRef;
-    const streamBody = this.streamBodyRef;
-    const height = streamBody.offsetHeight - streamHeaders.offsetHeight;
-    streamChat.style.height = `${height}px`;
   }
 
   streamHeaders() {
@@ -154,7 +136,7 @@ export default class ChatDiv extends Component {
             id="chatLabel"
             style={styles.chatLabel}
           >
-            {`${this.state.active}`}
+            {(this.state.active) ? this.state.active : 'Stream Chat'}
           </div>
           <div
             ref={close => this.closeTarget.close = close}

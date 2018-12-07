@@ -14,53 +14,27 @@ export default class Chat extends Component {
   }
   componentDidMount() {
     this.animation = new TimelineLite({ paused: true });
-      // .to(this.node, 0, {
-      //   display: 'block',
-      // });
-      // .from(this.node, 0.3, {})
-      // .from(this.node, 0.3, {
-      //   x: 400,
-      //   visibility: 0,
-      // });
   }
-  componentDidUpdate(prev) {
-    // const case1 = (prev.streamChatHeight !== this.props.streamChatHeight);
-    const case2 = (prev.streamHeadersHeight !== this.props.streamHeadersHeight);
-    // const case3 = (prev.name !== this.props.name);
-
-    if (case2) {
-      console.log('props received for', this.props.name,
-      'streamHeadersHeight:',
-      this.props.streamHeadersHeight);
-
-      this.chatResize();
-    }
+  componentDidUpdate() {
+    // this.chatResize();
   }
-  // chatLoad() {
-  //   const chat = this.node;
-  //   chat.addEventListener('load', () => {
-  //     this.chatResize();
-  //   });
-  // }
-  // headersExpand() {
-  //   const streamHeaders = this.props.streamHeaders;
-  //   streamHeaders.addEventListener('resize', () => {
-  //     this.chatResize();
-  //   });
-  // }
+
   chatResize() {
     const chat = this.node;
-    const height = this.props.streamChatHeight;
+    // const height = this.props.streamChatHeight;
+    // console.log('chat: chatResize');
 
-    chat.style.height = `${height}px`;
+    chat.style.height = '100%';
   }
   render() {
     const styles = {
       active: {
         display: 'block',
+        height: '100%'
       },
       normal: {
         display: 'none',
+        height: '100%'
       }
     };
     return (

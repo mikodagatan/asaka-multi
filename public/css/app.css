@@ -10513,13 +10513,22 @@ button:focus {
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
   padding: 10px;
+  -ms-flex-line-pack: start;
+      align-content: flex-start;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
 }
 
 .multiStream .streamChannel {
-  margin: 0 0 -1px 5px;
+  margin: 0 0 5px 5px;
+  overflow-x: hidden;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
 }
 
 @media (max-width: 768px) {
@@ -10528,7 +10537,7 @@ button:focus {
   }
 
   .multiStream .streamChannel {
-    margin: 0 0 -1px 0;
+    margin: 0 0 5px 0;
   }
 }
 
