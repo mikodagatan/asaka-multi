@@ -10486,6 +10486,11 @@ body #app #app-container #App {
   width: 100%;
 }
 
+.break {
+  display: block;
+  margin: 10px 0;
+}
+
 .form-group {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -10512,7 +10517,7 @@ button:focus {
   display: flex;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
-  padding: 10px;
+  padding: 5px;
   -ms-flex-line-pack: start;
       align-content: flex-start;
   -webkit-box-align: start;

@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
+import { TimelineMax } from 'gsap';
+
 import ManageForm from './ManageForm';
 import MultiStream from './MultiStream';
 import ChatDiv from './ChatDiv';
-import { TimelineLite } from 'gsap';
 
 
 export default class Multi extends Component {
@@ -24,22 +25,27 @@ export default class Multi extends Component {
     this.initAnimation = this.initAnimation.bind(this);
     this.playAnimation = this.playAnimation.bind(this);
     this.changeAnimation = this.changeAnimation.bind(this);
+    this.initPageAnimation = this.initPageAnimation.bind(this);
+    this.playPageAnimation = this.playPageAnimation.bind(this);
 
     this.renderMultiStream = this.renderMultiStream.bind(this);
 
     this.multiTarget = null;
     this.moveAnimation = null;
+    this.pageAnimation = null;
   }
 
   componentDidMount() {
     this.setStreamsByUrl();
     this.initAnimation();
+    this.initPageAnimation();
   }
 
   componentDidUpdate() {
     this.setUrlByForm();
     window.addEventListener('resize', this.changeAnimation);
     this.playAnimation();
+    this.playPageAnimation();
   }
 
   setUrlByForm() {
@@ -82,10 +88,21 @@ export default class Multi extends Component {
       width = window.innerWidth - 375;
     }
 
-    this.moveAnimation = new TimelineLite({ paused: true })
+    this.moveAnimation = new TimelineMax({ paused: true })
       .to(this.multiTarget, 0.5, {
         x: 0,
         width,
+        ease: Power4.easeOut
+      });
+  }
+
+  initPageAnimation() {
+    this.pageAnimation = new TimelineMax({ paused: true })
+      .to(this.multiTarget, 0.3, {
+        x: 0,
+        width: 0,
+        height: 0,
+        overflow: 'hidden',
         ease: Power4.easeOut
       });
   }
@@ -99,6 +116,7 @@ export default class Multi extends Component {
     } else {
       width = window.innerWidth - 375;
     }
+
     // important if window is resized at animation.play
     this.multiTarget.style.width = '100%';
     this.moveAnimation = this.moveAnimation
@@ -107,7 +125,8 @@ export default class Multi extends Component {
         x: 0,
         width,
         ease: Power4.easeOut
-      });
+      })
+      .pause(0);
   }
 
   playAnimation() {
@@ -115,6 +134,16 @@ export default class Multi extends Component {
       this.moveAnimation.play();
     } else {
       this.moveAnimation.reverse();
+    }
+  }
+
+  playPageAnimation() {
+    console.log('play page animation');
+    if (this.props.multi === false) {
+      this.moveAnimation.pause(0);
+      this.pageAnimation.play();
+    } else {
+      this.pageAnimation.reverse();
     }
   }
 

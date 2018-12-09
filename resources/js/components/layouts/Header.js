@@ -15,16 +15,10 @@ export default class Header extends Component {
     this.handleManageClick = this.handleManageClick.bind(this);
     this.handleChatClick = this.handleChatClick.bind(this);
     this.target = [];
-    this.animation = new TimelineMax({ paused: true });
     this.multiAnimation = null;
   }
 
   componentDidMount() {
-    this.animation = this.animation.from(this.target[0], 1, {
-      x: 200,
-      ease: Bounce.easeOut
-    }).play();
-
     this.multiAnimation = new TimelineMax({ paused: true })
       .to(this.target[0], 0.3, {
         backgroundColor: colors.orange,
@@ -79,6 +73,7 @@ export default class Header extends Component {
         alignItems: 'center',
         overflowY: 'hidden',
         zIndex: 9,
+        boxShadow: '0 0 5px 0 rgba(0,0,0,0.15)'
       },
       brand: {
         display: 'inline-block',

@@ -14,12 +14,17 @@ export default class Main extends Component {
     }
   }
   render() {
+    let padding;
+    if (this.props.multi) {
+      padding = 30;
+    } else {
+      padding = 0;
+    }
     const styles = {
       main: {
         height: '100%',
-        paddingTop: 30,
-        paddingBottom: 30,
-        overflowY: 'hidden',
+        paddingTop: padding,
+        paddingBottom: padding
       }
     };
     return (

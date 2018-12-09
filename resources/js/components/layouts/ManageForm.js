@@ -100,12 +100,16 @@ export default class ManageForm extends Component {
     if (rule1 && rule2 && rule3) {
       addChannel = this.props.addChannel;
     }
+
     this.props.storeInput(index, target, addChannel);
   }
 
   handleRemoveStream(name, e) {
     e.preventDefault();
-    this.props.removeStream(name);
+    const length = this.props.streams.length;
+    if (length > 1) {
+      this.props.removeStream(name);
+    }
   }
 
   handleKeyPress(e) {
@@ -129,6 +133,19 @@ export default class ManageForm extends Component {
     if (target.getAttribute('data-clicked') === false) {
       target.setAttribute('data-clicked', 'true');
     }
+  }
+  watchButton() {
+    return (
+      <button
+        id='watch'
+        style={styles.submit}
+        onClick={this.handleWatch}
+        data-clicked='false'
+        className="btn-primary"
+      >
+        Watch
+      </button>
+    );
   }
 
   renderStreamFields() {
@@ -178,19 +195,7 @@ export default class ManageForm extends Component {
       ))
     );
   }
-  watchButton() {
-    return (
-      <button
-        id='watch'
-        style={styles.submit}
-        onClick={this.handleWatch}
-        data-clicked='false'
-        className="btn-primary"
-      >
-        Watch
-      </button>
-    );
-  }
+
 
   render() {
     return (

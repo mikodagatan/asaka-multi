@@ -9,7 +9,8 @@
  // require('./player.js');
  // require('./chat-modal.js');
  // require('./chat.js');
- require('./resize.js');
+ // require('./resize.js');
+ require('./onePage');
 
 /**
  * Next, we will create a fresh React component instance and attach it to
@@ -21,11 +22,11 @@ import { Router, Route, Switch } from 'react-router';
 
 require('./components/App');
 
-$(window).on('load', function() {
-  $('a').not('.asaka-link').on('click', (e) => {
-    e.preventDefault();
-  });
-  $('form').not('.asaka-link').on('submit', (e) => {
-    e.preventDefault();
-  });
-});
+// $(window).on('load', function() {
+//   $('a').not('.asaka-link').on('click', (e) => {
+//     e.preventDefault();
+//   });
+//   $('form').not('.asaka-link').on('submit', (e) => {
+//     e.preventDefault();
+//   });
+// });

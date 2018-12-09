@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
 import { TimelineLite } from 'gsap';
+import ReactPageScroller from 'react-page-scroller';
 
 import { colors } from './variables';
+
+import FrontSplash from './FrontSplash';
+import FrontHow from './FrontHow';
 
 export default class Front extends Component {
   constructor(props) {
@@ -14,30 +18,42 @@ export default class Front extends Component {
     const width = window.innerWidth;
 
     this.animation = new TimelineLite({ pause: true })
+      .from(this.div, 0.5, {})
       .from(this.div, 0.5, {
         x: -width,
-      })
+        ease: Power3.easeOut,
+      });
+    this.animation.play();
   }
 
-  componentWillUnmount
+  componentWillUnmount() {
+    this.animation.reverse();
+  }
 
+  goToPage = (pageNumber) => {
+    this.reactPageScroller.goToPage(pageNumber);
+  }
   render() {
-
     const styles = {
       front: {
         height: '100%',
         width: '100%',
         backgroundColor: colors.orange,
         color: 'white',
-        fontSize: 50,
-      }
+      },
     };
     return (
       <div
         style={styles.front}
+        id='front'
         ref={div => this.div = div}
       >
-        POTANGINA
+        <ReactPageScroller
+          ref={c => this.reactPageScroller = c}
+        >
+          <FrontSplash />
+          <FrontHow />
+        </ReactPageScroller>
       </div>
     );
   }
