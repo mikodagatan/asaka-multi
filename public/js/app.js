@@ -85296,7 +85296,7 @@ var FrontUpdates = function (_Component) {
           {
             style: styles.header
           },
-          'FEATURE PLANS'
+          'FEATURE PLAN'
         ),
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
           'div',

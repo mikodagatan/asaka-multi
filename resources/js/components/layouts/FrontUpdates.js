@@ -44,7 +44,7 @@ export default class FrontUpdates extends Component {
         <div
           style={styles.header}
         >
-          FEATURE PLANS
+          FEATURE PLAN
         </div>
         <div
           style={styles.body}
