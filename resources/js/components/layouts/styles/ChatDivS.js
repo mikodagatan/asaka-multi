@@ -80,8 +80,8 @@ export const styles = {
     overflowX: 'hidden',
   },
   streamChat: {
-    height: 'calc(100% - 31px)',
-    maxHeight: 'calc(100% - 31px)',
+    height: 'calc(100% - 57px)',
+    maxHeight: 'calc(100% - 57px)',
     width: 375,
     right: 0,
   }

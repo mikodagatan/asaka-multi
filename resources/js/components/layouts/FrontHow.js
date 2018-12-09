@@ -79,7 +79,7 @@ export default class FrontHow extends Component {
         color: 'black',
         width: '100%',
         height: fullHeight,
-        padding: '110px 50px 80px 50px',
+        padding: '150px 50px 80px 50px',
         display: 'flex',
         flexWrap: 'wrap',
         fontSize: 13,
@@ -134,7 +134,7 @@ export default class FrontHow extends Component {
               <div className='break' />
               In order to continue support to our beloved streamers, we use multiple tabs with their streams. If we're supporting a few streamers, it doesn't take much of your time. But, this may grow to be more difficult since there's just so many amazing streamers out there who capture our hearts! Damnnnnnn you all for making me laugh!
               <div className='break' />
-              You may have found many multi-stream websites out there and used them. I did so too and even fell in love with one! Unfortunately, there are many rules so that your support for them does actually get counted, and it's been hard for me to keep up even with multi-stream website  adored the most.
+              You may have found many multi-stream websites out there and used them. I did so too and even fell in love with one! Unfortunately, there are many rules so that your support for them does actually get counted, and it's been hard for me to keep up even with the my favorite multi-stream website.
               <div className='break' />
               I made this so that I can make sure the views are counted while using a multi-streaming app. I made this so that I can do my responsibilities while giving support to these amazing individuals. I made this so that you can benefit from it too.
               <div className='break' />
@@ -198,8 +198,12 @@ export default class FrontHow extends Component {
                   If you need to remove streams. Just click 'Manage' and click the 'X' button to the corresponding stream!
                 </li>
                 <li>
+                  You can use your mobile phone for this website! Just a warning though, it will also get hot (twitch stuff). You may need to plug it to a charger too.
+                </li>
+                <li>
                   If you want to add a feature, feel free to message me on <a href='https://www.twitch.tv/phantasmaasaka'>Twitch!</a>
                 </li>
+
               </ul>
             </div>
           </div>

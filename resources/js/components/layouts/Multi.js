@@ -140,7 +140,7 @@ export default class Multi extends Component {
   playPageAnimation() {
     console.log('play page animation');
     if (this.props.multi === false) {
-      this.moveAnimation.pause(0);
+      // this.moveAnimation.pause(0);
       this.pageAnimation.play();
     } else {
       this.pageAnimation.reverse();
@@ -206,27 +206,28 @@ export default class Multi extends Component {
         height: '100%',
         // position: 'fixed',
         top: 30,
+        marginBottom: 30,
       }
     };
     return (
       <React.Fragment>
+        <ManageForm
+          multi={this.props.multi}
+          manage={this.props.manage}
+          closeManage={this.props.closeManage}
+          streams={this.state.streams}
+          addChannel={this.addChannelField}
+          storeInput={this.storeInput}
+          removeStream={this.removeStream}
+          start={this.state.start}
+          changeStart={this.changeStart}
+          changeLoad={this.changeLoad}
+        />
         <div
           id="multi"
           ref={multi => this.multiTarget = multi}
           style={styles.multi}
         >
-          <ManageForm
-            multi={this.props.multi}
-            manage={this.props.manage}
-            closeManage={this.props.closeManage}
-            streams={this.state.streams}
-            addChannel={this.addChannelField}
-            storeInput={this.storeInput}
-            removeStream={this.removeStream}
-            start={this.state.start}
-            changeStart={this.changeStart}
-            changeLoad={this.changeLoad}
-          />
           {this.renderMultiStream()}
         </div>
         <ChatDiv

@@ -72295,7 +72295,7 @@ var Multi = function (_Component) {
     value: function playPageAnimation() {
       console.log('play page animation');
       if (this.props.multi === false) {
-        this.moveAnimation.pause(0);
+        // this.moveAnimation.pause(0);
         this.pageAnimation.play();
       } else {
         this.pageAnimation.reverse();
@@ -72373,12 +72373,25 @@ var Multi = function (_Component) {
           width: '100%',
           height: '100%',
           // position: 'fixed',
-          top: 30
+          top: 30,
+          marginBottom: 30
         }
       };
       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.Fragment,
         null,
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__ManageForm__["a" /* default */], {
+          multi: this.props.multi,
+          manage: this.props.manage,
+          closeManage: this.props.closeManage,
+          streams: this.state.streams,
+          addChannel: this.addChannelField,
+          storeInput: this.storeInput,
+          removeStream: this.removeStream,
+          start: this.state.start,
+          changeStart: this.changeStart,
+          changeLoad: this.changeLoad
+        }),
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
           'div',
           {
@@ -72388,18 +72401,6 @@ var Multi = function (_Component) {
             },
             style: styles.multi
           },
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__ManageForm__["a" /* default */], {
-            multi: this.props.multi,
-            manage: this.props.manage,
-            closeManage: this.props.closeManage,
-            streams: this.state.streams,
-            addChannel: this.addChannelField,
-            storeInput: this.storeInput,
-            removeStream: this.removeStream,
-            start: this.state.start,
-            changeStart: this.changeStart,
-            changeLoad: this.changeLoad
-          }),
           this.renderMultiStream()
         ),
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__ChatDiv__["a" /* default */], {
@@ -72736,15 +72737,16 @@ var ManageForm = function (_Component) {
 // eslint-disable-next-line no-unused-vars
 var styles = {
   manageStyle: {
-    height: '100%',
+    height: 'calc(100% - 30px)',
     width: 300,
     backgroundColor: __WEBPACK_IMPORTED_MODULE_0__variables__["a" /* colors */].nav,
     position: 'fixed',
-    top: 0,
+    top: 30,
     left: '-500',
     overflowY: 'scroll',
     overflowX: 'hidden',
-    textAlign: 'center'
+    textAlign: 'center',
+    zIndex: 1
   },
   manageHeader: {
     display: 'flex',
@@ -73016,6 +73018,7 @@ var ChatDiv = function (_Component) {
     _this.streamHeaders = _this.streamHeaders.bind(_this);
     _this.streamChat = _this.streamChat.bind(_this);
     _this.setActive = _this.setActive.bind(_this);
+    _this.initActive = _this.initActive.bind(_this);
     _this.playAnimation = _this.playAnimation.bind(_this);
 
     _this.streamBodyRef = null;
@@ -73063,11 +73066,7 @@ var ChatDiv = function (_Component) {
   }, {
     key: 'componentDidUpdate',
     value: function componentDidUpdate() {
-      if (this.state.active === null) {
-        this.setState({
-          active: this.props.streams[0].name
-        });
-      }
+      this.initActive();
       this.playAnimation();
     }
   }, {
@@ -73077,6 +73076,25 @@ var ChatDiv = function (_Component) {
       this.setState({
         active: name
       });
+    }
+  }, {
+    key: 'initActive',
+    value: function initActive() {
+      var _this2 = this;
+
+      console.log('setActive:', this.state.active, 'toEnter:', this.props.streams[0].name);
+      var notInStreams = this.props.streams.filter(function (stream) {
+        return stream.name === _this2.state.active;
+      }).length === 0;
+      var case1 = this.state.active === null;
+      var case2 = this.state.active === '';
+      var case3 = this.props.multi === true;
+      var case4 = this.props.streams[0].name !== '';
+      if ((case1 || case2 || notInStreams) && case3 && case4) {
+        this.setState({
+          active: this.props.streams[0].name
+        });
+      }
     }
   }, {
     key: 'playAnimation',
@@ -73108,7 +73126,7 @@ var ChatDiv = function (_Component) {
   }, {
     key: 'streamHeaders',
     value: function streamHeaders() {
-      var _this2 = this;
+      var _this3 = this;
 
       var streams = this.props.streams.filter(function (stream) {
         return stream.name !== '';
@@ -73117,10 +73135,10 @@ var ChatDiv = function (_Component) {
         return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
           'div',
           {
-            style: _this2.state.active === stream.name ? __WEBPACK_IMPORTED_MODULE_3__styles_ChatDivS__["a" /* styles */].streamHeadActive : __WEBPACK_IMPORTED_MODULE_3__styles_ChatDivS__["a" /* styles */].streamHead,
+            style: _this3.state.active === stream.name ? __WEBPACK_IMPORTED_MODULE_3__styles_ChatDivS__["a" /* styles */].streamHeadActive : __WEBPACK_IMPORTED_MODULE_3__styles_ChatDivS__["a" /* styles */].streamHead,
             key: 'streamChatButton-' + stream.name,
             onClick: function onClick(e) {
-              return _this2.setActive(stream.name, e);
+              return _this3.setActive(stream.name, e);
             }
           },
           stream.name
@@ -73130,7 +73148,7 @@ var ChatDiv = function (_Component) {
   }, {
     key: 'streamChat',
     value: function streamChat() {
-      var _this3 = this;
+      var _this4 = this;
 
       var streams = this.props.streams.filter(function (stream) {
         return stream.name !== '';
@@ -73140,23 +73158,23 @@ var ChatDiv = function (_Component) {
         return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__Chat__["a" /* default */], {
           key: 'streamChatComp-' + stream.name,
           name: stream.name,
-          streamChatHeight: _this3.streamChatRef.offsetHeight,
-          streamHeadersHeight: _this3.state.streamHeadersHeight,
-          active: _this3.state.active
+          streamChatHeight: _this4.streamChatRef.offsetHeight,
+          streamHeadersHeight: _this4.state.streamHeadersHeight,
+          active: _this4.state.active
         });
       });
     }
   }, {
     key: 'render',
     value: function render() {
-      var _this4 = this;
+      var _this5 = this;
 
       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
         'div',
         {
           id: 'chatDiv',
           ref: function ref(chat) {
-            return _this4.target = chat;
+            return _this5.target = chat;
           },
           style: __WEBPACK_IMPORTED_MODULE_3__styles_ChatDivS__["a" /* styles */].ChatDiv
         },
@@ -73167,7 +73185,7 @@ var ChatDiv = function (_Component) {
             'div',
             {
               ref: function ref(label) {
-                return _this4.closeTarget.label = label;
+                return _this5.closeTarget.label = label;
               },
               id: 'chatLabel',
               style: __WEBPACK_IMPORTED_MODULE_3__styles_ChatDivS__["a" /* styles */].chatLabel
@@ -73178,16 +73196,16 @@ var ChatDiv = function (_Component) {
             'div',
             {
               ref: function ref(close) {
-                return _this4.closeTarget.close = close;
+                return _this5.closeTarget.close = close;
               },
               id: 'closeChat',
               style: __WEBPACK_IMPORTED_MODULE_3__styles_ChatDivS__["a" /* styles */].closeChat,
               onClick: this.handleClose,
               onMouseEnter: function onMouseEnter(e) {
-                return _this4.handleCloseHover(e);
+                return _this5.handleCloseHover(e);
               },
               onMouseLeave: function onMouseLeave(e) {
-                return _this4.handleCloseHoverR(e);
+                return _this5.handleCloseHoverR(e);
               }
             },
             'Close'
@@ -73199,7 +73217,7 @@ var ChatDiv = function (_Component) {
             id: 'chatBody',
             style: __WEBPACK_IMPORTED_MODULE_3__styles_ChatDivS__["a" /* styles */].chatBody,
             ref: function ref(s) {
-              return _this4.streamBodyRef = s;
+              return _this5.streamBodyRef = s;
             }
           },
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
@@ -73207,7 +73225,7 @@ var ChatDiv = function (_Component) {
             {
               id: 'streamHeaders',
               ref: function ref(s) {
-                return _this4.streamHeadersRef = s;
+                return _this5.streamHeadersRef = s;
               },
               style: __WEBPACK_IMPORTED_MODULE_3__styles_ChatDivS__["a" /* styles */].streamHeaders
             },
@@ -73218,7 +73236,7 @@ var ChatDiv = function (_Component) {
             {
               id: 'streamChat',
               ref: function ref(s) {
-                return _this4.streamChatRef = s;
+                return _this5.streamChatRef = s;
               },
               style: __WEBPACK_IMPORTED_MODULE_3__styles_ChatDivS__["a" /* styles */].streamChat
             },
@@ -73323,8 +73341,8 @@ var styles = {
     overflowX: 'hidden'
   },
   streamChat: {
-    height: 'calc(100% - 31px)',
-    maxHeight: 'calc(100% - 31px)',
+    height: 'calc(100% - 57px)',
+    maxHeight: 'calc(100% - 57px)',
     width: 375,
     right: 0
   }
@@ -83895,7 +83913,7 @@ var FrontHow = function (_Component) {
           color: 'black',
           width: '100%',
           height: fullHeight,
-          padding: '110px 50px 80px 50px',
+          padding: '150px 50px 80px 50px',
           display: 'flex',
           flexWrap: 'wrap',
           fontSize: 13
@@ -83965,7 +83983,7 @@ var FrontHow = function (_Component) {
               __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'break' }),
               'In order to continue support to our beloved streamers, we use multiple tabs with their streams. If we\'re supporting a few streamers, it doesn\'t take much of your time. But, this may grow to be more difficult since there\'s just so many amazing streamers out there who capture our hearts! Damnnnnnn you all for making me laugh!',
               __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'break' }),
-              'You may have found many multi-stream websites out there and used them. I did so too and even fell in love with one! Unfortunately, there are many rules so that your support for them does actually get counted, and it\'s been hard for me to keep up even with multi-stream website  adored the most.',
+              'You may have found many multi-stream websites out there and used them. I did so too and even fell in love with one! Unfortunately, there are many rules so that your support for them does actually get counted, and it\'s been hard for me to keep up even with the my favorite multi-stream website.',
               __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'break' }),
               'I made this so that I can make sure the views are counted while using a multi-streaming app. I made this so that I can do my responsibilities while giving support to these amazing individuals. I made this so that you can benefit from it too.',
               __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'break' }),
@@ -84068,6 +84086,11 @@ var FrontHow = function (_Component) {
                   'li',
                   null,
                   'If you need to remove streams. Just click \'Manage\' and click the \'X\' button to the corresponding stream!'
+                ),
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                  'li',
+                  null,
+                  'You can use your mobile phone for this website! Just a warning though, it will also get hot (twitch stuff). You may need to plug it to a charger too.'
                 ),
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                   'li',

@@ -20,6 +20,7 @@ export default class ChatDiv extends Component {
     this.streamHeaders = this.streamHeaders.bind(this);
     this.streamChat = this.streamChat.bind(this);
     this.setActive = this.setActive.bind(this);
+    this.initActive = this.initActive.bind(this);
     this.playAnimation = this.playAnimation.bind(this);
 
     this.streamBodyRef = null;
@@ -68,11 +69,7 @@ export default class ChatDiv extends Component {
   }
 
   componentDidUpdate() {
-    if (this.state.active === null) {
-      this.setState({
-        active: this.props.streams[0].name
-      });
-    }
+    this.initActive();
     this.playAnimation();
   }
 
@@ -81,6 +78,22 @@ export default class ChatDiv extends Component {
     this.setState({
       active: name
     });
+  }
+
+  initActive() {
+    console.log('setActive:', this.state.active, 'toEnter:', this.props.streams[0].name);
+    const notInStreams = this.props.streams
+    .filter(stream => stream.name === this.state.active)
+    .length === 0;
+    const case1 = this.state.active === null;
+    const case2 = this.state.active === '';
+    const case3 = this.props.multi === true;
+    const case4 = this.props.streams[0].name !== '';
+    if ((case1 || case2 || notInStreams) && case3 && case4) {
+      this.setState({
+        active: this.props.streams[0].name
+      });
+    }
   }
 
   playAnimation() {
