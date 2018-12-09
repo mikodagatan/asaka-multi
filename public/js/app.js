@@ -83438,17 +83438,21 @@ var FrontHow = function (_Component) {
     key: 'componentDidMount',
     value: function componentDidMount() {
       var smallScreen = window.matchMedia('(max-width: 768px)');
+      var delay = [];
       if (!smallScreen.matches) {
-        this.missionA = new __WEBPACK_IMPORTED_MODULE_1_gsap__["a" /* TimelineLite */]({ paused: true }).delay(1.5).from(this.missionT.header, 0.5, {
+        delay = [1.5, 2.5, 3.5];
+        this.missionA = new __WEBPACK_IMPORTED_MODULE_1_gsap__["a" /* TimelineLite */]({ paused: true }).delay(delay[0]).from(this.missionT.header, 0.5, {
           opacity: 0,
           x: -100
         }).from(this.missionT.body, 0.5, {
           opacity: 0,
           x: -100
         });
+      } else {
+        delay = [0, 1.5, 2.5];
       }
 
-      this.howA = new __WEBPACK_IMPORTED_MODULE_1_gsap__["a" /* TimelineLite */]({ paused: true }).delay(2.5).from(this.howT.header, 0.5, {
+      this.howA = new __WEBPACK_IMPORTED_MODULE_1_gsap__["a" /* TimelineLite */]({ paused: true }).delay(delay[1]).from(this.howT.header, 0.5, {
         opacity: 0,
         x: -100
       }).from(this.howT.body, 0.5, {
@@ -83456,7 +83460,7 @@ var FrontHow = function (_Component) {
         x: -100
       });
 
-      this.tipsA = new __WEBPACK_IMPORTED_MODULE_1_gsap__["a" /* TimelineLite */]({ paused: true }).delay(3.5).from(this.tipsT.header, 0.5, {
+      this.tipsA = new __WEBPACK_IMPORTED_MODULE_1_gsap__["a" /* TimelineLite */]({ paused: true }).delay(delay[2]).from(this.tipsT.header, 0.5, {
         opacity: 0,
         x: -100
       }).from(this.tipsT.body, 0.5, {
@@ -83479,8 +83483,8 @@ var FrontHow = function (_Component) {
       }
     }
   }, {
-    key: 'missionStatement',
-    value: function missionStatement() {
+    key: 'mission',
+    value: function mission(styles) {
       var _this2 = this;
 
       var smallScreen = window.matchMedia('(max-width: 768px)');
@@ -83604,7 +83608,7 @@ var FrontHow = function (_Component) {
             id: 'howContainer',
             style: styles.howContainer
           },
-          this.mission,
+          this.mission(styles),
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             'div',
             {

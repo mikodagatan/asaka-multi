@@ -33,9 +33,11 @@ export default class FrontHow extends Component {
   }
   componentDidMount() {
     const smallScreen = window.matchMedia('(max-width: 768px)');
+    let delay = [];
     if (!smallScreen.matches) {
+      delay = [1.5, 2.5, 3.5];
       this.missionA = new TimelineLite({ paused: true })
-        .delay(1.5)
+        .delay(delay[0])
         .from(this.missionT.header, 0.5, {
           opacity: 0,
           x: -100,
@@ -44,11 +46,13 @@ export default class FrontHow extends Component {
           opacity: 0,
           x: -100,
         });
+    } else {
+      delay = [0, 1.5, 2.5];
     }
 
 
     this.howA = new TimelineLite({ paused: true })
-      .delay(2.5)
+      .delay(delay[1])
       .from(this.howT.header, 0.5, {
         opacity: 0,
         x: -100
@@ -59,7 +63,7 @@ export default class FrontHow extends Component {
       });
 
       this.tipsA = new TimelineLite({ paused: true })
-        .delay(3.5)
+        .delay(delay[2])
         .from(this.tipsT.header, 0.5, {
           opacity: 0,
           x: -100
@@ -81,7 +85,7 @@ export default class FrontHow extends Component {
       this.tipsA.play();
     }
   }
-  missionStatement() {
+  mission(styles) {
     const smallScreen = window.matchMedia('(max-width: 768px)');
     if (smallScreen.matches) {
       return null;
@@ -184,7 +188,7 @@ export default class FrontHow extends Component {
           id='howContainer'
           style={styles.howContainer}
         >
-          {this.mission}
+          {this.mission(styles)}
           <div
             id='how'
             ref={how => this.howT.div = how}
