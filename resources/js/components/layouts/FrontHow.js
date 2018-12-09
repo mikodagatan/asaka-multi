@@ -32,16 +32,20 @@ export default class FrontHow extends Component {
     this.handleEnter = this.handleEnter.bind(this);
   }
   componentDidMount() {
-    this.missionA = new TimelineLite({ paused: true })
-      .delay(1.5)
-      .from(this.missionT.header, 0.5, {
-        opacity: 0,
-        x: -100,
-      })
-      .from(this.missionT.body, 0.5, {
-        opacity: 0,
-        x: -100,
-      });
+    const smallScreen = window.matchMedia('(max-width: 768px)');
+    if (!smallScreen.matches) {
+      this.missionA = new TimelineLite({ paused: true })
+        .delay(1.5)
+        .from(this.missionT.header, 0.5, {
+          opacity: 0,
+          x: -100,
+        })
+        .from(this.missionT.body, 0.5, {
+          opacity: 0,
+          x: -100,
+        });
+    }
+
 
     this.howA = new TimelineLite({ paused: true })
       .delay(2.5)
@@ -67,27 +71,93 @@ export default class FrontHow extends Component {
   }
   handleEnter() {
     console.log('waypoint enter');
-    this.missionA.play();
-    this.howA.play();
-    this.tipsA.play();
+    const smallScreen = window.matchMedia('(max-width: 768px)');
+    if (smallScreen.matches) {
+      this.howA.play();
+      this.tipsA.play();
+    } else {
+      this.missionA.play();
+      this.howA.play();
+      this.tipsA.play();
+    }
+  }
+  missionStatement() {
+    const smallScreen = window.matchMedia('(max-width: 768px)');
+    if (smallScreen.matches) {
+      return null;
+    } else {
+      return (
+        <div
+          id='mission'
+          ref={mission => this.missionT.div = mission}
+          style={styles.mission}
+        >
+          <div
+            ref={header => this.missionT.header = header}
+            style={styles.missionH}
+          >
+            MY MISSION
+          </div>
+          <div
+            ref={body => this.missionT.body = body}
+          >
+            Twitch is an amazing platform for streamers and viewers alike. We fell in love with so many amazing streamers and want to express our support by hanging out in their stream.
+            <div className='break' />
+            However, we sometimes need to tend to our responsibilities - our schoolworks, our jobs, our promises to keep, our time with our loved ones, and many more. We need to adult sometimes you know?
+            <div className='break' />
+            In order to continue support to our beloved streamers, we use multiple tabs with their streams. If we're supporting a few streamers, it doesn't take much of your time. But, this may grow to be more difficult since there's just so many amazing streamers out there who capture our hearts! Damnnnnnn you all for making me laugh!
+            <div className='break' />
+            You may have found many multi-stream websites out there and used them. I did so too and even fell in love with one! Unfortunately, there are many rules so that your support for them does actually get counted, and it's been hard for me to keep up even with the my favorite multi-stream website.
+            <div className='break' />
+            I made this so that I can make sure the views are counted while using a multi-streaming app. I made this so that I can do my responsibilities while giving support to these amazing individuals. I made this so that you can benefit from it too.
+            <div className='break' />
+            <div style={styles.missionRegards}>
+              All the best,
+              <br />
+              Miko
+            </div>
+          </div>
+        </div>
+      );
+    }
   }
   render() {
+    const smallScreen = window.matchMedia('(max-width: 768px)');
     const fullHeight = 'calc(100% + 30px)';
+
+    let height;
+    let padding;
+    let missionPadding;
+    let width;
+    let containerHeight;
+    if (smallScreen.matches) {
+      padding = 0;
+      missionPadding = '70px 10px 5px 10px';
+      width = '100%';
+      height = 'auto';
+      containerHeight = 'auto';
+    } else {
+      padding = '110px 50px 80px 50px';
+      missionPadding = '0 50px 0 50px';
+      width = '50%';
+      height = '100%';
+      containerHeight = fullHeight;
+    }
     const styles = {
       howContainer: {
         backgroundColor: colors.nav,
         color: 'black',
         width: '100%',
-        height: fullHeight,
-        padding: '150px 50px 80px 50px',
+        height: containerHeight,
+        padding,
         display: 'flex',
         flexWrap: 'wrap',
         fontSize: 13,
       },
       mission: {
-        height: '100%',
-        width: '50%',
-        padding: '0 50px 0 50px',
+        height,
+        width,
+        padding: missionPadding,
       },
       missionH: {
         fontSize: 30,
@@ -97,9 +167,9 @@ export default class FrontHow extends Component {
         textAlign: 'right',
       },
       how: {
-        height: '100%',
-        width: '50%',
-        padding: '0 50px 0 50px',
+        height,
+        width,
+        padding: missionPadding,
       },
       howH: {
         fontSize: 30,
@@ -114,38 +184,7 @@ export default class FrontHow extends Component {
           id='howContainer'
           style={styles.howContainer}
         >
-          <div
-            id='mission'
-            ref={mission => this.missionT.div = mission}
-            style={styles.mission}
-          >
-            <div
-              ref={header => this.missionT.header = header}
-              style={styles.missionH}
-            >
-              MY MISSION
-            </div>
-            <div
-              ref={body => this.missionT.body = body}
-            >
-              Twitch is an amazing platform for streamers and viewers alike. We fell in love with so many amazing streamers and want to express our support by hanging out in their stream.
-              <div className='break' />
-              However, we sometimes need to tend to our responsibilities - our schoolworks, our jobs, our promises to keep, our time with our loved ones, and many more. We need to adult sometimes you know?
-              <div className='break' />
-              In order to continue support to our beloved streamers, we use multiple tabs with their streams. If we're supporting a few streamers, it doesn't take much of your time. But, this may grow to be more difficult since there's just so many amazing streamers out there who capture our hearts! Damnnnnnn you all for making me laugh!
-              <div className='break' />
-              You may have found many multi-stream websites out there and used them. I did so too and even fell in love with one! Unfortunately, there are many rules so that your support for them does actually get counted, and it's been hard for me to keep up even with the my favorite multi-stream website.
-              <div className='break' />
-              I made this so that I can make sure the views are counted while using a multi-streaming app. I made this so that I can do my responsibilities while giving support to these amazing individuals. I made this so that you can benefit from it too.
-              <div className='break' />
-              <div style={styles.missionRegards}>
-              All the best,
-              <br />
-              Miko
-              </div>
-
-            </div>
-          </div>
+          {this.mission}
           <div
             id='how'
             ref={how => this.howT.div = how}

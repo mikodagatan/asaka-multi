@@ -83437,13 +83437,16 @@ var FrontHow = function (_Component) {
   _createClass(FrontHow, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
-      this.missionA = new __WEBPACK_IMPORTED_MODULE_1_gsap__["a" /* TimelineLite */]({ paused: true }).delay(1.5).from(this.missionT.header, 0.5, {
-        opacity: 0,
-        x: -100
-      }).from(this.missionT.body, 0.5, {
-        opacity: 0,
-        x: -100
-      });
+      var smallScreen = window.matchMedia('(max-width: 768px)');
+      if (!smallScreen.matches) {
+        this.missionA = new __WEBPACK_IMPORTED_MODULE_1_gsap__["a" /* TimelineLite */]({ paused: true }).delay(1.5).from(this.missionT.header, 0.5, {
+          opacity: 0,
+          x: -100
+        }).from(this.missionT.body, 0.5, {
+          opacity: 0,
+          x: -100
+        });
+      }
 
       this.howA = new __WEBPACK_IMPORTED_MODULE_1_gsap__["a" /* TimelineLite */]({ paused: true }).delay(2.5).from(this.howT.header, 0.5, {
         opacity: 0,
@@ -83465,31 +83468,113 @@ var FrontHow = function (_Component) {
     key: 'handleEnter',
     value: function handleEnter() {
       console.log('waypoint enter');
-      this.missionA.play();
-      this.howA.play();
-      this.tipsA.play();
+      var smallScreen = window.matchMedia('(max-width: 768px)');
+      if (smallScreen.matches) {
+        this.howA.play();
+        this.tipsA.play();
+      } else {
+        this.missionA.play();
+        this.howA.play();
+        this.tipsA.play();
+      }
+    }
+  }, {
+    key: 'missionStatement',
+    value: function missionStatement() {
+      var _this2 = this;
+
+      var smallScreen = window.matchMedia('(max-width: 768px)');
+      if (smallScreen.matches) {
+        return null;
+      } else {
+        return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'div',
+          {
+            id: 'mission',
+            ref: function ref(mission) {
+              return _this2.missionT.div = mission;
+            },
+            style: styles.mission
+          },
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'div',
+            {
+              ref: function ref(header) {
+                return _this2.missionT.header = header;
+              },
+              style: styles.missionH
+            },
+            'MY MISSION'
+          ),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'div',
+            {
+              ref: function ref(body) {
+                return _this2.missionT.body = body;
+              }
+            },
+            'Twitch is an amazing platform for streamers and viewers alike. We fell in love with so many amazing streamers and want to express our support by hanging out in their stream.',
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'break' }),
+            'However, we sometimes need to tend to our responsibilities - our schoolworks, our jobs, our promises to keep, our time with our loved ones, and many more. We need to adult sometimes you know?',
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'break' }),
+            'In order to continue support to our beloved streamers, we use multiple tabs with their streams. If we\'re supporting a few streamers, it doesn\'t take much of your time. But, this may grow to be more difficult since there\'s just so many amazing streamers out there who capture our hearts! Damnnnnnn you all for making me laugh!',
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'break' }),
+            'You may have found many multi-stream websites out there and used them. I did so too and even fell in love with one! Unfortunately, there are many rules so that your support for them does actually get counted, and it\'s been hard for me to keep up even with the my favorite multi-stream website.',
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'break' }),
+            'I made this so that I can make sure the views are counted while using a multi-streaming app. I made this so that I can do my responsibilities while giving support to these amazing individuals. I made this so that you can benefit from it too.',
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'break' }),
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              'div',
+              { style: styles.missionRegards },
+              'All the best,',
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('br', null),
+              'Miko'
+            )
+          )
+        );
+      }
     }
   }, {
     key: 'render',
     value: function render() {
-      var _this2 = this;
+      var _this3 = this;
 
+      var smallScreen = window.matchMedia('(max-width: 768px)');
       var fullHeight = 'calc(100% + 30px)';
+
+      var height = void 0;
+      var padding = void 0;
+      var missionPadding = void 0;
+      var width = void 0;
+      var containerHeight = void 0;
+      if (smallScreen.matches) {
+        padding = 0;
+        missionPadding = '70px 10px 5px 10px';
+        width = '100%';
+        height = 'auto';
+        containerHeight = 'auto';
+      } else {
+        padding = '110px 50px 80px 50px';
+        missionPadding = '0 50px 0 50px';
+        width = '50%';
+        height = '100%';
+        containerHeight = fullHeight;
+      }
       var styles = {
         howContainer: {
           backgroundColor: __WEBPACK_IMPORTED_MODULE_3__variables__["a" /* colors */].nav,
           color: 'black',
           width: '100%',
-          height: fullHeight,
-          padding: '150px 50px 80px 50px',
+          height: containerHeight,
+          padding: padding,
           display: 'flex',
           flexWrap: 'wrap',
           fontSize: 13
         },
         mission: {
-          height: '100%',
-          width: '50%',
-          padding: '0 50px 0 50px'
+          height: height,
+          width: width,
+          padding: missionPadding
         },
         missionH: {
           fontSize: 30,
@@ -83499,9 +83584,9 @@ var FrontHow = function (_Component) {
           textAlign: 'right'
         },
         how: {
-          height: '100%',
-          width: '50%',
-          padding: '0 50px 0 50px'
+          height: height,
+          width: width,
+          padding: missionPadding
         },
         howH: {
           fontSize: 30,
@@ -83519,57 +83604,13 @@ var FrontHow = function (_Component) {
             id: 'howContainer',
             style: styles.howContainer
           },
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-            'div',
-            {
-              id: 'mission',
-              ref: function ref(mission) {
-                return _this2.missionT.div = mission;
-              },
-              style: styles.mission
-            },
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              'div',
-              {
-                ref: function ref(header) {
-                  return _this2.missionT.header = header;
-                },
-                style: styles.missionH
-              },
-              'MY MISSION'
-            ),
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              'div',
-              {
-                ref: function ref(body) {
-                  return _this2.missionT.body = body;
-                }
-              },
-              'Twitch is an amazing platform for streamers and viewers alike. We fell in love with so many amazing streamers and want to express our support by hanging out in their stream.',
-              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'break' }),
-              'However, we sometimes need to tend to our responsibilities - our schoolworks, our jobs, our promises to keep, our time with our loved ones, and many more. We need to adult sometimes you know?',
-              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'break' }),
-              'In order to continue support to our beloved streamers, we use multiple tabs with their streams. If we\'re supporting a few streamers, it doesn\'t take much of your time. But, this may grow to be more difficult since there\'s just so many amazing streamers out there who capture our hearts! Damnnnnnn you all for making me laugh!',
-              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'break' }),
-              'You may have found many multi-stream websites out there and used them. I did so too and even fell in love with one! Unfortunately, there are many rules so that your support for them does actually get counted, and it\'s been hard for me to keep up even with the my favorite multi-stream website.',
-              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'break' }),
-              'I made this so that I can make sure the views are counted while using a multi-streaming app. I made this so that I can do my responsibilities while giving support to these amazing individuals. I made this so that you can benefit from it too.',
-              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'break' }),
-              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                'div',
-                { style: styles.missionRegards },
-                'All the best,',
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('br', null),
-                'Miko'
-              )
-            )
-          ),
+          this.mission,
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             'div',
             {
               id: 'how',
               ref: function ref(how) {
-                return _this2.howT.div = how;
+                return _this3.howT.div = how;
               },
               style: styles.how
             },
@@ -83577,7 +83618,7 @@ var FrontHow = function (_Component) {
               'div',
               {
                 ref: function ref(header) {
-                  return _this2.howT.header = header;
+                  return _this3.howT.header = header;
                 },
                 style: styles.howH
               },
@@ -83586,7 +83627,7 @@ var FrontHow = function (_Component) {
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
               'div',
               { ref: function ref(body) {
-                  return _this2.howT.body = body;
+                  return _this3.howT.body = body;
                 } },
               'There are two ways to use this website:',
               __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'break' }),
@@ -83609,7 +83650,7 @@ var FrontHow = function (_Component) {
               'div',
               {
                 ref: function ref(header) {
-                  return _this2.tipsT.header = header;
+                  return _this3.tipsT.header = header;
                 },
                 style: styles.howH
               },
@@ -83618,7 +83659,7 @@ var FrontHow = function (_Component) {
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
               'div',
               { ref: function ref(body) {
-                  return _this2.tipsT.body = body;
+                  return _this3.tipsT.body = body;
                 } },
               'To make your view count, these are the best convenient practices (as per my experiences):',
               __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', { className: 'break' }),
