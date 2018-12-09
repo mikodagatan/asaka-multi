@@ -60,30 +60,65 @@ export default class App extends Component {
 
   useMulti() {
     const multi = !this.state.multi;
+    const smallScreen = window.matchMedia('(max-width: 768px)');
+    let chat;
+    if (smallScreen.matches) {
+      chat = false;
+    } else {
+      chat = multi;
+    }
+
     this.setState({
       multi,
       manage: multi,
-      chat: multi
+      chat
     });
   }
 
   useMultiOnLoad() {
+    const smallScreen = window.matchMedia('(max-width: 768px)');
+    let chat;
+    if (smallScreen.matches) {
+      chat = false;
+    } else {
+      chat = true;
+    }
+
     const multi = !this.state.multi;
     this.setState({
       multi,
+      chat
     });
   }
 
   changeManage() {
     const manage = !this.state.manage;
+
+    const smallScreen = window.matchMedia('(max-width: 768px)');
+    let chat;
+    if (smallScreen.matches) {
+      chat = false;
+    } else {
+      chat = this.state.chat;
+    }
     this.setState({
-      manage
+      manage,
+      chat
     });
   }
 
   changeChat() {
     const chat = !this.state.chat;
+    const smallScreen = window.matchMedia('(max-width: 768px)');
+    let manage;
+    if (smallScreen.matches) {
+      manage = false;
+    } else {
+      manage = this.state.manage;
+    }
+
     this.setState({
+      manage,
       chat
     });
   }

@@ -43,6 +43,6 @@
 //     });
 //   } else {
 //     ( this ).setAttribute('height', '300');
-//     ( this ).setAttribute('width', '400');
+//     ( this ).setAttribute('width', '375');
 //   };
 // });

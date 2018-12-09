@@ -29,7 +29,8 @@ export default class NavLink extends Component {
       });
     this.show = new TimelineMax({ paused: true })
       .from(this.target, 0.3, {
-        display: 'none',
+        width: 0,
+        padding: 0,
       })
       .from(this.target, showDelay, {})
       .from(this.target, 0.3, {

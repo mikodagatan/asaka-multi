@@ -5,18 +5,18 @@ import { colors } from '../variables';
 export const styles = {
   ChatDiv: {
     position: 'fixed',
-    top: 0,
-    right: -400,
+    top: 30,
+    right: 0,
     flexWrap: 'wrap',
-    height: '100%',
+    height: 'calc(100% - 60px)',
     backgroundColor: colors.nav,
-    width: 400,
+    width: 375,
     overflowY: 'hidden',
     zIndex: 2,
   },
   chatHeader: {
     display: 'flex',
-    width: 400,
+    width: 375,
     height: 70,
   },
   chatLabel: {
@@ -24,7 +24,7 @@ export const styles = {
     fontSize: 14,
     textTransform: 'uppercase',
     color: 'white',
-    width: 350,
+    width: 325,
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
@@ -46,7 +46,7 @@ export const styles = {
     width: '100%',
   },
   streamHeaders: {
-    width: 400,
+    width: 375,
     backgroundColor: colors.orange,
     padding: '5px 5px 0 5px',
     display: 'flex',
@@ -82,7 +82,7 @@ export const styles = {
   streamChat: {
     height: 'calc(100% - 31px)',
     maxHeight: 'calc(100% - 31px)',
-    width: 400,
+    width: 375,
     right: 0,
   }
 };

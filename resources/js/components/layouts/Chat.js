@@ -46,7 +46,7 @@ export default class Chat extends Component {
         frameBorder="0"
         scrolling="yes"
         height='539'
-        width='400'
+        width='375'
         id={`chat-${this.props.name}`}
         src={`https://www.twitch.tv/embed/${this.props.name}/chat`}
       />

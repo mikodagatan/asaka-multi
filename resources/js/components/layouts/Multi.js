@@ -38,7 +38,7 @@ export default class Multi extends Component {
 
   componentDidUpdate() {
     this.setUrlByForm();
-    // window.addEventListener('resize', this.changeAnimation());
+    window.addEventListener('resize', this.changeAnimation);
     this.playAnimation();
   }
 
@@ -74,25 +74,40 @@ export default class Multi extends Component {
   }
 
   initAnimation() {
-    const width = window.innerWidth - 400;
+    const smallScreen = window.matchMedia('(max-width: 768px)');
+    let width;
+    if (smallScreen.matches) {
+      width = window.innerWidth;
+    } else {
+      width = window.innerWidth - 375;
+    }
+
     this.moveAnimation = new TimelineLite({ paused: true })
       .to(this.multiTarget, 0.5, {
         x: 0,
         width,
-        ease: Power2.easeOut
+        ease: Power4.easeOut
       });
   }
 
   changeAnimation() {
-    const width = window.innerWidth - 400;
+    console.log('change animation');
+    const smallScreen = window.matchMedia('(max-width: 768px)');
+    let width;
+    if (smallScreen.matches) {
+      width = window.innerWidth;
+    } else {
+      width = window.innerWidth - 375;
+    }
+    // important if window is resized at animation.play
+    this.multiTarget.style.width = '100%';
     this.moveAnimation = this.moveAnimation
       .clear()
       .to(this.multiTarget, 0.5, {
         x: 0,
         width,
-        ease: Power2.easeOut
+        ease: Power4.easeOut
       });
-    console.log(this.moveAnimation);
   }
 
   playAnimation() {
@@ -165,31 +180,33 @@ export default class Multi extends Component {
       }
     };
     return (
-      <div
-        id="multi"
-        ref={multi => this.multiTarget = multi}
-        style={styles.multi}
-      >
-        <ManageForm
-          multi={this.props.multi}
-          manage={this.props.manage}
-          closeManage={this.props.closeManage}
-          streams={this.state.streams}
-          addChannel={this.addChannelField}
-          storeInput={this.storeInput}
-          removeStream={this.removeStream}
-          start={this.state.start}
-          changeStart={this.changeStart}
-          changeLoad={this.changeLoad}
-        />
-        {this.renderMultiStream()}
+      <React.Fragment>
+        <div
+          id="multi"
+          ref={multi => this.multiTarget = multi}
+          style={styles.multi}
+        >
+          <ManageForm
+            multi={this.props.multi}
+            manage={this.props.manage}
+            closeManage={this.props.closeManage}
+            streams={this.state.streams}
+            addChannel={this.addChannelField}
+            storeInput={this.storeInput}
+            removeStream={this.removeStream}
+            start={this.state.start}
+            changeStart={this.changeStart}
+            changeLoad={this.changeLoad}
+          />
+          {this.renderMultiStream()}
+        </div>
         <ChatDiv
           multi={this.props.multi}
           streams={this.state.streams}
           chat={this.props.chat}
           closeChat={this.props.closeChat}
         />
-      </div>
+      </React.Fragment>
     );
   }
 }

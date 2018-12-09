@@ -20,6 +20,7 @@ export default class ChatDiv extends Component {
     this.streamHeaders = this.streamHeaders.bind(this);
     this.streamChat = this.streamChat.bind(this);
     this.setActive = this.setActive.bind(this);
+    this.playAnimation = this.playAnimation.bind(this);
 
     this.streamBodyRef = null;
     this.streamChatRef = null;
@@ -40,8 +41,11 @@ export default class ChatDiv extends Component {
   componentDidMount() {
     // ChatForm Animation
     this.animation = this.animation
-      .from(this.target, 1, {
+      .from(this.target, 0.5, {
+        x: 375,
         ease: Power3.easeOut,
+        display: 'block',
+        delay: 0.2
       });
     // Close Animation
 
@@ -58,17 +62,18 @@ export default class ChatDiv extends Component {
 
     this.closeHoverA.close = new TimelineMax({ paused: true })
       .to(this.closeTarget.close, 0.7, {
-        width: 400,
+        width: 375,
         ease: Power3.easeOut
       });
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate() {
     if (this.state.active === null) {
       this.setState({
         active: this.props.streams[0].name
       });
     }
+    this.playAnimation();
   }
 
   setActive(name, e) {
@@ -76,6 +81,15 @@ export default class ChatDiv extends Component {
     this.setState({
       active: name
     });
+  }
+
+  playAnimation() {
+    console.log('play animation');
+    if (this.props.chat) {
+      this.animation.play();
+    } else {
+      this.animation.reverse();
+    }
   }
 
   handleCloseHover() {
