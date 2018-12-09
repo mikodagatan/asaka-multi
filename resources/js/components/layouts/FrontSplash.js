@@ -20,12 +20,18 @@ export default class FrontSplash extends Component {
     const smallScreen = window.matchMedia('(max-width: 768px)');
     let fontSize;
     let welcomeSize;
+    let padding;
+    let welcomePadding;
     if (smallScreen.matches) {
       fontSize = 26;
       welcomeSize = 10;
+      padding = 0;
+      welcomePadding = '0 0 0 15px';
     } else {
       fontSize = 54;
       welcomeSize = 14;
+      padding = '110px 50px 80px 50px';
+      welcomePadding = '0 0 0 15px';
     }
     const styles = {
       splash: {
@@ -37,7 +43,7 @@ export default class FrontSplash extends Component {
         alignContent: 'center',
         flexWrap: 'wrap',
         textTransform: 'uppercase',
-        padding: '110px 50px 80px 50px',
+        padding,
       },
       welcome: {
         letterSpacing: 3,
@@ -49,7 +55,8 @@ export default class FrontSplash extends Component {
         letterSpacing: 20,
         fontSize,
         width: '100%',
-        textAlign: 'center'
+        textAlign: 'center',
+        padding: welcomePadding,
       },
       scroll: {
         position: 'absolute',

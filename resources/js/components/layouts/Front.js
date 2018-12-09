@@ -6,6 +6,8 @@ import { colors } from './variables';
 
 import FrontSplash from './FrontSplash';
 import FrontHow from './FrontHow';
+import FrontUpdates from './FrontUpdates';
+import FrontDonate from './FrontDonate';
 
 export default class Front extends Component {
   constructor(props) {
@@ -53,6 +55,8 @@ export default class Front extends Component {
         >
           <FrontSplash />
           <FrontHow />
+          <FrontUpdates />
+          <FrontDonate />
         </ReactPageScroller>
       </div>
     );
