@@ -16,5 +16,11 @@
     gtag('config', 'UA-129676471-1');
   </script>
 
+  <meta charset="UTF-8">
+   <meta name="description" content="Twitch Multi-stream viewing tool">
+   <meta name="keywords" content="twitch, multi, stream, viewing, tool, streaming, view, easy, best">
+   <meta name="author" content="Miguel Dagatan">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 
   <title>AsakaMulti v2.00 @yield('title')</title>
