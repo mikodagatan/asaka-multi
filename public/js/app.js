@@ -83647,7 +83647,7 @@ var FrontHow = function (_Component) {
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                   'li',
                   null,
-                  'Type on the address bar. For example:  \'asakamulti.com/stream1/stream2/stream3\'.'
+                  'Type on the address bar. For example:  \'asakamulti.com/phantasmaasaka/rox_games/mister_bobbie\'.'
                 ),
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                   'li',

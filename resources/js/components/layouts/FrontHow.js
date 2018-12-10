@@ -211,7 +211,7 @@ export default class FrontHow extends Component {
               <div className='break' />
               <ol>
                 <li>
-                  Type on the address bar. For example:  'asakamulti.com/stream1/stream2/stream3'.
+                  Type on the address bar. For example:  'asakamulti.com/phantasmaasaka/rox_games/mister_bobbie'.
                 </li>
                 <li>
                   Click on 'Enter Multi Mode' and enter the streams you love and support.
