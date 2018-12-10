@@ -22,7 +22,7 @@ export default class Main extends Component {
     }
     const styles = {
       main: {
-        height: '100%',
+        minHeight: '100%',
         paddingTop: padding,
         paddingBottom: padding
       }

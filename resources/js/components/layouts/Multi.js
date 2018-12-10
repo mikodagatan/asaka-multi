@@ -101,7 +101,7 @@ export default class Multi extends Component {
       .to(this.multiTarget, 0.3, {
         x: 0,
         width: 0,
-        height: 0,
+        minHeight: 0,
         overflow: 'hidden',
         ease: Power4.easeOut
       });
@@ -203,10 +203,9 @@ export default class Multi extends Component {
     const styles = {
       multi: {
         width: '100%',
-        height: '100%',
+        minHeight: '100%',
         // position: 'fixed',
         top: 30,
-        marginBottom: 30,
       }
     };
     return (
