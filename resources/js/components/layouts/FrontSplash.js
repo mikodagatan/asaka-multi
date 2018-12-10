@@ -23,10 +23,10 @@ export default class FrontSplash extends Component {
     let padding;
     let welcomePadding;
     if (smallScreen.matches) {
-      fontSize = 26;
-      welcomeSize = 10;
+      fontSize = '5vw';
+      welcomeSize = '3vw';
       padding = 0;
-      welcomePadding = '0 0 0 15px';
+      welcomePadding = '0 0 10px 10px';
     } else {
       fontSize = 54;
       welcomeSize = 14;

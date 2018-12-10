@@ -134,18 +134,24 @@ export default class FrontHow extends Component {
     let missionPadding;
     let width;
     let containerHeight;
+    let fontSize;
+    let headerSize;
     if (smallScreen.matches) {
       padding = 0;
       missionPadding = '70px 10px 5px 10px';
       width = '100%';
       height = 'auto';
-      containerHeight = 'auto';
+      containerHeight = '100%';
+      fontSize = 10;
+      headerSize = 15;
     } else {
       padding = '110px 50px 80px 50px';
       missionPadding = '0 50px 0 50px';
       width = '50%';
       height = '100%';
       containerHeight = fullHeight;
+      fontSize = 13;
+      headerSize = 30;
     }
     const styles = {
       howContainer: {
@@ -156,7 +162,7 @@ export default class FrontHow extends Component {
         padding,
         display: 'flex',
         flexWrap: 'wrap',
-        fontSize: 13,
+        fontSize,
       },
       mission: {
         height,
@@ -164,7 +170,7 @@ export default class FrontHow extends Component {
         padding: missionPadding,
       },
       missionH: {
-        fontSize: 30,
+        fontSize: headerSize,
         letterSpacing: 5,
       },
       missionRegards: {
@@ -176,7 +182,7 @@ export default class FrontHow extends Component {
         padding: missionPadding,
       },
       howH: {
-        fontSize: 30,
+        fontSize: headerSize,
         letterSpacing: 5,
 
       }

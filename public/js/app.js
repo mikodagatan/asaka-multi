@@ -83296,10 +83296,10 @@ var FrontSplash = function (_Component) {
       var padding = void 0;
       var welcomePadding = void 0;
       if (smallScreen.matches) {
-        fontSize = 26;
-        welcomeSize = 10;
+        fontSize = '5vw';
+        welcomeSize = '3vw';
         padding = 0;
-        welcomePadding = '0 0 0 15px';
+        welcomePadding = '0 0 10px 10px';
       } else {
         fontSize = 54;
         welcomeSize = 14;
@@ -83551,18 +83551,24 @@ var FrontHow = function (_Component) {
       var missionPadding = void 0;
       var width = void 0;
       var containerHeight = void 0;
+      var fontSize = void 0;
+      var headerSize = void 0;
       if (smallScreen.matches) {
         padding = 0;
         missionPadding = '70px 10px 5px 10px';
         width = '100%';
         height = 'auto';
-        containerHeight = 'auto';
+        containerHeight = '100%';
+        fontSize = 10;
+        headerSize = 15;
       } else {
         padding = '110px 50px 80px 50px';
         missionPadding = '0 50px 0 50px';
         width = '50%';
         height = '100%';
         containerHeight = fullHeight;
+        fontSize = 13;
+        headerSize = 30;
       }
       var styles = {
         howContainer: {
@@ -83573,7 +83579,7 @@ var FrontHow = function (_Component) {
           padding: padding,
           display: 'flex',
           flexWrap: 'wrap',
-          fontSize: 13
+          fontSize: fontSize
         },
         mission: {
           height: height,
@@ -83581,7 +83587,7 @@ var FrontHow = function (_Component) {
           padding: missionPadding
         },
         missionH: {
-          fontSize: 30,
+          fontSize: headerSize,
           letterSpacing: 5
         },
         missionRegards: {
@@ -83593,7 +83599,7 @@ var FrontHow = function (_Component) {
           padding: missionPadding
         },
         howH: {
-          fontSize: 30,
+          fontSize: headerSize,
           letterSpacing: 5
 
         }
