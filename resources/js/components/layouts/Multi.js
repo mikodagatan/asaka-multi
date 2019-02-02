@@ -136,7 +136,7 @@ export default class Multi extends Component {
       this.moveAnimation.reverse();
     }
   }
-
+// should work
   playPageAnimation() {
     console.log('play page animation');
     if (this.props.multi === false) {
